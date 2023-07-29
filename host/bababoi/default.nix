@@ -11,7 +11,11 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true; 
+    configurationLimit = 10;
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "bababoi"; # Define your hostname.
@@ -41,6 +45,13 @@
   nix.settings = {
     substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ]; 
     experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
   };
 
   # Configure keymap in X11
