@@ -1,0 +1,51 @@
+{ config, pkgs, ... }:
+{
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      # -- general
+
+      set -g prefix C-s
+      setw -g xterm-keys on
+      set -s escape-time 0
+      set -sg repeat-time 300
+      set -s focus-events on
+      set -g mouse on
+      set -sg exit-empty on
+
+
+
+      set -q -g status-utf8 on
+      setw -q -g utf8 on
+
+      set -g visual-activity off
+      setw -g monitor-activity off
+      setw -g monitor-bell off
+
+      set -g history-limit 10000
+
+      # vim mode
+
+      bind -n M-v copy-mode
+
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind -T copy-mode-vi y send-keys -X cursor-left
+      bind -T copy-mode-vi o send-keys -X cursor-right
+      bind -T copy-mode-vi e send-keys -X cursor-up
+      bind -T copy-mode-vi n send-keys -X cursor-down
+      bind -T copy-mode-vi k send-keys -X next-word-end
+      bind -T copy-mode-vi E send-keys -N 5 -X cursor-up
+      bind -T copy-mode-vi N send-keys -N 5 -X cursor-down
+      bind -T copy-mode-vi Y send-keys -X start-of-line
+      bind -T copy-mode-vi I send-keys -X end-of-line
+      bind -T copy-mode-vi H send-keys -X copy-end-of-line
+      bind -T copy-mode-vi h send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi j send-keys -X search-again
+
+
+      set -g status-fg black
+      set -g status-bg magenta
+    '';
+  };
+}
