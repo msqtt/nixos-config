@@ -32,6 +32,8 @@
     wev
     lf
     wl-clipboard
+    grim
+    slurp
     brightnessctl
 
     # archives
