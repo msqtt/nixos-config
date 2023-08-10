@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -16,9 +16,19 @@
     systemd-boot = {
       enable = true; 
       configurationLimit = 10;
+      extraEntries = {
+        "archlinux.conf" = ''
+          title ArchLinux
+          efi /efi/ARCH/grubx64.efi
+        '';
+      };
+
     };
     efi.canTouchEfiVariables = true;
   };
+
+  # hibernate resume config
+  boot.resumeDevice = "/dev/nvme0n1p5";
 
   networking = {
     hostName = "bababoi";
@@ -32,7 +42,7 @@
   };
 
   console = {
-    font = "sun12x22";
+    font = "solar24x32";
     #keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
@@ -66,6 +76,18 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    # "qq"
+  ];
+
+  # install docker
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "btrfs";
+  };
+
+  powerManagement.enable = true;
 
   system.stateVersion = "23.05"; # Did you read the comment?
 }

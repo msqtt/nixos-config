@@ -26,6 +26,7 @@
 
       # vim mode
 
+      setw -g mode-keys vi
       bind -n M-v copy-mode
 
       bind -T copy-mode-vi v send-keys -X begin-selection

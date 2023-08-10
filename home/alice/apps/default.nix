@@ -20,8 +20,10 @@
     sakura
     firefox
     v2raya
-    lazygit
+    appimage-run
+
     # daily use
+    trayer
     go-musicfox
     tty-clock
     musescore
@@ -35,6 +37,7 @@
     grim
     slurp
     brightnessctl
+    
 
     # archives
     zip

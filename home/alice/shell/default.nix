@@ -11,6 +11,7 @@
     interactiveShellInit = ''
       #set fish_greeting # Disable greeting
       set -x LF_BOOKMARK_PATH ~/.bookmark
+      set PATH $HOME/bin $PATH
     '';
     shellAbbrs =
     let
