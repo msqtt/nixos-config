@@ -8,10 +8,15 @@
 
   programs.fish = {
     enable = true;
-    interactiveShellInit = ''
-      #set fish_greeting # Disable greeting
+    loginShellInit = ''
+      # set fish_greeting # Disable greeting
+      # environment
       set -x LF_BOOKMARK_PATH ~/.bookmark
       set PATH $HOME/bin $PATH
+    '';
+    interactiveShellInit = ''
+      # init shit
+      any-nix-shell fish --info-right | source
     '';
     shellAbbrs =
     let

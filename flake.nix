@@ -1,5 +1,8 @@
 {
   description = "Msqt's NixOS Flake";
+  nixConfig = {
+    substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
+  };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
