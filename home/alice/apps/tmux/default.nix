@@ -1,10 +1,20 @@
 { config, pkgs, ... }:
+let 
+  plugins  = pkgs.tmuxPlugins // pkgs.callPackage ./net-speed-fix.nix {};
+in
 {
   programs.tmux = {
     enable = true;
-    extraConfig = ''
-      # -- general
+    keyMode = "vi";
+    baseIndex = 1;
+    aggressiveResize = true;
+    plugins = with plugins; [
+      net-speed
+      battery
+    ];
 
+    extraConfig = ''
+      # general
       set -g prefix C-s
       setw -g xterm-keys on
       set -s escape-time 0
@@ -26,7 +36,7 @@
 
       # vim mode
 
-      setw -g mode-keys vi
+      # setw -g mode-keys vi
       bind -n M-v copy-mode
 
       bind -T copy-mode-vi v send-keys -X begin-selection
@@ -47,6 +57,20 @@
 
       set -g status-fg black
       set -g status-bg magenta
+      set-option -g pane-border-style "fg=black,bg=black" 
+      set-option -g pane-active-border-style "fg=magenta,bg=black"
+
+      # plugin
+      set -g @download_speed_format '%%s'
+      set -g @upload_speed_format '%%s'
+
+      set -g status-left-length 100
+      set -g status-left "[#S] | D:#{download_speed} U:#{upload_speed} |"
+
+      set -g status-right 'Batt: #{battery_icon_status} #{battery_percentage} #{battery_remain} | %H:%M '
+
+      run-shell ${plugins.battery}/share/tmux-plugins/battery/battery.tmux
+      run-shell ${plugins.net-speed}/share/tmux-plugins/net-speed/net-speed.tmux
     '';
   };
 }

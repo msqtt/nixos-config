@@ -7,7 +7,8 @@
   ];
 
   home.packages = with pkgs;[
-    # language shit
+    # develop shit
+    gcc
     subversion
 
     # base shit
@@ -24,6 +25,7 @@
     tty-clock
     musescore
     telegram-desktop
+    acpi
 
 
     # cli shit

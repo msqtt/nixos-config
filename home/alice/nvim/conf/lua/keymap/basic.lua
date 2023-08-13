@@ -49,6 +49,3 @@ map("n", "<leader>t", ":sp<CR><C-w>j:terminal<CR>", ot)
 map("n", "<leader>vt", ":vsp | terminal<CR>", ot)
 map("t", "<Esc>", "<C-\\><C-n>", ot)
 
--- package
-map("c", "ps", "PackerSync", ot)
-map("c", "pc", "PackerCompile", ot)
