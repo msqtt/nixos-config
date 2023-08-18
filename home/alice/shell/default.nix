@@ -17,6 +17,7 @@
     interactiveShellInit = ''
       # init shit
       any-nix-shell fish --info-right | source
+      direnv hook fish | source
     '';
     shellAbbrs =
     let

@@ -10,6 +10,16 @@
     v2raya.enable = true;
     blueman.enable = true;
     tlp.enable = true;
+    kmscon = {
+      enable = false;
+      extraConfig = ''
+        font-name=Sarasa SC
+        font-size=22
+        xkb-layout=us
+        xkb-variant=workman
+        xkb-options=ctrl:nocaps,altwin:swap_lalt_lwin
+      '';
+    };
   };
 
 }

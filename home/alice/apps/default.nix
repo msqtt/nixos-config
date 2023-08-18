@@ -4,6 +4,7 @@
     ./lf
     ./mako
     ./tmux
+    ./direnv
   ];
 
   home.packages = with pkgs;[
