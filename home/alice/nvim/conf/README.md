@@ -1,12 +1,12 @@
-## nvim.lua
+## My neo neovim config X)
 
-Emm, here are my nvim stuffs, i'm trying to make it eazy as much as possible. :relaxed:
+Moving to NixOs, I spent some time reconfiguring nvim.
 
-| Screen shot                                                                                                     |
-| --------------------------------------------------------------------------------------------------------------- |
-| ![image](https://user-images.githubusercontent.com/94043894/212529933-3328c0cb-f82b-4d33-92ed-a4b64d858293.png) |
-| ![image](https://user-images.githubusercontent.com/94043894/212530104-e4915cd1-c0fa-4ac0-ba33-89febd3c3d38.png) |
-| ![image](https://user-images.githubusercontent.com/94043894/212530158-eccde1e9-4c6e-4245-a0ef-e441ba7bd6a1.png) |
-| ![image](https://user-images.githubusercontent.com/94043894/212530205-3a78dea8-bd73-4d28-8347-b7820d751ef8.png) |
-| ![image](https://user-images.githubusercontent.com/94043894/212530261-950f56ea-593f-41e3-91e6-00d1888872a9.png) |
-| ![image](https://user-images.githubusercontent.com/94043894/212530555-798885fc-cd19-4162-aa41-2b762749e9c4.png) |
+Deeper in lua learning, I optimizated many many codes(e.g. using fp way, tables to contain configs and
+metatables to abstract key-mode and key-opt...).
+
+What's more, I finally decided to replace the lsp plugin, and switched from coc to nvim-lsp.
+
+Also replaced some other plugins, and I dont want to list them all.
+
+Thats all, Im quite satisfied with new config at the moment :).

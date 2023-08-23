@@ -16,8 +16,12 @@
     '';
     interactiveShellInit = ''
       # init shit
-      any-nix-shell fish --info-right | source
-      direnv hook fish | source
+      if test -n "$IN_NIX_SHELL"
+        any-nix-shell fish --info-right | source
+      end
+      set_color -i cyan
+        echo (direnv hook fish | source)
+      set_color normal
     '';
     shellAbbrs =
     let

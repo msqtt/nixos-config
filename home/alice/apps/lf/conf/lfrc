@@ -1,5 +1,9 @@
+############################################################ options
 # interpreter for shell commands
 set shell sh
+
+# set sixel
+set previewer ~/.config/lf/sixel.sh
 
 set reverse
 # icons
@@ -27,19 +31,7 @@ set scrolloff 10
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 # set cursorpreviewfmt "\033[7;2m"
 
-# use enter for shell commands
-map <enter> shell
-
-# show the result of execution of previous commands
-map ` !true
-
-# execute current file (must be executable)
-map xx $$f
-map xX !$f
-
-# dedicated keys for file opener actions
-# map o &mimeopen $f
-# map O $mimeopen --ask $f
+############################################################ commands define
 
 # define a custom 'open' command
 # This command is called when current file is not a directory. You may want to
@@ -54,32 +46,111 @@ cmd open &{{
     esac
 }}
 
-# mkdir command. See wiki if you want it to select created dir
-map M :push %mkdir<space>
 
-# define a custom 'rename' command without prompt for overwrite
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
+cmd bookmark_jump ${{
+    res="$(cat $LF_BOOKMARK_PATH/$(ls $LF_BOOKMARK_PATH | fzf))"
+    lf -remote "send $id cd \"$res\""
+}}
 
-# make sure trash folder exists
-# %mkdir -p ~/.trash
+cmd bookmark_create ${{
+    read ans
+    echo $PWD > $LF_BOOKMARK_PATH/$ans
+}}
 
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
+cmd fzf_search ${{
+    res="$( \
+        RG_PREFIX="rg --column --line-number --no-heading --color=always \
+            --smart-case "
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1
+    )"
+    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
+}}
+
+
+cmd fzf_jump ${{
+    res="$(find . -maxdepth 4 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    if [ -d "$res" ] ; then
+        cmd="cd"
+    elif [ -f "$res" ] ; then
+        cmd="select"
+    else
+        exit 0
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd open-with-gui &$@ $fx ## opens with a gui application outside lf client
+cmd open-with-cli $$@ $fx ## opens with a cli application inside lf client
+
+
+# y (select for copy) and P to paste soft-link
+# d (select for cut) and P to paste hard-link
+cmd link %{{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    if [ "$#" -lt 1 ]; then
+        lf -remote "send $id echo no files to link"
+        exit 0
+    fi
+    case "$mode" in
+        # symbolically copy mode is indicating a soft link
+        copy) sudo ln -sr -t . -- "$@";;
+        # while a move mode is indicating a hard link
+        move) sudo ln -t . -- "$@";;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+
+
+cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+cmd yank-basename-without-extension ${{
+    echo "$fx" |
+      xargs -r -d '\n' basename -a |
+      awk -e '{
+        for (i=length($0); i > 0; i--) {
+          if (substr($0, i, 1) == ".") {
+            if (i == 1) print $0
+            else print substr($0, 0, i-1)
+
+            break
+          }
+        }
+
+        if (i == 0)
+          print $0
+      }' |
+      if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
+      xclip -i -selection clipboard
+}}
+
+
+cmd lazygit ${{
+  lazygit
+}}
+
+
 cmd trash %set -f; mv $fx ~/.trash
 
-# define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
 
-# use '<delete>' key for either 'trash' or 'delete' command
-map <delete> trash
-# map <delete> delete
+cmd paste-sudo ${{
+    set -- $(cat ~/.local/share/lf/files)
+    mode="$1"
+    shift
+    case "$mode" in
+        copy) sudo cp -rn -- "$@" .;;
+        move) sudo mv -n -- "$@" .;;
+    esac
+    rm ~/.local/share/lf/files
+    lf -remote "send clear"
+}}
+
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -131,17 +202,50 @@ cmd zip ${{
 #     lf -remote "send clear"
 # }}
 #
-cmd paste-sudo ${{
-    set -- $(cat ~/.local/share/lf/files)
-    mode="$1"
-    shift
-    case "$mode" in
-        copy) sudo cp -rn -- "$@" .;;
-        move) sudo mv -n -- "$@" .;;
-    esac
-    rm ~/.local/share/lf/files
-    lf -remote "send clear"
-}}
+
+
+
+############################################################ maps define
+# use enter for shell commands
+map <enter> shell
+
+# show the result of execution of previous commands
+map ` !true
+
+# execute current file (must be executable)
+map xx $$f
+map xX !$f
+
+# dedicated keys for file opener actions
+# map o &mimeopen $f
+# map O $mimeopen --ask $f
+
+
+# mkdir command. See wiki if you want it to select created dir
+map M :push %mkdir<space>
+
+# define a custom 'rename' command without prompt for overwrite
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# map r push :rename<space>
+
+# make sure trash folder exists
+# %mkdir -p ~/.trash
+
+# move current file or selected files to trash folder
+# (also see 'man mv' for backup/overwrite options)
+
+# define a custom 'delete' command
+# cmd delete ${{
+#     set -f
+#     printf "$fx\n"
+#     printf "delete?[y/n]"
+#     read ans
+#     [ "$ans" = "y" ] && rm -rf $fx
+# }}
+
+# use '<delete>' key for either 'trash' or 'delete' command
+map <delete> trash
+# map <delete> delete
 
 map p
 map pp :paste
@@ -165,102 +269,22 @@ map E :search-prev
 
 
 map gi :lazygit
-cmd lazygit ${{
-  lazygit
-}}
-
-
 map hd :yank-dirname
 map hp :yank-path
 map hn :yank-basename
 map h. :yank-basename-without-extension
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
-cmd yank-basename-without-extension ${{
-    echo "$fx" |
-      xargs -r -d '\n' basename -a |
-      awk -e '{
-        for (i=length($0); i > 0; i--) {
-          if (substr($0, i, 1) == ".") {
-            if (i == 1) print $0
-            else print substr($0, 0, i-1)
-
-            break
-          }
-        }
-
-        if (i == 0)
-          print $0
-      }' |
-      if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
-      xclip -i -selection clipboard
-}}
-
-# y (select for copy) and P to paste soft-link
-# d (select for cut) and P to paste hard-link
-cmd link %{{
-    set -- $(cat ~/.local/share/lf/files)
-    mode="$1"
-    shift
-    if [ "$#" -lt 1 ]; then
-        lf -remote "send $id echo no files to link"
-        exit 0
-    fi
-    case "$mode" in
-        # symbolically copy mode is indicating a soft link
-        copy) sudo ln -sr -t . -- "$@";;
-        # while a move mode is indicating a hard link
-        move) sudo ln -t . -- "$@";;
-    esac
-    rm ~/.local/share/lf/files
-    lf -remote "send clear"
-}}
 map pl :link
 
-cmd open-with-gui &$@ $fx ## opens with a gui application outside lf client
-cmd open-with-cli $$@ $fx ## opens with a cli application inside lf client
 map xO push :open-with-gui<space> ## input application
 map xo push :open-with-cli<space> ## input application
 
 map f :fzf_jump
-cmd fzf_jump ${{
-    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
-    if [ -d "$res" ] ; then
-        cmd="cd"
-    elif [ -f "$res" ] ; then
-        cmd="select"
-    else
-        exit 0
-    fi
-    lf -remote "send $id $cmd \"$res\""
-}}
-
 map gf :fzf_search
-cmd fzf_search ${{
-    res="$( \
-        RG_PREFIX="rg --column --line-number --no-heading --color=always \
-            --smart-case "
-        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
-            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-            --ansi --layout=reverse --header 'Search in files' \
-            | cut -d':' -f1
-    )"
-    [ ! -z "$res" ] && lf -remote "send $id select \"$res\""
-}}
-
-
 
 map gt :top
 map gg :bookmark_jump
 map gc :bookmark_create
-cmd bookmark_jump ${{
-    res="$(cat $LF_BOOKMARK_PATH/$(ls $LF_BOOKMARK_PATH | fzf))"
-    lf -remote "send $id cd \"$res\""
-}}
+map gt :top
 
-cmd bookmark_create ${{
-    read ans
-    echo $PWD > $LF_BOOKMARK_PATH/$ans
-}}
+map T push $touch<space>

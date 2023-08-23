@@ -8,7 +8,6 @@
     printing.enable = true;
     # v2raya proxy
     v2raya.enable = true;
-    blueman.enable = true;
     tlp.enable = true;
     kmscon = {
       enable = false;

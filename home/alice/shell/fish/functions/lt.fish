@@ -11,7 +11,7 @@
 #
 # You may put this in a function called fish_user_key_bindings.
 
-function lf
+function lt
     set tmp (mktemp)
     # `command` is needed in case `lfcd` is aliased to `lf`
     command lf -last-dir-path=$tmp $argv

@@ -42,7 +42,7 @@
   };
 
   console = {
-    # font = "solar24x32";
+    font = "solar24x32";
     #keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };

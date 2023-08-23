@@ -5,6 +5,7 @@
     ./mako
     ./tmux
     ./direnv
+    ./terminal
   ];
 
   home.packages = with pkgs;[
@@ -17,6 +18,10 @@
     hikari
     pavucontrol
     sakura
+    mpv
+    imv
+    chafa
+
     firefox
     v2raya
     appimage-run

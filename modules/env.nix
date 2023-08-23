@@ -22,7 +22,7 @@
             # 如果你的 FHS 程序还有其他依赖，把它们添加在这里
           ]
         );
-        profile = "export FHS=1";
+        profile = "export IN_NIX_SHELL=1";
         runScript = "fish";
         extraOutputsToInstall = ["dev"];
       }))
