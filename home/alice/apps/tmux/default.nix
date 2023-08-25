@@ -22,8 +22,7 @@ in
       set -s focus-events on
       set -g mouse on
       set -sg exit-empty on
-
-
+			set -g set-clipboard on
 
       set -g default-terminal "screen-256color"
       set -q -g status-utf8 on

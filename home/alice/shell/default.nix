@@ -19,9 +19,7 @@
       if test -n "$IN_NIX_SHELL"
         any-nix-shell fish --info-right | source
       end
-      set_color -i cyan
-        echo (direnv hook fish | source)
-      set_color normal
+			direnv hook fish | source
     '';
     shellAbbrs =
     let

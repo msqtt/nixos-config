@@ -1,51 +1,51 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function () 
-      local configs = require("nvim-treesitter.configs")
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
+	config = function()
+		local configs = require("nvim-treesitter.configs")
 
-      configs.setup({
-          ensure_installed = {
-            -- config
-            "c",
-            "lua",
-            "vim",
-            "vimdoc",
-            "query",
-            "make",
-            "nix",
+		configs.setup({
+			ensure_installed = {
+				-- config
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"make",
+				"nix",
 
-            -- develop
-            "python",
-            "go",
-            "java",
-            "rust",
-            
-            "vue",
-            "tsx",
-            "typescript",
-            "javascript",
-            "html",
-            "css",
+				-- develop
+				"python",
+				"go",
+				"java",
+				"rust",
 
-            "sql",
+				"vue",
+				"tsx",
+				"typescript",
+				"javascript",
+				"html",
+				"css",
 
-            -- serialization
-            "yaml",
-            "toml",
-            "json",
-            "graphql",
-            "proto",
+				"sql",
 
-            -- misc
-            "diff",
-            "fish",
-            "bash",
-          },
+				-- serialization
+				"yaml",
+				"toml",
+				"json",
+				"graphql",
+				"proto",
 
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true },  
-        })
-    end
- }
+				-- misc
+				"diff",
+				"fish",
+				"bash",
+			},
+
+			sync_install = false,
+			highlight = { enable = true },
+			indent = { enable = true },
+		})
+	end
+}

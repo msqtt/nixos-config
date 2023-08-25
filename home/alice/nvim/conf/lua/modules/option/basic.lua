@@ -1,7 +1,8 @@
-local opt = vim.opt
+local opt = vim.o
 
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
+opt.clipboard = 'unnamedplus'
 opt.ttyfast = true
 opt.autochdir = true
 opt.exrc = true

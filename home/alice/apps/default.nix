@@ -56,7 +56,7 @@
     yq-go # yaml processer https://github.com/mikefarah/yq
     fzf # A command-line fuzzy finder
     fd
-     
+
 
     # misc
     nerdfonts
@@ -71,12 +71,12 @@
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
-    nil
+    rnix-lsp
 
     # productivity
     glow # markdown previewer in terminal
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 

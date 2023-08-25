@@ -3,7 +3,7 @@
   services.mako = {
     enable = true;
     extraConfig = ''
-      # default-timeout=5000
+      default-timeout=5000
       font=Sarasa UI SC
       # Colors
 
@@ -14,7 +14,7 @@
 
       [urgency=high]
       border-color=#fab387
-      # ignore-timeout=1
+      ignore-timeout=1
 
     '';
   };
