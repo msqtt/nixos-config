@@ -33,6 +33,10 @@
   networking = {
     hostName = "bababoi";
     wireless.iwd.enable = true;
+		extraHosts = ''
+			125.217.53.138 mypi
+			125.217.53.183 kexie2
+		'';
   };
 
   time.timeZone = "Asia/Shanghai";

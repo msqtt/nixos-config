@@ -15,7 +15,6 @@
 
     # base shit
     bemenu
-    hikari
     pavucontrol
     sakura
     mpv
