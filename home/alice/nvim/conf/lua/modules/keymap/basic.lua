@@ -17,7 +17,7 @@ local keymaps = {
 	{ v, "N",          ":move '>+1<CR>gv-gv",                nore },
 	{ v, "E",          ":move '<-2<CR>gv-gv",                nore },
 	{ n, "S",          "viw",                                nore },
-	{ n, "V",          "0wv$",                               nore },
+	{ n, "vv",          "0wv$",                               nore },
 	{ n, "<C-l>",      ":set cursorline! cursorcolumn!<CR>", nore + silent },
 	{ n, "s",          "",                                   nore },
 	{ n, "sv",         ":vsp<CR>",                           nore },

@@ -17,6 +17,15 @@ local confn = function()
 
 	-- (Optional) Configure lua language server for neovim
 	require'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
+	require'lspconfig'.volar.setup{
+		init_options = {
+			typescript = {
+				tsdk = '/nix/store/yi14ijlcd02g1nsrf6izbhnwj9vj2lxx-typescript-5.1.6/lib/node_modules/typescript/lib'
+				-- Alternative location if installed as root:
+				-- tsdk = '/usr/local/lib/node_modules/typescript/lib'
+			}
+		}
+	}
 
 	lsp.setup()
 
