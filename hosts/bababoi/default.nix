@@ -33,6 +33,8 @@
   networking = {
     hostName = "bababoi";
     wireless.iwd.enable = true;
+		firewall.enable = true;
+		firewall.allowedTCPPorts = [2017];
 		extraHosts = ''
 			125.217.53.138 mypi
 			125.217.53.183 kexie2

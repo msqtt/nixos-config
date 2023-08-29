@@ -107,9 +107,9 @@ cmd link %{{
 }}
 
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
+cmd yank-dirname $dirname -- "$f" | head -c-1 | wl-copy #; xclip -i -selection clipboard
+cmd yank-path $printf '%s' "$fx" | wl-copy #; xclip -i -selection clipboard
+cmd yank-basename $basename -a -- $fx | head -c-1 | wl-copy #; xclip -i -selection clipboard
 cmd yank-basename-without-extension ${{
     echo "$fx" |
       xargs -r -d '\n' basename -a |
@@ -204,6 +204,13 @@ cmd zip ${{
 #
 
 
+cmd newfold ${{
+    set -f
+    read newd
+    printf "Directory name: "
+    mkdir -- "$newd"
+    mv -- $fx "$newd"
+}}
 
 ############################################################ maps define
 # use enter for shell commands
@@ -264,8 +271,10 @@ map hh :copy
 map d
 map dd :cut
 
-map N :search-next
-map E :search-prev
+map j :search-next
+map J :search-prev
+map N :updir; set dironly true; down; set dironly false; open
+map E :updir; set dironly true; up; set dironly false; open
 
 
 map gi :lazygit
@@ -288,3 +297,6 @@ map gc :bookmark_create
 map gt :top
 
 map T push $touch<space>
+
+map <a-n> newfold
+

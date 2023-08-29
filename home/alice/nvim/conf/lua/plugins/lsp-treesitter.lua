@@ -41,6 +41,8 @@ return {
 				"diff",
 				"fish",
 				"bash",
+				markdown,
+				markdown_lines,
 			},
 
 			sync_install = false,

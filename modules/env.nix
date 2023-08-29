@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
-	programs.hyprland.enable = true;
   environment = {
     variables = rec {
       EDITOR="nvim";
+			LIBSEAT_BACKEND="logind";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget

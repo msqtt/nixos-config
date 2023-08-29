@@ -1,13 +1,11 @@
 return {
-  "bluz71/vim-moonfly-colors",
-  name = "moonfly",
-  lazy = false,
-  priority = 1000,
-  config = function ()
-		vim.g.moonflyCursorColor = true
-		vim.g.moonflyUnderlineMatchParen = true
-		vim.g.moonflyVirtualTextColor = true
-		-- float color
+	"msqtt/vim-moonfly-colors",
+	name = "moonfly",
+	lazy = false,
+	priority = 1000,
+
+	config = function()
+		-- Lua initialization file
 		vim.g.moonflyNormalFloat = true
 		vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 			vim.lsp.handlers.hover, {
@@ -20,9 +18,8 @@ return {
 			}
 		)
 		vim.diagnostic.config({ float = { border = "single" } })
-		local winhighlight = {
-			winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
-		}
+		-- Lua initialization file
+		vim.g.moonflyWinSeparator = 0
 		vim.cmd [[colorscheme moonfly]]
-  end
+	end
 }

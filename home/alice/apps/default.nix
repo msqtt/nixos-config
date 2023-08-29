@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-new, ... }:
 {
   imports = [
     ./lf
@@ -14,6 +14,7 @@
     subversion
 
     # base shit
+    wayfire
     bemenu
     pavucontrol
     sakura
@@ -37,7 +38,6 @@
     neofetch
     wev
     lf
-    wl-clipboard
     grim
     slurp
     brightnessctl
@@ -83,5 +83,10 @@
     strace # system call monitoring
     ltrace # library call monitoring
     lsof # list open files
-  ];
+
+
+		# for new version
+  ] ++ (with pkgs-new ; [
+	   wl-clipboard
+  ]); 
 }

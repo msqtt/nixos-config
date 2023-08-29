@@ -15,6 +15,7 @@
     recursive = true;
   };
 
+	# link do not work, just copy one.
   home.file.".local/share/fcitx5/themes/material-theme/theme.conf".text
     = builtins.readFile ./themes/material-theme/theme-indigo.conf;
 

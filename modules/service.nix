@@ -12,7 +12,7 @@
     kmscon = {
       enable = false;
       extraConfig = ''
-        font-name=Sarasa SC
+        font-name=Maple Mono
         font-size=22
         xkb-layout=us
         xkb-variant=workman
