@@ -5,7 +5,7 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "Maple Mono:size=12,monospace:size=12";
+        font = "Source Code Pro:size=12";
         dpi-aware = "yes";
       };
 

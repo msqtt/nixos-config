@@ -29,6 +29,7 @@
 
   # hibernate resume config
   boot.resumeDevice = "/dev/nvme0n1p5";
+	hardware.opengl.enable = true;
 
   networking = {
     hostName = "bababoi";
