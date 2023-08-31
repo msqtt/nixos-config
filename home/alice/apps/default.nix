@@ -23,6 +23,7 @@
     imv
     chafa
 		swappy
+		swww
 
     firefox
     appimage-run

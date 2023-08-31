@@ -1,7 +1,7 @@
 local fp = require("utils").fp
 local km = require("modules.keymap.utils")
 
-local n, v, t = km.new_mode("n"), km.new_mode("v"), km.new_mode("t")
+local n, v, t, i = km.new_mode "n", km.new_mode "v", km.new_mode "t", km.new_mode "i"
 local nore, silent = km.new_opt("noremap", true), km.new_opt("silent", true)
 
 vim.g.mapleader = " "
@@ -17,8 +17,9 @@ local keymaps = {
 	{ v, "N",          ":move '>+1<CR>gv-gv",                nore },
 	{ v, "E",          ":move '<-2<CR>gv-gv",                nore },
 	{ n, "S",          "viw",                                nore },
-	{ n, "vv",          "0wv$",                               nore },
+	{ n, "vv",         "0wv$",                               nore },
 	{ n, "<C-l>",      ":set cursorline! cursorcolumn!<CR>", nore + silent },
+	{ n, "qq",         ":q!<CR>",                            nore },
 	{ n, "s",          "",                                   nore },
 	{ n, "sv",         ":vsp<CR>",                           nore },
 	{ n, "sh",         ":sp<CR>",                            nore },
@@ -42,6 +43,9 @@ local keymaps = {
 	{ n, "<leader>t",  ":sp<CR><C-w>j:terminal<CR>",         nore },
 	{ n, "<leader>vt", ":vsp | terminal<CR>",                nore },
 	{ t, "<Esc>",      "<C-\\><C-n>",                        nore },
+	{ i, "<C-c>",      "<ESC>",                              nore },
+	{ i, ";;",         "<ESC>",                              nore },
+	{ i, "；；",     "<ESC>",                              nore },
 }
 
 local commands = {

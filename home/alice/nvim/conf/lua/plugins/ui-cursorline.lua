@@ -1,5 +1,6 @@
 return {
 	'yamatsum/nvim-cursorline',
+  event = { "UIEnter" },
 	config = function()
 		require('nvim-cursorline').setup {
 			cursorline = {
