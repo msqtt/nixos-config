@@ -6,6 +6,7 @@
     ./tmux
     ./direnv
     ./terminal
+    ./pdf
   ];
 
   home.packages = with pkgs;[
@@ -21,9 +22,9 @@
     mpv
     imv
     chafa
+		swappy
 
     firefox
-    v2raya
     appimage-run
     # daily use
     trayer
@@ -35,7 +36,9 @@
 
 
     # cli shit
+		reptyr
     neofetch
+		libnotify
     wev
     lf
     grim
@@ -85,8 +88,8 @@
     lsof # list open files
 
 
-		# for new version
   ] ++ (with pkgs-new ; [
-	   wl-clipboard
+		# for new version
+		wl-clipboard
   ]); 
 }

@@ -12,7 +12,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-ad97212.url = "github:NixOS/nixpkgs/ad97212346a23bd1c1a47f8c34429bb55ea9b5c2";
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,7 +34,7 @@
           system = "x86_64-linux";
 
 					specialArgs = {
-						pkgs-new = import inputs.nixpkgs-ad97212 {
+						pkgs-new = import inputs.nixpkgs-master {
 							system = system;
 							# 允许安装非自由软件
 							# config.allowUnfree = true;
