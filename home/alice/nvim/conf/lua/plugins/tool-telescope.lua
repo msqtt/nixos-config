@@ -1,6 +1,6 @@
 return {
 	'nvim-telescope/telescope.nvim',
-	branch = 'master',
+	tag = '0.1.2',
 	event = "VeryLazy",
 	keys = {
 		{ '<leader>fg', mode = { 'n' }, function() require('telescope.builtin').live_grep() end },

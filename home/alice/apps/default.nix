@@ -40,6 +40,7 @@
 		reptyr
     neofetch
 		libnotify
+		inotify-tools
     wev
     lf
     grim
