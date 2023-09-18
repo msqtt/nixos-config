@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-new, ... }:
+{ config, pkgs, pkgs-ad97212, ... }:
 {
   imports = [
     ./lf
@@ -37,6 +37,9 @@
 
 
     # cli shit
+		sshfs
+		fbterm
+		translate-shell
 		reptyr
     neofetch
 		libnotify
@@ -90,8 +93,8 @@
     lsof # list open files
 
 
-  ] ++ (with pkgs-new ; [
-		# for new version
+  ] ++ (with pkgs-ad97212 ; [
+		# for a special version
 		wl-clipboard
   ]); 
 }

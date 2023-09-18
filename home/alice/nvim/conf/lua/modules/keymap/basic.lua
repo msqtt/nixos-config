@@ -20,6 +20,7 @@ local keymaps = {
 	{ n, "vv",         "0wv$",                               nore },
 	{ n, "<C-l>",      ":set cursorline! cursorcolumn!<CR>", nore + silent },
 	{ n, "qq",         ":q!<CR>",                            nore },
+	{ n, "qx",         ":bd<CR>",                            nore },
 	{ n, "s",          "",                                   nore },
 	{ n, "sv",         ":vsp<CR>",                           nore },
 	{ n, "sh",         ":sp<CR>",                            nore },

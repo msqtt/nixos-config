@@ -8,6 +8,9 @@
 			Y = "previous";
 			O = "next";
 		};
+		options = {
+			selection-clipboard="clipboard";
+		};
 	};
 }
 

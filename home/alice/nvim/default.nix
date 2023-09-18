@@ -8,6 +8,9 @@
     vimAlias = true;
   };
 
+  home.file.".vimrc".source = ./conf/vimrc;
+  home.file.".ideavimrc".source = ./conf/vimrc;
+
   home.file.".config/nvim" = {
     source = ./conf;
     recursive = true;

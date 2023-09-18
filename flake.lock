@@ -235,6 +235,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-ad97212": {
+      "locked": {
+        "lastModified": 1693163516,
+        "narHash": "sha256-l84f6yo+R6DvVpTpyp/iYq8g9ATCFpsuDmO0ToEyHgI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ad97212346a23bd1c1a47f8c34429bb55ea9b5c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ad97212346a23bd1c1a47f8c34429bb55ea9b5c2",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -249,22 +265,6 @@
         "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1693458750,
-        "narHash": "sha256-1iMHbmfT+UOVXfsMGbAaEQWGQdETnIhrHC0pH5hTKLU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e6eee3ee22cb70d9ce558a04712aa5b633fcf5fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -306,7 +306,7 @@
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-master": "nixpkgs-master"
+        "nixpkgs-ad97212": "nixpkgs-ad97212"
       }
     },
     "systems": {

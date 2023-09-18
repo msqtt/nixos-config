@@ -30,9 +30,14 @@
       nsh="IN_NIX_SHELL=1 nix shell";
       nrun="IN_NIX_SHELL=1 nix run";
     };
-    shellAliases = {
+
+    shellAliases = rec {
+			eap = "export all_proxy=socks5://127.0.0.1:20170";
+			ap = "all_proxy=socks5://127.0.0.1:20170";
       tm="tmux";
       pc="proxychains4";
+			"2z"=pc+" trans :zh";
+			"2e"=pc+" trans :en";
     };
   };
 }

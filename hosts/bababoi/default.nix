@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/env.nix # environment and system default apps
       ../../modules/service.nix
@@ -14,7 +15,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
     systemd-boot = {
-      enable = true; 
+      enable = true;
       configurationLimit = 10;
       extraEntries = {
         "archlinux.conf" = ''
@@ -29,17 +30,23 @@
 
   # hibernate resume config
   boot.resumeDevice = "/dev/nvme0n1p5";
-	hardware.opengl.enable = true;
+  hardware.opengl = {
+		enable = true;
+    driSupport = true; 
+    driSupport32Bit = true; 
+	};
 
   networking = {
     hostName = "bababoi";
     wireless.iwd.enable = true;
-		firewall.enable = true;
-		firewall.allowedTCPPorts = [2017];
-		extraHosts = ''
-			125.217.53.138 mypi
-			125.217.53.183 kexie2
-		'';
+    firewall.enable = true;
+    firewall.allowedTCPPorts = [ 2017 20170 20171 ];
+    extraHosts = ''
+      			125.217.53.138 mypi
+      			125.217.53.183 kexie2
+      			43.163.233.244 kexieserver	
+      			107.174.247.115 ti
+      		'';
   };
 
   time.timeZone = "Asia/Shanghai";
@@ -56,14 +63,21 @@
 
   # keybord layout shit.
   services.xserver = {
-      layout = "us";
-      xkbVariant = "workman";
-      xkbOptions = "ctrl:nocaps";
+    layout = "us";
+    xkbVariant = "workman";
+    xkbOptions = "ctrl:nocaps";
+    libinput = {
+      enable = false;
+      touchpad = {
+        tapping = false;
+        disableWhileTyping = true;
+      };
     };
+  };
 
   nix = {
     settings = {
-      substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ]; 
+      substituters = [ "https://mirrors.ustc.edu.cn/nix-channels/store" ];
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
     };
