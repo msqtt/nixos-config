@@ -41,3 +41,4 @@ nnoremap E 3k
 nnoremap S viw
 
 set clipboard=unnamedplus
+set clipboard+=unnamed

@@ -43,9 +43,13 @@
     firewall.allowedTCPPorts = [ 2017 20170 20171 ];
     extraHosts = ''
       			125.217.53.138 mypi
-      			125.217.53.183 kexie2
+      			125.217.52.29 kexie2
       			43.163.233.244 kexieserver	
-      			107.174.247.115 ti
+      			107.174.247.79 ti
+						114.132.248.191 xyzserver
+						172.16.77.63 xyz1
+						172.16.77.166 xyz2
+						172.16.77.180 xyz3
       		'';
   };
 
@@ -65,7 +69,7 @@
   services.xserver = {
     layout = "us";
     xkbVariant = "workman";
-    xkbOptions = "ctrl:nocaps";
+    xkbOptions = "ctrl:nocaps,altwin:swap_lalt_lwin";
     libinput = {
       enable = false;
       touchpad = {

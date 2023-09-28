@@ -100,9 +100,9 @@ cmd link %{{
     fi
     case "$mode" in
         # symbolically copy mode is indicating a soft link
-        copy) sudo ln -sr -t . -- "$@";;
+        copy) doas ln -sr -t . -- "$@";;
         # while a move mode is indicating a hard link
-        move) sudo ln -t . -- "$@";;
+        move) doas ln -t . -- "$@";;
     esac
     rm ~/.local/share/lf/files
     lf -remote "send clear"
@@ -146,8 +146,8 @@ cmd paste-sudo ${{
     mode="$1"
     shift
     case "$mode" in
-        copy) sudo cp -rn -- "$@" .;;
-        move) sudo mv -n -- "$@" .;;
+        copy) doas cp -rn -- "$@" .;;
+        move) doas mv -n -- "$@" .;;
     esac
     rm ~/.local/share/lf/files
     lf -remote "send clear"

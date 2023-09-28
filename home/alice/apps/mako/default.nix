@@ -4,7 +4,7 @@
     enable = true;
     extraConfig = ''
       default-timeout=5000
-      font=Noto Serif Display
+      font=Noto Sans CJK SC
       # Colors
 
       background-color=#080808

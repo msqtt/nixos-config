@@ -9,6 +9,7 @@
     # v2raya proxy
     v2raya.enable = true;
     tlp.enable = true;
+		tailscale.enable = true;
   };
 
 }

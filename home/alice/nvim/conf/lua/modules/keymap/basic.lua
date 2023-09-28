@@ -45,8 +45,6 @@ local keymaps = {
 	{ n, "<leader>vt", ":vsp | terminal<CR>",                nore },
 	{ t, "<Esc>",      "<C-\\><C-n>",                        nore },
 	{ i, "<C-c>",      "<ESC>",                              nore },
-	{ i, ";;",         "<ESC>",                              nore },
-	{ i, "；；",     "<ESC>",                              nore },
 }
 
 local commands = {

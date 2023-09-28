@@ -24,6 +24,7 @@
     chafa
 		swappy
 		swww
+		wlr-randr
 
     firefox
     appimage-run
@@ -34,7 +35,6 @@
     musescore
     telegram-desktop
     acpi
-
 
     # cli shit
 		sshfs
@@ -53,6 +53,7 @@
 
     # archives
     zip
+		unar
     xz
     unzip
     p7zip

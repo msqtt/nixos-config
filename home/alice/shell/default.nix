@@ -25,7 +25,7 @@
     let
       nix-path = "~/nixos";
     in {
-      nbsf="sudo nixos-rebuild switch --flake ${nix-path}";
+      nbsf="doas nixos-rebuild switch --flake ${nix-path}";
       tclk="tty-clock -cs -C 5";
       nsh="IN_NIX_SHELL=1 nix shell";
       nrun="IN_NIX_SHELL=1 nix run";
