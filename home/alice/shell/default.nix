@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, ... }:
 {
 
   home.file.".config/fish" = {
@@ -15,30 +15,38 @@
       set PATH $HOME/bin $PATH
     '';
     interactiveShellInit = ''
-      # init shit
-      if test -n "$IN_NIX_SHELL"
-        any-nix-shell fish --info-right | source
-      end
-			direnv hook fish | source
+            # init shit
+            if test -n "$IN_NIX_SHELL"
+              any-nix-shell fish --info-right | source
+            end
+      			direnv hook fish | source
     '';
     shellAbbrs =
-    let
-      nix-path = "~/nixos";
-    in {
-      nbsf="doas nixos-rebuild switch --flake ${nix-path}";
-      tclk="tty-clock -cs -C 5";
-      nsh="IN_NIX_SHELL=1 nix shell";
-      nrun="IN_NIX_SHELL=1 nix run";
-    };
+      let
+        nix-path = "~/nixos";
+      in
+      {
+        nbsf = "doas nixos-rebuild switch --flake ${nix-path}";
+        tclk = "tty-clock -cs -C 5";
+        nsh = "IN_NIX_SHELL=1 nix shell";
+        nrun = "IN_NIX_SHELL=1 nix run";
+      };
 
-    shellAliases = rec {
-			eap = "export all_proxy=socks5://127.0.0.1:20170";
-			ap = "all_proxy=socks5://127.0.0.1:20170";
-      tm="tmux";
-      pc="proxychains4";
-			"2z"=pc+" trans :zh";
-			"2e"=pc+" trans :en";
-    };
+    shellAliases =
+      let
+				host = "127.0.0.1";
+				http_port = "20171";
+				socks5_port = "20170";
+				http_proxy = "http://${host}:${http_port}";
+				socks5_proxy = "socks5://${host}:${socks5_port}";
+      in
+      rec {
+        ap = "http_proxy=${http_proxy} https_proxy=${http_proxy} all_proxy=${socks5_proxy}";
+        eap = "export ${ap}";
+        tm = "tmux";
+        "2z" = "${ap} trans :zh";
+        "2e" = "${ap} trans :en";
+      };
   };
 }
 

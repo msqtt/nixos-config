@@ -9,7 +9,6 @@
       ../../modules/service.nix
       ../../modules/user.nix
       ../../modules/font.nix
-      ../../modules/proxy.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,7 +42,7 @@
     firewall.allowedTCPPorts = [ 2017 20170 20171 ];
     extraHosts = ''
       			125.217.53.138 mypi
-      			125.217.52.29 kexie2
+      			125.217.53.186 kexie2
       			43.163.233.244 kexieserver	
       			107.174.247.79 ti
 						114.132.248.191 xyzserver
@@ -99,6 +98,7 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     # "qq"
+		"wemeet"
   ];
 
   # install docker

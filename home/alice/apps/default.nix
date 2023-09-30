@@ -22,10 +22,9 @@
     mpv
     imv
     chafa
-		swappy
-		swww
-		wlr-randr
-
+    swappy
+    swww
+    wlr-randr
     firefox
     appimage-run
     # daily use
@@ -37,13 +36,13 @@
     acpi
 
     # cli shit
-		sshfs
-		fbterm
-		translate-shell
-		reptyr
+    sshfs
+    fbterm
+    translate-shell
+    reptyr
     neofetch
-		libnotify
-		inotify-tools
+    libnotify
+    inotify-tools
     wev
     lf
     grim
@@ -53,7 +52,7 @@
 
     # archives
     zip
-		unar
+    unar
     xz
     unzip
     p7zip
@@ -95,7 +94,10 @@
 
 
   ] ++ (with pkgs-ad97212 ; [
-		# for a special version
-		wl-clipboard
-  ]); 
+    # for a special version
+    wl-clipboard
+  ])
+  ++ [
+    # (pkgs.callPackage ./spotifox { })
+  ];
 }

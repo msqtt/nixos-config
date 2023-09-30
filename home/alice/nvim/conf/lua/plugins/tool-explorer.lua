@@ -3,11 +3,8 @@ return {
 	opts = {},
 	-- Optional dependencies
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	event = "VeryLazy",
-	keys = {
-		{ '<leader>o', mode = { 'n' }, ":vsp | Oil<CR>" },
-	},
 	config = function()
+		vim.keymap.set("n", "<leader>o", ":vsp | Oil<CR>", {noremap = true})
 		require("oil").setup({
 			default_file_explorer = true,
 			keymaps = {

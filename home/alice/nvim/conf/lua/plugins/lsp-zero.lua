@@ -13,8 +13,18 @@ local confn = function()
 	end)
 
 	-- setup lsp
-	lsp.setup_servers({ 'tsserver', 'eslint', 'gopls', 'pyright', 'rnix', 'volar',
-		'rust_analyzer', 'texlab', 'hls'})
+	lsp.setup_servers({
+		'tsserver',
+		'eslint',
+		'gopls',
+		'pyright',
+		'rnix',
+		'volar',
+		'rust_analyzer',
+		'texlab',
+		'hls',
+		'bufls'
+	})
 
 	-- (Optional) Configure lua language server for neovim
 	require 'lspconfig'.lua_ls.setup(lsp.nvim_lua_ls())
