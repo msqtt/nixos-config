@@ -32,11 +32,16 @@ xnoremap l o
 onoremap h y
 onoremap y h
 
-
-
 nnoremap N 3j
 nnoremap E 3k
 
+nnoremap <C-j> J
+nnoremap <C-d> <del>
+inoremap <C-l> <ESC>
+inoremap <C-,> <Left>
+inoremap <C-.> <Right>
+inoremap <C-S-lt> <Down>
+inoremap <C-S->> <Up>
 
 nnoremap S viw
 

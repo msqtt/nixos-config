@@ -7,8 +7,14 @@ local confn = function()
 		lsp.default_keymaps({ buffer = bufnr, preserve_mappings = false })
 		local opts = { buffer = bufnr }
 
+		vim.keymap.set({ 'n', 'x' }, 'gn', function()
+			vim.lsp.buf.rename()
+		end, opts)
 		vim.keymap.set({ 'n', 'x' }, 'gq', function()
 			vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+		end, opts)
+		vim.keymap.set({ 'n', 'x' }, 'ga', function()
+			vim.lsp.buf.code_action()
 		end, opts)
 	end)
 
@@ -48,6 +54,11 @@ local confn = function()
 			completion = cmp.config.window.bordered(winhighlight),
 			documentation = cmp.config.window.bordered(winhighlight),
 		},
+		sources = {
+			{ name = 'buffer' },
+			{ name = 'path' },
+			{ name = 'nvim_lsp' },
+		},
 		mapping = {
 			-- `Enter` key to confirm completion
 			['<CR>'] = cmp.mapping.confirm({ select = false }),
@@ -56,9 +67,30 @@ local confn = function()
 			['<C-Space>'] = cmp.mapping.complete(),
 
 			-- Navigate between snippet placeholder
-			['<C-j>'] = cmp_action.luasnip_jump_forward(),
-			['<C-k>'] = cmp_action.luasnip_jump_backward(),
+			['<C-f>'] = cmp_action.luasnip_jump_forward(),
+			['<C-b>'] = cmp_action.luasnip_jump_backward(),
 		}
+	})
+	-- `/` cmdline setup.
+	cmp.setup.cmdline('/', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = {
+			{ name = 'buffer' }
+		}
+	})
+	-- `:` cmdline setup.
+	cmp.setup.cmdline(':', {
+		mapping = cmp.mapping.preset.cmdline(),
+		sources = cmp.config.sources({
+			{ name = 'path' }
+		}, {
+			{
+				name = 'cmdline',
+				option = {
+					ignore_cmds = { 'Man', '!' }
+				}
+			}
+		})
 	})
 end
 
@@ -73,6 +105,10 @@ return {
 		{ 'hrsh7th/nvim-cmp',     lazy = true }, -- Required
 		{ 'hrsh7th/cmp-nvim-lsp', lazy = true }, -- Required
 		{ 'L3MON4D3/LuaSnip',     lazy = true }, -- Required
+
+		{ 'hrsh7th/cmp-buffer',   lazy = true },
+		{ 'hrsh7th/cmp-cmdline',  lazy = true },
+		{ 'hrsh7th/cmp-path',     lazy = true },
 	},
 	config = confn
 }

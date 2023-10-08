@@ -46,3 +46,4 @@ opt.updatetime                     = 100
 opt.virtualedit                    = 'block'
 opt.backupcopy                     = "yes"
 opt.ignorecase                     = true
+opt.foldmethod                     = 'manual'

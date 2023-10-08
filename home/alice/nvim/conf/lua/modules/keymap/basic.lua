@@ -22,8 +22,9 @@ local keymaps = {
 	{ n, "qq",         ":q!<CR>",                            nore },
 	{ n, "qx",         ":bd<CR>",                            nore },
 	{ n, "s",          "",                                   nore },
-	{ n, "sv",         ":vsp<CR>",                           nore },
-	{ n, "sh",         ":sp<CR>",                            nore },
+	{ n, "X",          "s",                                  nore },
+	{ n, "sv",         ":vsp | ",                            nore },
+	{ n, "sh",         ":sp | ",                             nore },
 	{ n, "sc",         "<C-w>c",                             nore },
 	{ n, "so",         "<C-w>o",                             nore },
 	{ n, "<tab>",      ":bn<CR>",                            nore + silent },
@@ -45,8 +46,15 @@ local keymaps = {
 	{ n, "<leader>vt", ":vsp | terminal<CR>",                nore },
 	{ t, "<Esc>",      "<C-\\><C-n>",                        nore },
 	{ i, "<C-c>",      "<ESC>",                              nore },
-	{ i, "<C-J>",      "J",                                  nore },
+	{ n, "<C-j>",      "J",                                  nore },
+	{ i, "<C-d>",      "<del>",                              nore },
+	{ i, "<C-l>",      "<ESC>O",                             nore },
+	{ i, "<C-,>",      "<Left>",                             nore },
+	{ i, "<C-.>",      "<Right>",                            nore },
+	{ i, "<C-S-lt>",   "<Down>",                             nore },
+	{ i, "<C-S->>",    "<Up>",                               nore },
 }
+
 
 local commands = {
 	{ "Format", "LspZeroFormat", {} }

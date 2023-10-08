@@ -20,6 +20,7 @@ return {
 		vim.diagnostic.config({ float = { border = "single" } })
 		-- Lua initialization file
 		vim.g.moonflyWinSeparator = 0
+		vim.g.moonflyUnderlineMatchParen = true
 		vim.cmd [[colorscheme moonfly]]
 	end
 }

@@ -7,6 +7,7 @@
     ./direnv
     ./terminal
     ./pdf
+		./obs
   ];
 
   home.packages = with pkgs;[
@@ -15,7 +16,7 @@
     subversion
 
     # base shit
-    wayfire
+		wayfire
     bemenu
     pavucontrol
     sakura
@@ -25,17 +26,21 @@
     swappy
     swww
     wlr-randr
+
+    # daily use
     firefox
     appimage-run
-    # daily use
     trayer
     go-musicfox
     tty-clock
     musescore
     telegram-desktop
     acpi
-
+		nur.repos.linyinfeng.wemeet
+		
     # cli shit
+		stress-ng
+		psmisc
     sshfs
     fbterm
     translate-shell

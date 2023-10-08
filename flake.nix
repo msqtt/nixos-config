@@ -7,9 +7,11 @@
     ];
     extra-substituters = [
       "https://nix-community.cachix.org"
+			"https://nixpkgs-wayland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+			"nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
   };
 
@@ -17,7 +19,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-ad97212.url = "github:NixOS/nixpkgs/ad97212346a23bd1c1a47f8c34429bb55ea9b5c2";
     nur.url = "github:nix-community/NUR";
-
 
     home-manager = {
       url = "github:nix-community/home-manager";

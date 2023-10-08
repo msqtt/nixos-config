@@ -1,6 +1,6 @@
 return {
 	'lewis6991/gitsigns.nvim',
-  event = { "UIEnter" },
+	event = { "UIEnter" },
 	config = function()
 		require('gitsigns').setup()
 	end
