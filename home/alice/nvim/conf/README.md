@@ -9,4 +9,13 @@ What's more, I finally decided to replace the lsp plugin, and switched from coc 
 
 Also replaced some other plugins, and I dont want to list them all.
 
-Thats all, Im quite satisfied with new config at the moment :).
+Thats all, Im quite satisfied with new configs at the moment :).
+
+
+![image](https://github.com/msqtt/nixos-config/assets/94043894/39dcd18d-de0b-4fcd-8796-517643b6639a)
+
+![image](https://github.com/msqtt/nixos-config/assets/94043894/f0cc0187-ea1d-464b-aaec-6271106ac853)
+
+![image](https://github.com/msqtt/nixos-config/assets/94043894/e86285ef-4862-4ec5-9924-d9948ae5009b)
+
+![image](https://github.com/msqtt/nixos-config/assets/94043894/0741ad20-c619-468a-9145-edd9c4fc1810)
