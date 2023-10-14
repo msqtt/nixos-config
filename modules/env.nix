@@ -4,6 +4,7 @@
     variables = rec {
       EDITOR = "nvim";
       LIBSEAT_BACKEND = "logind";
+      LIBVIRT_DEFAULT_URI = "qemu:///system";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -12,7 +13,7 @@
       wget
       docker-compose
       virt-manager
-			qemu_kvm
+      qemu_kvm
 
       (
         let base = pkgs.appimageTools.defaultFhsEnvArgs; in

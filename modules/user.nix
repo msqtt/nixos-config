@@ -10,7 +10,7 @@
   users.users.alice = {
     shell = pkgs.fish;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "libvirtd" ];
 		openssh.authorizedKeys.keys = [];
   };
 }
