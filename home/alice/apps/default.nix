@@ -26,6 +26,7 @@
     swappy
     swww
     wlr-randr
+    wl-clipboard
 
     # daily use
     firefox
@@ -100,9 +101,8 @@
 
   ] ++ (with pkgs-ad97212 ; [
     # for a special version
-    wl-clipboard
   ])
   ++ [
-    # (pkgs.callPackage ./spotifox { })
+    (pkgs.callPackage ./bobibo { })
   ];
 }
