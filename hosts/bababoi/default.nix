@@ -9,6 +9,7 @@
       ../../modules/service.nix
       ../../modules/user.nix
       ../../modules/font.nix
+      ../../modules/virt.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -16,13 +17,12 @@
     systemd-boot = {
       enable = true;
       configurationLimit = 10;
-      extraEntries = {
-        "archlinux.conf" = ''
-          title ArchLinux
-          efi /efi/ARCH/grubx64.efi
-        '';
-      };
-
+      # extraEntries = {
+      #   "archlinux.conf" = ''
+      #     title ArchLinux
+      #     efi /efi/ARCH/grubx64.efi
+      #   '';
+      # };
     };
     efi.canTouchEfiVariables = true;
   };
