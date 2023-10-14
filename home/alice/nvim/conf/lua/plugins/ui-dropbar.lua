@@ -1,5 +1,5 @@
 return {
 	"Bekaboo/dropbar.nvim",
-	event = { "UIEnter" },
+	-- event = { "UIEnter" },
 	enabled = true,
 }

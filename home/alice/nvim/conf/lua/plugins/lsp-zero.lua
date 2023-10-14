@@ -49,6 +49,10 @@ local confn = function()
 	-- nvim-cmp configurations
 	local cmp = require('cmp')
 	local cmp_action = require('lsp-zero').cmp_action()
+	local cmp_format = require('lsp-zero').cmp_format()
+
+	require('luasnip.loaders.from_vscode').lazy_load() -- for friendly snippets.
+
 	cmp.setup({
 		window = {
 			completion = cmp.config.window.bordered(winhighlight),
@@ -58,6 +62,7 @@ local confn = function()
 			{ name = 'buffer' },
 			{ name = 'path' },
 			{ name = 'nvim_lsp' },
+			{ name = 'luasnip' },
 		},
 		mapping = {
 			-- `Enter` key to confirm completion
@@ -69,7 +74,9 @@ local confn = function()
 			-- Navigate between snippet placeholder
 			['<C-f>'] = cmp_action.luasnip_jump_forward(),
 			['<C-b>'] = cmp_action.luasnip_jump_backward(),
-		}
+		},
+		--- (Optional) Show source name in completion menu
+		formatting = cmp_format,
 	})
 	-- `/` cmdline setup.
 	cmp.setup.cmdline('/', {
@@ -102,13 +109,15 @@ return {
 		{ 'neovim/nvim-lspconfig' }, -- Required
 
 		-- Autocompletion
-		{ 'hrsh7th/nvim-cmp',     lazy = true }, -- Required
-		{ 'hrsh7th/cmp-nvim-lsp', lazy = true }, -- Required
-		{ 'L3MON4D3/LuaSnip',     lazy = true }, -- Required
+		{ 'hrsh7th/nvim-cmp',             lazy = true }, -- Required
+		{ 'hrsh7th/cmp-nvim-lsp',         lazy = true }, -- Required
+		{ 'L3MON4D3/LuaSnip',             lazy = true }, -- Required
 
-		{ 'hrsh7th/cmp-buffer',   lazy = true },
-		{ 'hrsh7th/cmp-cmdline',  lazy = true },
-		{ 'hrsh7th/cmp-path',     lazy = true },
+		{ 'hrsh7th/cmp-buffer',           lazy = true },
+		{ 'hrsh7th/cmp-cmdline',          lazy = true },
+		{ 'hrsh7th/cmp-path',             lazy = true },
+		{ 'saadparwaiz1/cmp_luasnip',     lazy = true }, -- for custom snippets.
+		{ 'rafamadriz/friendly-snippets', lazy = true }, -- for custom snippets.
 	},
 	config = confn
 }

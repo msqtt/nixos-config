@@ -5,6 +5,9 @@ return {
 		local configs = require("nvim-treesitter.configs")
 
 		configs.setup({
+			autotag = {
+				enable = true,
+			},
 			ensure_installed = {
 				-- config
 				"c",
