@@ -43,6 +43,10 @@ inoremap <C-.> <Right>
 inoremap <C-S-lt> <Down>
 inoremap <C-S->> <Up>
 
+
+vnoremap < <gv
+vnoremap > >gv
+
 nnoremap S viw
 
 set clipboard=unnamedplus

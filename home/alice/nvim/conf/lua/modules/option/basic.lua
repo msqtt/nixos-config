@@ -1,7 +1,7 @@
 local opt                          = vim.o
 
 vim.env.NVIM_TUI_ENABLE_TRUE_COLOR = 1
-
+vim.g.OMNI_SQL_DEFAULT_COMPL_TYPE  = 'syntax'
 opt.clipboard                      = 'unnamedplus'
 opt.ttyfast                        = true
 opt.autochdir                      = false
@@ -10,8 +10,8 @@ opt.secure                         = false
 opt.number                         = true
 opt.relativenumber                 = true
 opt.cursorline                     = true
-opt.expandtab                      = false
-opt.tabstop                        = 2
+opt.expandtab                      = true
+opt.tabstop                        = 4
 opt.smarttab                       = true
 opt.shiftwidth                     = 2
 opt.softtabstop                    = 2

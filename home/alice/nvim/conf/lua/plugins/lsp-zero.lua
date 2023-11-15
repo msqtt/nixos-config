@@ -22,14 +22,19 @@ local confn = function()
 	lsp.setup_servers({
 		'tsserver',
 		'eslint',
+		'html',
+		'cssls',
+		'tailwindcss',
+		'volar',
 		'gopls',
 		'pyright',
 		'rnix',
-		'volar',
 		'rust_analyzer',
 		'texlab',
 		'hls',
-		'bufls'
+		'bufls',
+		'typst_lsp',
+		'sqlls'
 	})
 
 	-- (Optional) Configure lua language server for neovim
@@ -66,7 +71,7 @@ local confn = function()
 		},
 		mapping = {
 			-- `Enter` key to confirm completion
-			['<CR>'] = cmp.mapping.confirm({ select = false }),
+			['<CR>'] = cmp.mapping.confirm({ select = true }),
 
 			-- Ctrl+Space to trigger completion menu
 			['<C-Space>'] = cmp.mapping.complete(),

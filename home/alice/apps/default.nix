@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-ad97212, ... }:
+{ config, pkgs, pkgs-77ed358, ... }:
 {
   imports = [
     ./lf
@@ -7,17 +7,17 @@
     ./direnv
     ./terminal
     ./pdf
-		./obs
+    ./obs
+		./qutebrowser
+    ./misc
   ];
 
   home.packages = with pkgs;[
     # develop shit
-    gcc
     subversion
 
     # base shit
-		wayfire
-    bemenu
+		bemenu
     pavucontrol
     sakura
     mpv
@@ -29,21 +29,35 @@
     wl-clipboard
 
     # daily use
+		asciidoctor
+		grc
+		swaylock
+		flameshot
     firefox
     appimage-run
     trayer
     go-musicfox
     tty-clock
     musescore
-    telegram-desktop
     acpi
-		nur.repos.linyinfeng.wemeet
-		
+    nur.repos.linyinfeng.wemeet
+
     # cli shit
-		stress-ng
-		psmisc
+		dogdns
+		gping
+		du-dust
+		delta
+		httpie
+		cheat
+		netcat
+		htmlq
+    devbox
+    gh
+    lynx
+    browsh
+    stress-ng
+    psmisc
     sshfs
-    fbterm
     translate-shell
     reptyr
     neofetch
@@ -54,7 +68,6 @@
     grim
     slurp
     brightnessctl
-    any-nix-shell
 
     # archives
     zip
@@ -87,8 +100,6 @@
     rnix-lsp
 
     # productivity
-    glow # markdown previewer in terminal
-
     btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
@@ -99,9 +110,9 @@
     lsof # list open files
 
 
-  ] ++ (with pkgs-ad97212 ; [
-    # for a special version
-  ])
+  ]
+  # ++ (with pkgs-77ed358 ; [
+  #  ])
   ++ [
     (pkgs.callPackage ./bobibo { })
   ];

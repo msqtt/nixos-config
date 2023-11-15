@@ -3,12 +3,13 @@
   environment = {
     variables = rec {
       EDITOR = "nvim";
-      LIBSEAT_BACKEND = "logind";
+      # LIBSEAT_BACKEND = "logind";
       LIBVIRT_DEFAULT_URI = "qemu:///system";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     systemPackages = with pkgs; [
+      gcc
       git
       wget
       docker-compose
@@ -33,5 +34,4 @@
       )
     ];
   };
-
 }

@@ -15,11 +15,11 @@
       set PATH $HOME/bin $PATH
     '';
     interactiveShellInit = ''
-            # init shit
-            if test -n "$IN_NIX_SHELL"
-              any-nix-shell fish --info-right | source
-            end
-      			direnv hook fish | source
+			# init shit
+			# if test -n "$IN_NIX_SHELL"
+			#   any-nix-shell fish --info-right | source
+			# end
+			direnv hook fish | source
     '';
     shellAbbrs =
       let
@@ -44,9 +44,15 @@
         ap = "http_proxy=${http_proxy} https_proxy=${http_proxy} all_proxy=${socks5_proxy}";
         eap = "export ${ap}";
         tm = "tmux";
+				ns = "notify-send";
         "2z" = "${ap} trans :zh";
         "2e" = "${ap} trans :en";
       };
+		plugins = [
+			{ name = "grc"; src = pkgs.fishPlugins.grc.src; }
+			{ name = "done"; src = pkgs.fishPlugins.done.src; }
+			{ name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
+		];
   };
 }
 

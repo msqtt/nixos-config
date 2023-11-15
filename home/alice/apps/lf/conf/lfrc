@@ -11,6 +11,8 @@ set reverse
 # icons
 set icons
 
+set drawbox
+
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
 # exit on error and option '-u' is used to give error for unset variables.
@@ -43,6 +45,7 @@ cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$$EDITOR \$fx";;
         application/json) lf -remote "send $id \$$EDITOR \$fx";;
+				application/x-executable) lf -remote "send $id echo cannot open binary file directly";;
         inode/x-empty) lf -remote "send $id \$$EDITOR \$fx";; # .cjs .sql
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
@@ -73,7 +76,7 @@ cmd fzf_search ${{
 
 
 cmd fzf_jump ${{
-    res="$(find . -maxdepth 4 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    res="$(find . -maxdepth 6 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
     if [ -d "$res" ] ; then
         cmd="cd"
     elif [ -f "$res" ] ; then
@@ -129,16 +132,22 @@ cmd yank-basename-without-extension ${{
           print $0
       }' |
       if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
-      xclip -i -selection clipboard
+			wl-copy
+      # xclip -i -selection clipboard
 }}
-
+cmd yank-content ${{
+	cat "$fx" | wl-copy #; xclip -i -selection clipboard
+}}
 
 cmd lazygit ${{
   lazygit
 }}
 
 
-cmd trash %set -f; mv $fx ~/.trash
+cmd trash ${{
+	set -f
+	mv $fx ~/.trash/$(date +"%F")-deleted_$(basename -a -- $fx)
+}}
 
 
 cmd paste-sudo ${{
@@ -284,6 +293,7 @@ map hd :yank-dirname
 map hp :yank-path
 map hn :yank-basename
 map h. :yank-basename-without-extension
+map hc :yank-content
 
 map pl :link
 

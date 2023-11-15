@@ -17,7 +17,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-ad97212.url = "github:NixOS/nixpkgs/ad97212346a23bd1c1a47f8c34429bb55ea9b5c2";
+    # nixpkgs-77ed358.url = "github:NixOS/nixpkgs/77ed358e3d7945116cd0641d10928b5ee14c4db1";
     nur.url = "github:nix-community/NUR";
 
     home-manager = {
@@ -41,11 +41,11 @@
           system = "x86_64-linux";
 
           specialArgs = {
-            pkgs-ad97212 = import inputs.nixpkgs-ad97212 {
-              system = system;
-              # 允许安装非自由软件
-              # config.allowUnfree = true;
-            };
+            # pkgs-77ed358 = import inputs.nixpkgs-77ed358 {
+            #   system = system;
+            #   # 允许安装非自由软件
+            #   config.allowUnfree = true;
+            # };
           };
           modules = [
             ./hosts/bababoi
@@ -53,7 +53,6 @@
             home-manager.nixosModules.home-manager
             nur.nixosModules.nur
             {
-
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.alice = import ./home/alice;
