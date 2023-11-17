@@ -16,6 +16,7 @@
     v2raya.enable = true;
     tlp.enable = true;
 		tailscale.enable = true;
+    eternal-terminal.enable = true;
   };
 
 }

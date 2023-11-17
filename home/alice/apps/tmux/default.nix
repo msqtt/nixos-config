@@ -53,7 +53,9 @@ in
       bind -T copy-mode-vi H send-keys -X copy-end-of-line
       bind -T copy-mode-vi h send-keys -X copy-selection-and-cancel
       bind -T copy-mode-vi j send-keys -X search-again
-
+      # for system copy
+      bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "wl-copy"
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
 
       set -g status-fg black
       set -g status-bg magenta
