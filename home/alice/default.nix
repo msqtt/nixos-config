@@ -5,7 +5,7 @@
     ./fcitx5
     ./git
     ./nvim
-    ./shell
+    ./fish
     ./wm
   ];
 

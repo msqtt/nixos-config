@@ -29,6 +29,7 @@
     wl-clipboard
 
     # daily use
+    gomuks
 		asciidoctor
 		grc
 		swaylock
@@ -60,7 +61,7 @@
     sshfs
     translate-shell
     reptyr
-    neofetch
+    fastfetch
     libnotify
     inotify-tools
     wev

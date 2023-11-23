@@ -14,11 +14,11 @@
           xkb_options = "ctrl:nocaps";
         };
       };
-      terminal = "sakura";
+      terminal = "footclient";
 			menu = "bemenu-run  --fn='SourceCodePro[14]'";
       startup = [
         # Launch Firefox on start
-        # { command = "foot --server"; }
+        { command = "foot --server"; }
         { command = "fcitx5 -d"; }
       ];
       keybindings =
