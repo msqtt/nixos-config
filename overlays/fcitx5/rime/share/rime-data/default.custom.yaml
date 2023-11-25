@@ -1,44 +1,41 @@
+customization:
+  distribution_code_name: Squirrel
+  distribution_version: 2019-06-23
+  rime_version: 1.5.3
 patch:
   schema_list:
-    #- schema: luna_pinyin_simp # 朙月拼音
-    - schema: double_pinyin_flypy # 小鹤双拼
-    #- schema: double_pinyin # 自然码双拼
-    #- schema: numbers # 大写数字
+    - schema: flypy # 添加小鹤音形
 
-  menu/page_size: 9 # 候选词个数
+#
+# 可用的按键有 Caps_Lock, Shift_L, Shift_R, Control_L, control_R
+# Mac 系统上的鼠须管不能区分左、右，因此只有对 Shift_L, Control_L 的设定起作用
+#
+# 已输入编码时按切换键，可以进一步设定输入法中西文切换的形式
+# 可选的临时切换策略有三：
+# inline_ascii 在输入法的临时西文编辑区内输入字母、数字、符号、空格等，回车上屏后自动复位到中文
+# commit_text 已输入的候选文字上屏并切换至西文输入模式
+# commit_code 已输入的编码字符上屏并切换至西文输入模式
+# 设为 noop, 屏蔽该切换键
+#
+# 如果要把Caps Lock 设为只改变字母的大小写而不做中西文切换，可将 Caps_Lock 对应的切换方式设为 noop
+# 如果要以Caps Lock 切换到西文模式，默认输出小写字母，请置 ascii_composer/good_old_caps_lock: false
+# 如果要以Caps Lock 切换到西文模式，默认输出大写字母，请置 ascii_composer/good_old_caps_lock: true
 
-  # 若 caps 切换大小写无效, 打开 Mac 系统偏好设置 > 键盘 > 输入法 > 取消勾选[使用大写锁定键切换“美国”输入模式]
-  ascii_composer/good_old_caps_lock: true # 若为 true， Caps 只切换大小写
+  ascii_composer/good_old_caps_lock: true
   ascii_composer/switch_key:
-    Caps_Lock: commit_code # Caps 键
-    Shift_L: commit_code # 左 Shift，切换中英文
-    Shift_R: commit_code # 右 Shift，切换中英文
-    Control_L: noop # 左 Control，屏蔽该切换键
-    Control_R: noop # 右 Control，屏蔽该切换键
+    Caps_Lock: noop
+    Shift_L: commit_code
+    Shift_R: noop
+    Control_L: noop
+    Control_R: noop
 
-  key_binder/bindings: # 若开启, 去掉前面#
-    # 翻页
-    #- { when: has_menu, accept: Tab, send: Page_Down }            # "tab" 键翻页, 和 "tab" 键分词只能二选一
-    - { when: composing, accept: Tab, send: Shift+Right } # "tab" 键分词
-    - { when: paging, accept: minus, send: Page_Up } # "-" 上一页
-    - { when: has_menu, accept: equal, send: Page_Down } # "=" 下一页
-    - { when: paging, accept: comma, send: Page_Up } # "," 上一页
-    - { when: has_menu, accept: period, send: Page_Down } # "." 下一页
-    - { when: paging, accept: Control+p, send: Page_Up } # "[" 上一页
-    - { when: has_menu, accept: Control+n, send: Page_Down } # "]" 下一页
-    # 快捷键
-    #- { when: has_menu, accept: semicolon, send: 2 }              # ":" (分号)选择第 2 个候选词
-    #- { when: has_menu, accept: apostrophe, send: 3 }             # "'" (引号)选择第 3 个候选词
-    #- { when: composing, accept: Shift+Tab, send: Shift+Left }    # "Shift+Tab" 键向左选拼音分词
-    #- { when: composing, accept: Control+a, send: Home }          # "Control+a" 光标移至首
-    #- { when: composing, accept: Control+e, send: End }           # "Control+e" 光标移至尾
-    #- { when: composing, accept: Control+g, send: Escape }        # "Control+g" 清码
-    #- { when: composing, accept: Return, send: Escape }           # "Return" 回车清码
-    #- { when: always, accept: Control+Shift+1, select: .next }             # 切换输入方案
-    #- { when: always, accept: Control+Shift+2, toggle: ascii_mode }        # 中/英文切换
-    #- { when: always, accept: Control+Shift+3, toggle: full_shape }        # 全角/半角切换
-    - { when: always, accept: Control+Shift+4, toggle: simplification } # 繁简体切换
-    #- { when: always, accept: Control+Shift+5, toggle: extended_charset }  # 通用/增广切换（显示生僻字）
-    #- { when: composing, accept: Control+b, send: Left }           # "Control+b" 移动光标
-    #- { when: composing, accept: Control+f, send: Right }          # "Control+f" 向右选择候选词
-    - { when: composing, accept: Control+h, send: BackSpace } # "Control+h" 删除输入码
+  key_binder/bindings:
+    - when: paging
+      accept: Control_L
+      send: Page_Up
+    - when: has_menu
+      accept: Control_L
+      send: Page_Down
+
+
+

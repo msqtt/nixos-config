@@ -6,6 +6,7 @@
     ./git
     ./nvim
     ./fish
+    ./nushell
     ./wm
   ];
 
