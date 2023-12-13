@@ -3,6 +3,10 @@
   programs.qutebrowser = {
     enable = true;
     enableDefaultBindings = false;
+    settings = {
+      content.proxy = "socks5://localhost:20170";
+      colors.webpage.darkmode.enabled = false;
+    };
     keyBindings = {
       caret = {
         "$" = "move-to-end-of-line";
