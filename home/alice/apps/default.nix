@@ -29,6 +29,8 @@
     wl-clipboard
 
     # daily use
+    entr
+    neovide
     gomuks
 		asciidoctor
 		grc
@@ -44,18 +46,15 @@
     nur.repos.linyinfeng.wemeet
 
     # cli shit
+    wl-mirror
 		dogdns
-		gping
 		du-dust
 		delta
 		httpie
 		cheat
 		netcat
-		htmlq
     devbox
-    gh
     lynx
-    browsh
     stress-ng
     psmisc
     sshfs
@@ -63,7 +62,6 @@
     reptyr
     fastfetch
     libnotify
-    inotify-tools
     wev
     lf
     grim
