@@ -77,8 +77,8 @@ local confn = function()
 			['<C-Space>'] = cmp.mapping.complete(),
 
 			-- Navigate between snippet placeholder
-			['<C-f>'] = cmp_action.luasnip_jump_forward(),
-			['<C-b>'] = cmp_action.luasnip_jump_backward(),
+			['<C-l>'] = cmp_action.luasnip_jump_forward(),
+			['<C-k>'] = cmp_action.luasnip_jump_backward(),
 		},
 		--- (Optional) Show source name in completion menu
 		formatting = cmp_format,

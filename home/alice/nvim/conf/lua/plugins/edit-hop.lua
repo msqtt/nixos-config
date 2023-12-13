@@ -4,7 +4,7 @@ return {
 	keys = {
 		{
 			'f',
-			mode = { 'n' },
+			mode = { 'n', 'v' },
 			function()
 				require('hop').hint_char1({
 					direction = require('hop.hint').HintDirection.AFTER_CURSOR,
@@ -15,7 +15,7 @@ return {
 
 		{
 			'F',
-			mode = { 'n' },
+			mode = { 'n', 'v' },
 			function()
 				require('hop').hint_char1({
 					direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
@@ -25,7 +25,7 @@ return {
 		},
 		{
 			't',
-			mode = { 'n' },
+			mode = { 'n', 'v' },
 			function()
 				require('hop').hint_char1({
 					direction = require('hop.hint').HintDirection.AFTER_CURSOR,
@@ -37,7 +37,7 @@ return {
 
 		{
 			'T',
-			mode = { 'n' },
+			mode = { 'n', 'v' },
 			function()
 				require('hop').hint_char1({
 					direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
