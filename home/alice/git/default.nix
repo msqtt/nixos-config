@@ -3,8 +3,21 @@
   # git 相关配置
   programs.git = {
     enable = true;
-    userName = "mosquito";
+    userName = "msqtt";
     userEmail = "mosquito@email.cn";
+  };
+
+  # cli 
+  programs.gh = {
+    enable = true;
+    settings = {
+      git_protocol = "ssh";
+      editor = "vim";
+      aliases = {
+        co = "pr checkout";
+        pv = "pr view";
+      };
+    };
   };
 
   # lazygit tui 工具配置
@@ -12,8 +25,8 @@
     enable = true;
     settings = {
       gui = {
-      showIcons = true;
-      nerdFontsVersion = "3";
+        showIcons = true;
+        nerdFontsVersion = "3";
       };
       keybinding = {
         universal = {
@@ -30,8 +43,8 @@
           openFile = "x";
         };
         branches = {
-            createPullRequest = "";
-            viewPullRequestOptions = "";
+          createPullRequest = "";
+          viewPullRequestOptions = "";
         };
       };
     };
