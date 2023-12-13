@@ -53,6 +53,7 @@ local keymaps = {
   { i, "<C-f>",      "<Right>",                            nore },
   { i, "<A-b>",      "<C-Left>",                           nore },
   { i, "<A-f>",      "<C-Right>",                          nore },
+  { n, "!",          ":RunCmd ",                              nore },
 }
 
 

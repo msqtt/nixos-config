@@ -6,18 +6,18 @@ autocmd("FileType", { pattern = "markdown", command = "inoremap 3` ``````<esc>hh
 
 -- auto toggle fcitx5
 autocmd({ "VimEnter", "FocusGained", "InsertLeave", "CmdlineLeave" }, {
-	pattern = { "*.md", "*.tex", "*.adoc" },
-	callback = function()
-		local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-		if input_status == 2 then vim.fn.system("fcitx5-remote -t") end
-	end,
+  pattern = { "*.md", "*.tex", "*.adoc" },
+  callback = function()
+    local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+    if input_status == 2 then vim.fn.system("fcitx5-remote -t") end
+  end,
 })
 autocmd({ "InsertEnter" }, {
-	pattern = { "*.md", "*.tex", "*.adoc" },
-	callback = function()
-		local input_status = tonumber(vim.fn.system("fcitx5-remote"))
-		if input_status == 1 then vim.fn.system("fcitx5-remote -t") end
-	end,
+  pattern = { "*.md", "*.tex", "*.adoc" },
+  callback = function()
+    local input_status = tonumber(vim.fn.system("fcitx5-remote"))
+    if input_status == 1 then vim.fn.system("fcitx5-remote -t") end
+  end,
 })
 
 -- for folder
