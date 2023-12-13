@@ -6,16 +6,24 @@
       modifier = "Mod4";
       input = {
         "*" = {
-					repeat_delay = "250";
-					repeat_rate = "40";
+          repeat_delay = "250";
+          repeat_rate = "40";
           xkb_layout = "us";
           xkb_variant = "workman";
           # xkb_options = "ctrl:nocaps,altwin:swap_lalt_lwin";
           xkb_options = "ctrl:nocaps";
         };
       };
+      output = {
+        "eDP-1" = {
+          res = "1920x1080";
+        };
+        "HDMI-A-1" = {
+          res = "2560x1440@74.968Hz";
+        };
+      };
       terminal = "footclient";
-			menu = "bemenu-run  --fn='SourceCodePro[14]'";
+      menu = "bemenu-run  --fn='SourceCodePro[14]'";
       startup = [
         # Launch Firefox on start
         { command = "foot --server"; }
@@ -23,23 +31,24 @@
       ];
       keybindings =
         let
-					cfg = config.wayland.windowManager.sway;
-        in {
-					"${modifier}+Shift+l" = ''exec swaylock'';
-					"${modifier}+Shift+a" = ''exec grim -g "$(slurp)" - | swappy -f -'';
+          cfg = config.wayland.windowManager.sway;
+        in
+        {
+          "${modifier}+Shift+l" = ''exec swaylock'';
+          "${modifier}+Shift+a" = ''exec grim -g "$(slurp)" - | swappy -f -'';
           "${modifier}+Return" = "exec ${cfg.config.terminal}";
-					"${modifier}+Shift+q" = "kill";
+          "${modifier}+Shift+q" = "kill";
           "${modifier}+Shift+Return" = "exec ${cfg.config.menu}";
           "${modifier}+Shift+k" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
-					"${modifier}+${cfg.config.left}" = "focus left";
-					"${modifier}+${cfg.config.down}" = "focus down";
-					"${modifier}+${cfg.config.up}" = "focus up";
-					"${modifier}+${cfg.config.right}" = "focus right";
-					"${modifier}+Shift+${cfg.config.left}" = "move left";
-					"${modifier}+Shift+${cfg.config.down}" = "move down";
-					"${modifier}+Shift+${cfg.config.up}" = "move up";
-					"${modifier}+Shift+${cfg.config.right}" = "move right";
-					"${modifier}+b" = "splith";
+          "${modifier}+${cfg.config.left}" = "focus left";
+          "${modifier}+${cfg.config.down}" = "focus down";
+          "${modifier}+${cfg.config.up}" = "focus up";
+          "${modifier}+${cfg.config.right}" = "focus right";
+          "${modifier}+Shift+${cfg.config.left}" = "move left";
+          "${modifier}+Shift+${cfg.config.down}" = "move down";
+          "${modifier}+Shift+${cfg.config.up}" = "move up";
+          "${modifier}+Shift+${cfg.config.right}" = "move right";
+          "${modifier}+b" = "splith";
           "${modifier}+v" = "splitv";
           "${modifier}+f" = "fullscreen toggle";
           "${modifier}+a" = "focus parent";
@@ -89,6 +98,25 @@
       down = "n";
       up = "e";
       right = "o";
+      fonts = {
+        names = [ "Source Code Pro" ];
+        style = "Regular";
+        size = 9.0;
+      };
+      bars = [
+        {
+          fonts = {
+            names = [ "Source Code Pro" ];
+            style = "Regular";
+            size = 9.0;
+          };
+          mode = "dock";
+          hiddenState = "show";
+          position = "bottom";
+          statusCommand = "${pkgs.i3status}/bin/i3status";
+          workspaceButtons = true;
+        }
+      ];
     };
   };
 }
