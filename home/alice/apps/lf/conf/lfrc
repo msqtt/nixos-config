@@ -76,7 +76,7 @@ cmd fzf_search ${{
 
 
 cmd fzf_jump ${{
-    res="$(fd . --maxdepth 6 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    res="$(fd . -H --maxdepth 6 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
     if [ -d "$res" ] ; then
         cmd="cd"
     elif [ -f "$res" ] ; then
