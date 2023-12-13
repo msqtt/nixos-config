@@ -15,8 +15,8 @@
       172.16.77.63 xyz1
       172.16.77.166 xyz2
       172.16.77.180 xyz3
-      172.17.0.3 master.krejcmat.com
-      172.17.0.4 slave1.krejcmat.com
+      172.17.0.2 master.krejcmat.com
+      172.17.0.3 slave1.krejcmat.com
     '';
   };
 }
