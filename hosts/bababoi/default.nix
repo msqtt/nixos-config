@@ -90,7 +90,6 @@
   # Enable bluetooth
   hardware.bluetooth.enable = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "qq"
     "wemeet"
   ];
 

@@ -21,14 +21,11 @@ local keymaps = {
   { n, "<C-l>",      ":set cursorline! cursorcolumn!<CR>", nore + silent },
   { n, "Q",          ":q!<CR>",                            nore },
   { n, "qx",         ":bd<CR>",                            nore },
-  { n, "s",          "",                                   nore },
   { n, "X",          "s",                                  nore },
-  { n, "sv",         ":vsp | ",                            nore },
-  { n, "sh",         ":sp | ",                             nore },
-  { n, "sc",         "<C-w>c",                             nore },
-  { n, "so",         "<C-w>o",                             nore },
-  { n, "<tab>",      ":bn<CR>",                            nore + silent },
-  { n, "<S-tab>",    ":bp<CR>",                            nore + silent },
+  { n, "cc",         "<C-w>c",                             nore },
+  { n, "co",         "<C-w>o",                             nore },
+  { n, "<tab>",      ":tabn<CR>",                          nore + silent },
+  { n, "<S-tab>",    ":tabp<CR>",                          nore + silent },
   { n, "<A-y>",      "<C-w>h",                             nore },
   { n, "<A-n>",      "<C-w>j",                             nore },
   { n, "<A-e>",      "<C-w>k",                             nore },
@@ -53,7 +50,7 @@ local keymaps = {
   { i, "<C-f>",      "<Right>",                            nore },
   { i, "<A-b>",      "<C-Left>",                           nore },
   { i, "<A-f>",      "<C-Right>",                          nore },
-  { n, "!",          ":RunCmd ",                              nore },
+  { n, "!",          ":RunCmd ",                           nore },
 }
 
 
