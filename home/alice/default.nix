@@ -7,7 +7,7 @@
     ./nvim
     ./fish
     ./nushell
-    ./wm
+    ./wayland
   ];
 
   home.username = "alice";

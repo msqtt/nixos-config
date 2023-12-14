@@ -53,9 +53,16 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n =
+    let
+      english = "en_US.UTF-8/UTF-8";
+      chinese-utf = "zh_CN.UTF-8/UTF-8";
+      chinese-gbk = "zh_CN.GBK/GBK";
+    in
+    {
+      defaultLocale = "en_US.UTF-8";
+      supportedLocales = [ english chinese-utf chinese-gbk ];
+    };
 
   console = {
     font = "solar24x32";
@@ -66,8 +73,6 @@
   nix = {
     settings = {
       substituters = [
-        # "https://mirror.sjtu.edu.cn/nix-channels/store"
-        # "https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://cache.nixos.org"
       ];
       experimental-features = [ "nix-command" "flakes" ];

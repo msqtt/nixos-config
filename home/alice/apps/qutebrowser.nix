@@ -201,7 +201,7 @@
         "gC" = "tab-clone";
         "gD" = "tab-give";
         "gJ" = "tab-move +";
-        "gK" = "tab-move -";
+        "gE" = "tab-move -";
         "gO" = "cmd-set-text :open -t -r {url:pretty}";
         "gU" = "navigate up -t";
         "g^" = "tab-focus 1";
