@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-77ed358, ... }:
+{ config, pkgs, pkgs-4469e2, ... }:
 {
   imports = [
     ./lf
@@ -13,6 +13,10 @@
   ];
 
   home.packages = with pkgs;[
+    # my owe shit
+    my-nur.bobibo
+    my-nur.wpsoffice-cn-fix
+
     # develop shit
     subversion
 
@@ -23,8 +27,8 @@
     chafa
 
     # daily use
+    blueberry
     entr
-    neovide
     gomuks
     grc
     firefox
@@ -36,7 +40,6 @@
     nur.repos.linyinfeng.wemeet
 
     # cli shit
-    zoxide
     dogdns
     du-dust
     delta
@@ -58,7 +61,7 @@
     zip
     unar
     xz
-    unzip
+    # unzip eeeee dont send GBK to me
     p7zip
 
     # utils
@@ -67,6 +70,7 @@
     yq-go # yaml processer https://github.com/mikefarah/yq
     fzf # A command-line fuzzy finder
     fd
+    zoxide
 
 
     # misc
@@ -86,17 +90,9 @@
 
     # productivity
     btop # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
-
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
     lsof # list open files
   ]
-  # ++ (with pkgs-77ed358 ; [
-  #  ])
-  ++ [
-    (pkgs.callPackage ./bobibo { })
-  ];
+  # ++ (with pkgs-4469e2 ; [
+  # ])
+  ;
 }
