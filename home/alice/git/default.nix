@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-4469e2, ... }:
 {
   # git 相关配置
   programs.git = {
@@ -10,6 +10,7 @@
   # cli 
   programs.gh = {
     enable = true;
+    package = pkgs-4469e2.gh;
     settings = {
       git_protocol = "ssh";
       editor = "vim";

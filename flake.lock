@@ -105,16 +105,36 @@
         ]
       },
       "locked": {
-        "lastModified": 1702510888,
-        "narHash": "sha256-+7Bd9j47gDjD1DD0K9zKwA+8TjnTdTRGMVCERh6w2L0=",
+        "lastModified": 1702538064,
+        "narHash": "sha256-At5GwJPu2tzvS9dllhBoZmqK6lkkh/sOp2YefWRlaL8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5e9d1fe19f2d17cdfeb3b7e5e668f763e430cd28",
+        "rev": "0e2e443ff24f9d75925e91b89d1da44b863734af",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "my-nur": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1702559746,
+        "narHash": "sha256-yj699WwV143AFWWXhKStWHtLZdBUBzrsrB3UngZG694=",
+        "owner": "msqtt",
+        "repo": "my-nur",
+        "rev": "a1bb3f00773b3129809470336597236e264ff862",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msqtt",
+        "repo": "my-nur",
         "type": "github"
       }
     },
@@ -180,6 +200,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-4469e2": {
+      "locked": {
+        "lastModified": 1701141680,
+        "narHash": "sha256-qaPcwKI0RR6mxfn4sMrHEjjDl6VCEPUTRZhN+OFB6zg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4469e22700c47792f93daa882786d36f9bf8bc2a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4469e22700c47792f93daa882786d36f9bf8bc2a",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1702312524,
@@ -198,11 +234,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1702531143,
-        "narHash": "sha256-Soha63AecCN8KznPM+lnEu6hOvHJ/ky74330gcY4ZiI=",
+        "lastModified": 1702558663,
+        "narHash": "sha256-MHq/DdwsBwsTRqwFg1JuFtcoGArgvaH/XwbxgWQ4Zn0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a96a2e73854f31c829de33bcf5e903bba7be594a",
+        "rev": "b839a2bae27c0c14dd99dcc1f6d18f83b0af59bd",
         "type": "github"
       },
       "original": {
@@ -214,8 +250,10 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "my-nur": "my-nur",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-4469e2": "nixpkgs-4469e2",
         "nur": "nur"
       }
     },

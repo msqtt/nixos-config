@@ -18,8 +18,13 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-77ed358.url = "github:NixOS/nixpkgs/77ed358e3d7945116cd0641d10928b5ee14c4db1";
+    nixpkgs-4469e2.url = "github:NixOS/nixpkgs/4469e22700c47792f93daa882786d36f9bf8bc2a";
     nur.url = "github:nix-community/NUR";
+    # here is my owe nur.
+    my-nur = {
+      url = "github:msqtt/my-nur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -34,6 +39,9 @@
       overlays = with inputs; [
         neovim-nightly-overlay.overlay
         nur.overlay
+        (final: prev: {
+          my-nur = inputs.my-nur.packages."${prev.system}";
+        })
       ];
     in
     {
@@ -42,10 +50,10 @@
           system = "x86_64-linux";
 
           specialArgs = {
-            # pkgs-77ed358 = import inputs.nixpkgs-77ed358 {
-            #   system = system;
-            #   config.allowUnfree = true;
-            # };
+            pkgs-4469e2 = import inputs.nixpkgs-4469e2 {
+              system = system;
+              config.allowUnfree = true;
+            };
           };
           modules = [
             ./hosts/bababoi

@@ -3,6 +3,7 @@
   virtualisation = {
     docker = {
       enable = true;
+      package = pkgs.docker_20_10;
       storageDriver = "btrfs";
     };
 
