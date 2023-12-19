@@ -40,7 +40,7 @@
           nextMatch = "j";
           prevMatch = "J";
           new = "c";
-          edit = "i";
+          edit = "";
           openFile = "x";
         };
         branches = {
