@@ -15,12 +15,14 @@
   home.packages = with pkgs;[
     # my owe shit
     my-nur.bobibo
+    my-nur.listenme
     my-nur.wpsoffice-cn-fix
 
     # develop shit
     subversion
 
     # base shit
+    gnumake
     pavucontrol
     mpv
     imv

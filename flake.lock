@@ -125,11 +125,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1702899881,
-        "narHash": "sha256-KZjzWWyLWXvrNigYGIxwyhXKIeOGoSBI7KRdK0AqWXY=",
+        "lastModified": 1702994575,
+        "narHash": "sha256-GfFgB7zuouTca6kXfUOY/TZDSAMFbRLr8qBygJCCCIM=",
         "owner": "msqtt",
         "repo": "my-nur",
-        "rev": "21c4360798bf403c68f25aa581907c04a4537eb0",
+        "rev": "6f7db80b6bc518903e68b36cf50d0b61aeca8755",
         "type": "github"
       },
       "original": {
