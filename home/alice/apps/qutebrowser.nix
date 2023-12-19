@@ -47,8 +47,10 @@
         "<Ctrl-?>" = "rl-delete-char";
         "<Ctrl-A>" = "rl-beginning-of-line";
         "<Ctrl-B>" = "rl-backward-char";
-        "<Ctrl-C>" = "completion-item-yank";
-        "<Ctrl-D>" = "completion-item-del";
+        # "<Ctrl-C>" = "completion-item-yank";
+        # "<Ctrl-D>" = "completion-item-del";
+        "<Ctrl-C>" = "mode-leave";
+        "<Ctrl-D>" = "mode-leave";
         "<Ctrl-E>" = "rl-end-of-line";
         "<Ctrl-F>" = "rl-forward-char";
         "<Ctrl-H>" = "rl-backward-delete-char";
