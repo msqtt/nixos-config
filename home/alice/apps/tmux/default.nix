@@ -15,7 +15,7 @@ in
 
     extraConfig = ''
       # general
-      set -g prefix C-s
+      set -g prefix C-a
       setw -g xterm-keys on
       set -s escape-time 0
       set -sg repeat-time 300
