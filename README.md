@@ -1,6 +1,6 @@
 ### My NixOs Stuffs
 
-这是我用的主系统NixOS的全部配置🥺 
+这是我主系统NixOS的全部配置🥺 
 
 [neovim config](home/alice/nvim/conf)
 
