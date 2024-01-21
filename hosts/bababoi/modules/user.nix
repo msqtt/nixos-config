@@ -12,7 +12,7 @@
   users.users.alice = {
     shell = pkgs.fish;
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" "libvirtd" ];
+    extraGroups = [ "wheel" "docker" "libvirtd" "video" ];
     openssh.authorizedKeys.keys = [ ];
   };
 }

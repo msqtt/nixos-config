@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  imports = [];
   environment = {
     variables = rec {
       EDITOR = "nvim";

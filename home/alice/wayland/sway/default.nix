@@ -19,7 +19,10 @@
           res = "1920x1080";
         };
         "HDMI-A-1" = {
-          res = "2560x1440@74.968Hz";
+          # res = "2560x1440@74.968Hz";
+          res = "1440x900@74.984Hz";
+          # scale = "1.25";
+          transform = "270";
         };
       };
       terminal = "footclient";
@@ -112,7 +115,7 @@
           };
           mode = "dock";
           hiddenState = "show";
-          position = "bottom";
+          position = "top";
           statusCommand = "${pkgs.i3status}/bin/i3status";
           workspaceButtons = true;
         }

@@ -15,11 +15,11 @@
       set PATH $HOME/bin $PATH
     '';
     interactiveShellInit = ''
-      			# init shit
-      			# if test -n "$IN_NIX_SHELL"
-      			#   any-nix-shell fish --info-right | source
-      			# end
-      			direnv hook fish | source
+      # init shit
+      # if test -n "$IN_NIX_SHELL"
+      #   any-nix-shell fish --info-right | source
+      # end
+      direnv hook fish | source
     '';
     shellAbbrs =
       let

@@ -1,30 +1,23 @@
 { config, pkgs, ... }:
-let 
-  plugins  = pkgs.tmuxPlugins // pkgs.callPackage ./net-speed-fix.nix {};
-in
 {
   programs.tmux = {
     enable = true;
     keyMode = "vi";
     baseIndex = 1;
-    aggressiveResize = true;
-    plugins = with plugins; [
-      net-speed
-      battery
-    ];
+    aggressiveResize = false;
 
     extraConfig = ''
       # general
-      set -g prefix C-a
+      set -g prefix C-q
       setw -g xterm-keys on
       set -s escape-time 0
       set -sg repeat-time 300
       set -s focus-events on
       set -g mouse on
       set -sg exit-empty on
-			set -g set-clipboard on
+      set -g set-clipboard on
 
-      set -g default-terminal "screen-256color"
+      set -g default-terminal "tmux-256color"
       set -q -g status-utf8 on
       setw -q -g utf8 on
 
@@ -47,7 +40,7 @@ in
       bind -T copy-mode-vi n send-keys -X cursor-down
       bind -T copy-mode-vi k send-keys -X next-word-end
       bind -T copy-mode-vi E send-keys -N 5 -X cursor-up
-      bind -T copy-mode-vi N send-keys -N 5 -X cursor-down
+      bind -T copy-mode-vi N send-keys -N 7 -X cursor-down
       bind -T copy-mode-vi Y send-keys -X start-of-line
       bind -T copy-mode-vi I send-keys -X end-of-line
       bind -T copy-mode-vi H send-keys -X copy-end-of-line
@@ -58,21 +51,12 @@ in
       bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
 
       set -g status-fg black
-      set -g status-bg magenta
-      set-option -g pane-border-style "fg=black,bg=black" 
-      set-option -g pane-active-border-style "fg=magenta,bg=black"
-
+      set -g status-bg white
+      set -g mode-style 'fg=black,bg=magenta'
+      set -g message-style 'fg=black,bg=magenta'
+      # set -g pane-border-style 'fg=black,bg=black' 
+      set -g pane-active-border-style fg=magenta
       # plugin
-      set -g @download_speed_format '%%s'
-      set -g @upload_speed_format '%%s'
-
-      set -g status-left-length 100
-      set -g status-left "[#S] | D:#{download_speed} U:#{upload_speed} |"
-
-      set -g status-right 'Batt: #{battery_icon_status} #{battery_percentage} #{battery_remain} | %H:%M '
-
-      run-shell ${plugins.battery}/share/tmux-plugins/battery/battery.tmux
-      run-shell ${plugins.net-speed}/share/tmux-plugins/net-speed/net-speed.tmux
     '';
   };
 }

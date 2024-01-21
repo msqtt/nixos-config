@@ -4,10 +4,10 @@
     hostName = "bababoi";
     wireless.iwd.enable = true;
     firewall.enable = true;
-    firewall.allowedTCPPorts = [ 20170 20171 8080 4321 ];
+    firewall.allowedTCPPorts = [ 20170 20171 8080 4321 3000 5500 ];
     extraHosts = ''
       125.217.53.138 mypi
-      125.217.53.186 kexie2
+      125.217.52.212 kexie2
       43.163.233.244 kexieserver
       107.174.247.79 ti
       114.132.248.191 xyzserver

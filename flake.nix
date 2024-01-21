@@ -3,16 +3,16 @@
   nixConfig = {
     substituters = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
-      "https://mirrors.ustc.edu.cn/nix-channels/store"
-      "https://cache.nixos.org/"
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
+        "https://cache.nixos.org/"
     ];
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://nixpkgs-wayland.cachix.org"
+        "https://nixpkgs-wayland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
   };
 
@@ -20,7 +20,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-4469e2.url = "github:NixOS/nixpkgs/4469e22700c47792f93daa882786d36f9bf8bc2a";
     nur.url = "github:nix-community/NUR";
-    # here is my owe nur.
+# here is my owe nur.
     my-nur = {
       url = "github:msqtt/my-nur";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,13 +36,13 @@
 
   outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
     let
-      overlays = with inputs; [
-        neovim-nightly-overlay.overlay
-        nur.overlay
-        (final: prev: {
-          my-nur = inputs.my-nur.packages."${prev.system}";
-        })
-      ];
+    overlays = with inputs; [
+    neovim-nightly-overlay.overlay
+      nur.overlay
+      (final: prev: {
+       my-nur = inputs.my-nur.packages."${prev.system}";
+       })
+    ];
     in
     {
       nixosConfigurations = {
@@ -58,11 +58,11 @@
           modules = [
             ./hosts/bababoi
 
-            (args: { nixpkgs.overlays = overlays ++ import ./overlays args; })
+              (args: { nixpkgs.overlays = overlays ++ import ./overlays args; })
 
-            home-manager.nixosModules.home-manager
-            nur.nixosModules.nur
-            {
+              home-manager.nixosModules.home-manager
+              nur.nixosModules.nur
+              {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.alice = import ./home/alice;

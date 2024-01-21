@@ -5,7 +5,8 @@
     enableDefaultBindings = false;
     settings = {
       content.proxy = "socks5://localhost:20170";
-      colors.webpage.darkmode.enabled = false;
+      colors.webpage.darkmode.enabled = true;
+      editor.command = [ "footclient" "-e" "nvim" "{file}" "+call cursor({line}, {column})" ];
     };
     keyBindings = {
       caret = {
@@ -80,10 +81,11 @@
         "<Ctrl-F>" = "hint links";
         "<Ctrl-R>" = "hint --rapid links tab-bg";
         "<Escape>" = "mode-leave";
+        "<Ctrl-c>" = "mode-leave";
         "<Return>" = "hint-follow";
       };
       insert = {
-        "<Ctrl-E>" = "edit-text";
+        "<Alt-e>" = "edit-text";
         "<Escape>" = "mode-leave";
         "<Ctrl-c>" = "mode-leave";
         "<Shift-Escape>" = "fake-key <Escape>";
@@ -91,6 +93,7 @@
         "<Ctrl-b>" = "fake-key <Left>";
         "<Ctrl-a>" = "fake-key <Home>";
         "<Ctrl-e>" = "fake-key <End>";
+        # "<Ctrl-e>" = "insert-text {primary}";
         "<Ctrl-n>" = "fake-key <Down>";
         "<Ctrl-p>" = "fake-key <Up>";
         "<Alt-f>" = "fake-key <Ctrl-Right>";
@@ -99,7 +102,6 @@
         "<Alt-d>" = "fake-key <Ctrl-Delete>";
         "<Ctrl-w>" = "fake-key <Ctrl-Backspace>";
         "<Ctrl-h>" = "fake-key <Backspace>";
-        "<Ctrl-y>" = "insert-text {primary}";
       };
       normal = {
         "'" = "mode-enter jump_mark";
@@ -149,7 +151,7 @@
         "<Ctrl-T>" = "open -t";
         "<Ctrl-Tab>" = "tab-focus last";
         "<Ctrl-U>" = "scroll-page 0 -0.5";
-        "<Ctrl-V>" = "mode-enter passthrough";
+        "<Ctrl-b>" = "mode-enter passthrough";
         "<Ctrl-W>" = "tab-close";
         "<Ctrl-X>" = "navigate decrement";
         "<Ctrl-^>" = "tab-focus last";
@@ -293,7 +295,7 @@
         "}}" = "navigate next -t";
       };
       passthrough = {
-        "<Shift-Escape>" = "mode-leave";
+        "<Ctrl-b>" = "mode-leave";
       };
       prompt = {
         "<Alt-B>" = "rl-backward-word";

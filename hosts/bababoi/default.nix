@@ -5,7 +5,8 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/env.nix # environment and system default apps
+      # environment and system default apps
+      ./modules/env
       ./modules/service.nix
       ./modules/user.nix
       ./modules/font.nix

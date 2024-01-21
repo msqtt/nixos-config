@@ -10,18 +10,20 @@
     ./zathura.nix
     ./obs.nix
     ./qutebrowser.nix
+    ./fbterm.nix
   ];
 
   home.packages = with pkgs;[
     # my owe shit
     my-nur.bobibo
     my-nur.listenme
-    my-nur.wpsoffice-cn-fix
+    # my-nur.wpsoffice-cn-fix
 
     # develop shit
     subversion
 
     # base shit
+    ffmpeg
     gnumake
     pavucontrol
     mpv
@@ -29,19 +31,20 @@
     chafa
 
     # daily use
+    ytfzf
+    pulsemixer
     blueberry
     entr
     gomuks
     grc
     firefox
     appimage-run
-    go-musicfox
-    tty-clock
     musescore
-    acpi
     nur.repos.linyinfeng.wemeet
 
     # cli shit
+    caddy
+    distrobox
     dogdns
     du-dust
     delta
@@ -49,7 +52,6 @@
     cheat
     netcat
     devbox
-    lynx
     stress-ng
     psmisc
     sshfs
@@ -69,11 +71,8 @@
     # utils
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processer https://github.com/mikefarah/yq
     fzf # A command-line fuzzy finder
     fd
-    zoxide
-
 
     # misc
     nerdfonts
