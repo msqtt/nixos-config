@@ -6,7 +6,7 @@
 
   home.packages = with pkgs;[
     swappy
-    swww
+    # swww
     bemenu
     sakura
     wlr-randr

@@ -75,7 +75,6 @@
     fd
 
     # misc
-    nerdfonts
     cowsay
     file
     tree
