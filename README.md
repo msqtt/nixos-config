@@ -1,7 +1,10 @@
 ### My NixOs Stuffs
 
-🥺🥺
+这是我主系统NixOS的全部配置🥺 
 
+- [neovim config](home/alice/nvim/conf)
+- [我的自建NUR仓库](https://github.com/msqtt/my-nur)
+  
 | Screenshot                                                                                      |
 | ----------------------------------------------------------------------------------------------- |
 | ![image](https://github.com/msqtt/Sources/assets/94043894/eb2b0cb1-e458-4a4f-a9c2-9a55089713ec) |
