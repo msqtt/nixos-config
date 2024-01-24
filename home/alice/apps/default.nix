@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-4469e2, ... }:
+{ config, pkgs,  ... }:
 {
   imports = [
     ./lf
@@ -87,6 +87,7 @@
     # with more details log output
     nix-output-monitor
     rnix-lsp
+    home-manager
 
     # productivity
     btop # replacement of htop/nmon
