@@ -2,7 +2,9 @@ return {
   'stevearc/oil.nvim',
   opts = {},
   -- Optional dependencies
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = {
+    -- "nvim-tree/nvim-web-devicons"
+  },
   config = function()
     vim.keymap.set("n", "<leader>o", ":vsp | Oil<CR>", { noremap = true })
     require("oil").setup({

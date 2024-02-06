@@ -5,10 +5,10 @@ local nore = km.new_opt("noremap", true)
 
 -- just workman layout movement keys.
 local layout = {
-	{ n + x, "n", "j", nore },
-	{ n + x, "e", "k", nore },
-	{ n + x + o, "y", "h", nore },
-	{ n + x, "o", "l", nore },
+  { n + x,     "n", "j", nore },
+  { n + x,     "e", "k", nore },
+  { n + x + o, "y", "h", nore },
+  { n + x,     "o", "l", nore },
 }
 
 fp.map(km.reverse_upper_keys(layout), km.uwrap_set)

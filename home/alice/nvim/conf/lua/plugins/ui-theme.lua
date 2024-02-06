@@ -1,7 +1,9 @@
 return {
-  "Abstract-IDE/Abstract-cs",
+  "nyoom-engineering/oxocarbon.nvim",
   event = { "UIEnter" },
+  enabled = false,
   config = function()
-    vim.cmd [[colorscheme abscs]]
+    vim.opt.background = "dark"
+    vim.cmd [[colorscheme oxocarbon]]
   end
 }

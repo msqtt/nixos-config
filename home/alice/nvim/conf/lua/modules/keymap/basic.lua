@@ -19,7 +19,8 @@ local keymaps = {
   { n, "S",          "viw",                                nore },
   { n, "vv",         "0wv$",                               nore },
   { n, "<C-l>",      ":set cursorline! cursorcolumn!<CR>", nore + silent },
-  { n, "Q",          ":q!<CR>",                            nore },
+  { n, "<leader>q",  ":q!<CR>",                            nore },
+  { n, "<leader>w",  ":w!<CR>",                            nore },
   { n, "qx",         ":bd<CR>",                            nore },
   { n, "X",          "s",                                  nore },
   { n, "cc",         "<C-w>c",                             nore },
@@ -60,8 +61,7 @@ local keymaps = {
 
 
 local commands = {
-  { "Format", "LspZeroFormat",                {} },
-  { "Conf",   "Oil ~/nixos/home/alice/nvim/", {} }
+  { "Format", "LspZeroFormat", {} },
 }
 
 fp.map(commands, km.uwrap_cmd_set)

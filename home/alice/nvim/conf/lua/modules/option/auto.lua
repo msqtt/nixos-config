@@ -23,3 +23,6 @@ autocmd({ "InsertEnter" }, {
 -- for folder
 autocmd("BufWritePre", { pattern = "*", command = "silent! mkview" })
 autocmd("BufEnter", { pattern = "*", command = "silent! loadview" })
+
+-- auto for relative number switching
+autocmd({ "InsertEnter", "InsertLeave", "CmdlineEnter", "CmdlineLeave" }, { command = "set relativenumber!" })

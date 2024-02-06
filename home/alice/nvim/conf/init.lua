@@ -6,3 +6,4 @@
 require("modules.keymap")
 require("modules.option")
 require("modules.plugin")
+require("modules.ui")

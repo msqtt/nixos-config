@@ -19,7 +19,8 @@ opt.softtabstop                       = 2
 opt.autoindent                        = true
 opt.list                              = true
 -- opt.listchars                         = 'tab:|\\ ,trail:▫'
-opt.listchars                         = 'trail:▫'
+opt.listchars                         = 'tab:  ,trail:▫'
+opt.fillchars                         = 'vert:|'
 opt.scrolloff                         = 4
 opt.ttimeoutlen                       = 0
 opt.timeout                           = false
@@ -50,3 +51,6 @@ opt.virtualedit                       = 'block'
 opt.ignorecase                        = true
 opt.foldmethod                        = 'manual'
 opt.guifont                           = 'FiraCode Nerd Font Propo Light,Source Han Sans SC:h16'
+
+-- others
+vim.cmd [[colorscheme lunaperche]]
