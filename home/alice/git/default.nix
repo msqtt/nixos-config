@@ -26,8 +26,8 @@
     enable = true;
     settings = {
       gui = {
-        showIcons = true;
-        nerdFontsVersion = "3";
+        showIcons = false;
+        # nerdFontsVersion = "3";
       };
       keybinding = {
         universal = {
