@@ -22,7 +22,11 @@ function GetGitStatus()
 end
 
 function GetLspStatus()
-  local client = vim.lsp.get_client_by_id(1).name
+  local client = vim.lsp.get_client_by_id(1)
+  if client ~= nil then
+    client = client.name
+  end
+
   local hint = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
   local warn = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
   local error = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -31,5 +35,5 @@ function GetLspStatus()
 end
 
 vim.o.statusline =
-    ' %{v:lua.GetModeStatus()}:[%t]%r%m' .. '%=' ..
+    ' %{v:lua.GetModeStatus()} [%t]%r%m' .. '%=' ..
     '%{v:lua.GetLspStatus()}' .. '%=' .. '%{v:lua.GetGitStatus()}' .. '%=' .. '%l,%c%V' .. '%=' .. '%ob %P '
