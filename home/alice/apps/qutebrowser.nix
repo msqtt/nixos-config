@@ -199,6 +199,7 @@
         "co" = "tab-only";
         "d" = "tab-close";
         "f" = "hint";
+        "gl" = "edit-url";
         "g$" = "tab-focus -1";
         "g0" = "tab-focus 1";
         "gB" = "cmd-set-text -s :bookmark-load -t";
