@@ -35,5 +35,5 @@ function GetLspStatus()
 end
 
 vim.o.statusline =
-    ' %{v:lua.GetModeStatus()} [%t]%r%m' .. '%=' ..
+    ' %{v:lua.GetModeStatus()} %t%r%m' .. '%=' ..
     '%{v:lua.GetLspStatus()}' .. '%=' .. '%{v:lua.GetGitStatus()}' .. '%=' .. '%l,%c%V' .. '%=' .. '%ob %P '
