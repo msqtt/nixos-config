@@ -31,6 +31,7 @@
     chafa
 
     # daily use
+    thunderbird-unwrapped
     ytfzf
     pulsemixer
     blueberry
