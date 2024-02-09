@@ -7,7 +7,7 @@
     ./direnv
     ./mako.nix
     ./foot.nix
-    ./zathura.nix
+    # ./zathura.nix
     ./obs.nix
     ./qutebrowser.nix
     ./fbterm.nix
@@ -32,6 +32,7 @@
 
     # daily use
     thunderbird-unwrapped
+    calibre
     ytfzf
     pulsemixer
     blueberry
