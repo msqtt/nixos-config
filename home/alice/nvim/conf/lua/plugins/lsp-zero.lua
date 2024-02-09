@@ -18,7 +18,11 @@ return {
     dependencies = {
       {
         'L3MON4D3/LuaSnip',
+        -- for friendly-snippets
+        'saadparwaiz1/cmp_luasnip',
         "rafamadriz/friendly-snippets",
+
+        -- for basic complete
         'hrsh7th/cmp-buffer',
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-cmdline'
@@ -33,7 +37,12 @@ return {
       local cmp = require('cmp')
       local cmp_action = lsp_zero.cmp_action()
 
+
+      -- for friendly-snippets
+      require('luasnip.loaders.from_vscode').lazy_load()
+
       cmp.setup({
+        --- (Optional) Show source name in completion menu
         formatting = lsp_zero.cmp_format(),
         mapping = cmp.mapping.preset.insert({
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
