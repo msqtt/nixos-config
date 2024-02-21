@@ -12,6 +12,8 @@
     };
     # Enable CUPS to print documents.
     printing.enable = true;
+    pipewire.jack.enable = true;
+    jack.jackd.enable = true;
     # v2raya proxy
     v2raya.enable = true;
     tlp.enable = true;

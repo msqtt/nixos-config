@@ -18,5 +18,6 @@
       172.17.0.2 master.krejcmat.com
       172.17.0.3 slave1.krejcmat.com
     '';
+    proxy.default = "http://127.0.0.1:20171";
   };
 }
