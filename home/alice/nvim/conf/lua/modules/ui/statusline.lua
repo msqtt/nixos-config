@@ -15,7 +15,7 @@ end
 function GetGitStatus()
   local gitinfo = vim.b.gitsigns_status
   if gitinfo == nil or gitinfo == '' then
-    gitinfo = 'clean'
+    gitinfo = 'nil'
   end
 
   return string.format('🐱:[%s]', gitinfo)
@@ -36,4 +36,4 @@ end
 
 vim.o.statusline =
     ' %{v:lua.GetModeStatus()} %t%r%m' .. '%=' ..
-    '%{v:lua.GetLspStatus()}' .. '%=' .. '%{v:lua.GetGitStatus()}' .. '%=' .. '%l,%c%V' .. '%=' .. '%ob %P '
+    '%{v:lua.GetLspStatus()}' .. '%=' .. '%{v:lua.GetGitStatus()}' .. '%=' .. '%l,%c%V' .. '    ' .. '%ob %P '

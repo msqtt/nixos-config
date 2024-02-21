@@ -49,8 +49,8 @@ return {
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-k>'] = cmp_action.luasnip_jump_forward(),
-          ['<C-l>'] = cmp_action.luasnip_jump_backward(),
+          ['<C-l>'] = cmp_action.luasnip_jump_forward(),
+          ['<C-k>'] = cmp_action.luasnip_jump_backward(),
         }),
         window = {
           completion = cmp.config.window.bordered(),

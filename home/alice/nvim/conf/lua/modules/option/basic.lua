@@ -53,4 +53,4 @@ opt.foldmethod                        = 'manual'
 opt.guifont                           = 'FiraCode Nerd Font Propo Light,Source Han Sans SC:h16'
 
 -- others
-vim.cmd [[colorscheme lunaperche]]
+vim.cmd [[colorscheme habamax]]

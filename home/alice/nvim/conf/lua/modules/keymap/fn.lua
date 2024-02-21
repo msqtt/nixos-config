@@ -9,7 +9,7 @@ function RunCmd(cmd)
   vim.g.terminal_buffer_nr = vim.fn.bufnr("%")
 end
 
-function CloseCmd(cmd)
+function CloseCmd()
   local ter_nr = vim.g.terminal_buffer_nr
   if ter_nr then
     vim.g.terminal_buffer_nr = nil
