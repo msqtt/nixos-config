@@ -16,7 +16,7 @@
     slurp
     swaylock
     wev
-    hyprpicker # color picker
+    # hyprpicker # color picker
   ];
   # 直接将当前文件夹的配置文件，链接到 Home 目录下的指定位置
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
@@ -24,10 +24,10 @@
   # imports = [
   # 		hyprland.homeManagerModules.default
   # ];
-  # wayland.windowManager.hyprland = {
-  # 	enable = true;
-  # 	extraConfig = builtins.readFile ./hyprland/hyprland.conf;
-  # };
+  wayland.windowManager.hyprland = {
+  	enable = false;
+  	extraConfig = builtins.readFile ./hyprland/hyprland.conf;
+  };
 
   # home.file.".config/wayfire.ini" = {
   #   source = ./wayfire/wayfire.ini;

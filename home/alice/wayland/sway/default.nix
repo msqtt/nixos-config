@@ -22,7 +22,7 @@
           # for my portable screen
           res = "1920x1080@144.017Hz";
           # pos = "0 -1920";
-          transform = "90";
+          # transform = "90";
           # for 5111 screen
           # res = "2560x1440@74.968Hz";
           # scale = "1.25";
