@@ -49,6 +49,7 @@
 
       cursor = {
         style = "block";
+        color = "000000 c9cbfe";
         blink = "yes";
       };
     };
