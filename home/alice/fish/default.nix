@@ -11,8 +11,8 @@
     loginShellInit = ''
       # set fish_greeting # Disable greeting
       # environment
-      set -x LF_BOOKMARK_PATH ~/.bookmark
-      set PATH $HOME/bin $PATH
+      # set -x LF_BOOKMARK_PATH $HOME/.bookmark
+      # set PATH $HOME/bin $PATH
     '';
     interactiveShellInit = ''
       # init shit
@@ -20,6 +20,8 @@
       #   any-nix-shell fish --info-right | source
       # end
       direnv hook fish | source
+      set -x LF_BOOKMARK_PATH $HOME/.bookmark
+      fish_add_path $HOME/bin
     '';
     shellAbbrs =
       let
