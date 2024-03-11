@@ -43,6 +43,9 @@ inoremap <C-.> <Right>
 inoremap <C-S-lt> <Down>
 inoremap <C-S->> <Up>
 
+nnoremap <leader>w :w!<CR>
+nnoremap <leader>q :q!<CR>
+
 
 vnoremap < <gv
 vnoremap > >gv

@@ -127,6 +127,8 @@ return {
           ['gopls'] = { 'go' },
           ['tsserver'] = { 'javascript', 'typescript' },
           ['rust_analyzer'] = { 'rust' },
+          ['rnix'] = { 'nix' },
+          ['bufls'] = { 'proto' },
         }
       })
 

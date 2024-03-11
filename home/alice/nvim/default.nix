@@ -8,6 +8,9 @@
     vimAlias = true;
   };
 
+
+  # home.packages = with pkgs;[ neovide ];
+
   home.file.".vimrc".source = ./conf/vimrc;
   home.file.".ideavimrc".source = ./conf/vimrc;
 
