@@ -20,12 +20,12 @@
         };
         "HDMI-A-1" = {
           # for my portable screen
-          res = "1920x1080@144.017Hz";
-          # pos = "0 -1920";
+          # res = "1920x1080@120.000Hz";
           # transform = "90";
+          # pos = "0 -1920";
           # for 5111 screen
-          # res = "2560x1440@74.968Hz";
-          # scale = "1.25";
+          res = "2560x1440@74.968Hz";
+          # scale = "1.20";
         };
       };
       terminal = "footclient";

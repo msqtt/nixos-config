@@ -1,4 +1,4 @@
-{ config, pkgs,  ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./lf
@@ -31,9 +31,10 @@
     chafa
 
     # daily use
+    wezterm
+    gimp
+    flameshot
     thunderbird-unwrapped
-    calibre
-    ytfzf
     pulsemixer
     blueberry
     entr
@@ -45,6 +46,7 @@
     nur.repos.linyinfeng.wemeet
 
     # cli shit
+    xclip
     caddy
     distrobox
     dogdns
@@ -92,7 +94,7 @@
     btop # replacement of htop/nmon
     lsof # list open files
   ]
-  # ++ (with pkgs-4469e2 ; [
-  # ])
+    # ++ (with pkgs-4469e2 ; [
+    # ])
   ;
 }

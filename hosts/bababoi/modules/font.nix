@@ -9,6 +9,7 @@
       source-han-sans
       source-han-serif
       source-code-pro
+      fira-code
     ];
     fontconfig = {
       defaultFonts = {

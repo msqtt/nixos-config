@@ -72,6 +72,7 @@
   };
 
   nix = {
+    optimise.automatic = true;
     settings = {
       substituters = [
         "https://cache.nixos.org"

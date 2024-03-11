@@ -8,7 +8,6 @@
     swappy
     # swww
     bemenu
-    sakura
     wlr-randr
     wl-clipboard
     wl-mirror
@@ -25,8 +24,8 @@
   # 		hyprland.homeManagerModules.default
   # ];
   wayland.windowManager.hyprland = {
-  	enable = false;
-  	extraConfig = builtins.readFile ./hyprland/hyprland.conf;
+    enable = false;
+    extraConfig = builtins.readFile ./hyprland/hyprland.conf;
   };
 
   # home.file.".config/wayfire.ini" = {
