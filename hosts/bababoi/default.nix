@@ -19,21 +19,15 @@
     resumeDevice = "/dev/nvme0n1p5";
     supportedFilesystems = [ "ntfs" ];
     # for boot kernel modules
-    initrd.kernelModules = [ "amdgpu" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback
-    ];
+    # initrd.kernelModules = [ "amdgpu" ];
+    # extraModulePackages = with config.boot.kernelPackages; [
+    #   v4l2loopback
+    # ];
     # Use the systemd-boot EFI boot loader.
     loader = {
       systemd-boot = {
         enable = true;
         configurationLimit = 10;
-        # extraEntries = {
-        #   "archlinux.conf" = ''
-        #     title ArchLinux
-        #     efi /efi/ARCH/grubx64.efi
-        #   '';
-        # };
       };
       efi.canTouchEfiVariables = true;
     };
@@ -91,8 +85,12 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "nix-2.15.3"
+  ];
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "wemeet"
+    "wine-wechat"
   ];
 
   powerManagement.enable = true;

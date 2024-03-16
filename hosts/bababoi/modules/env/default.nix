@@ -13,8 +13,8 @@
       git
       wget
       docker-compose
-      virt-manager
-      qemu_kvm
+      # virt-manager
+      # qemu_kvm
 
       (
         let base = pkgs.appimageTools.defaultFhsEnvArgs; in

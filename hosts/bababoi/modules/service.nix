@@ -17,7 +17,7 @@
       enable = true;
       displayManager.sddm.enable = true;
       # running on wayland
-      displayManager.defaultSession = "plasmawayland";
+      displayManager.defaultSession = "plasma";
       desktopManager.plasma5.enable = true;
     };
     openssh = {
@@ -34,14 +34,14 @@
     # v2raya proxy
     v2raya.enable = true;
     tlp.enable = false;
-    tailscale.enable = true;
+    tailscale.enable = false;
     # keybord layout shit.
     xserver = {
       layout = "us";
       xkbVariant = "workman";
       xkbOptions = "ctrl:nocaps";
       libinput = {
-        enable = false;
+        enable = true;
         touchpad = {
           tapping = false;
           disableWhileTyping = true;
