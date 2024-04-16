@@ -90,7 +90,7 @@
   ];
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "wemeet"
-    "wine-wechat"
+    "Oracle_VM_VirtualBox_Extension_Pack"
   ];
 
   powerManagement.enable = true;

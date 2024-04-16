@@ -44,7 +44,6 @@
     appimage-run
     musescore
     nur.repos.linyinfeng.wemeet
-    nur.repos.xddxdd.wine-wechat
 
     # cli shit
     xclip

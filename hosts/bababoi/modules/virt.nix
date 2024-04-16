@@ -20,7 +20,11 @@
         enable = false;
         extraConfig = ''uri_default = "qemu:///system"'';
       };
+      virtualbox.host.enable = true;
+      virtualbox.host.enableExtensionPack = true;
     };
+
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   # virt-manager requires dconf to remember settings
   programs.dconf.enable = true;
 }

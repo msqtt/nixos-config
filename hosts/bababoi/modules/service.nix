@@ -2,9 +2,8 @@
 {
 
   systemd.services.nix-daemon.environment = {
-    socks5_proxy = "socks5://127.0.0.1:20170";
-    http_proxy = "http://127.0.0.1:20171";
-    https_proxy = "http://127.0.0.1:20171";
+    http_proxy = "socks5h://127.0.0.1:20171";
+    https_proxy = "socks5h://127.0.0.1:20171";
   };
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     oxygen
@@ -28,13 +27,10 @@
       };
     };
     #
-    # for audio editting
-    pipewire.jack.enable = false;
-    jack.jackd.enable = false;
     # v2raya proxy
     v2raya.enable = true;
     tlp.enable = false;
-    tailscale.enable = false;
+    tailscale.enable = true;
     # keybord layout shit.
     xserver = {
       layout = "us";
@@ -43,7 +39,7 @@
       libinput = {
         enable = true;
         touchpad = {
-          tapping = false;
+          tapping = true;
           disableWhileTyping = true;
         };
       };
