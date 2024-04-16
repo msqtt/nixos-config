@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   programs.neovim = {
-    enable = true;
+    enable = false;
     # package = pkgs.neovim-nightly;
     defaultEditor = true;
     viAlias = true;

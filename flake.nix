@@ -31,16 +31,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nixvim = {
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
     let
       overlays = with inputs; [
         # neovim-nightly-overlay.overlay
-          nur.overlay
-          (final: prev: {
-           my-nur = inputs.my-nur.packages."${prev.system}";
-           })
+        nur.overlay
+        (final: prev: {
+          my-nur = inputs.my-nur.packages."${prev.system}";
+        })
       ];
     in
     {
@@ -61,7 +66,9 @@
 
             home-manager.nixosModules.home-manager
             nur.nixosModules.nur
+            inputs.nixvim.nixosModules.nixvim
             {
+
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.alice = import ./home/alice;

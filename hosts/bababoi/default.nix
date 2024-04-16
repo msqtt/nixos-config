@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 {
   imports =
     [
@@ -13,7 +12,6 @@
       ./modules/network.nix
       ./modules/virt.nix
     ];
-
   # hibernate resume config
   boot = {
     resumeDevice = "/dev/nvme0n1p5";
@@ -91,6 +89,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "wemeet"
     "Oracle_VM_VirtualBox_Extension_Pack"
+    "tabnine"
   ];
 
   powerManagement.enable = true;
