@@ -2,8 +2,8 @@
 {
 
   systemd.services.nix-daemon.environment = {
-    http_proxy = "socks5h://127.0.0.1:20171";
-    https_proxy = "socks5h://127.0.0.1:20171";
+    http_proxy = "http://127.0.0.1:20171";
+    https_proxy = "http://127.0.0.1:20171";
   };
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     oxygen

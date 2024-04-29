@@ -52,11 +52,13 @@ return {
           ['<C-l>'] = cmp_action.luasnip_jump_forward(),
           ['<C-k>'] = cmp_action.luasnip_jump_backward(),
         }),
+        cmdline = {
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
-        },
-        sources = {
+        };
+        }
+e       sources = {
           { name = 'buffer' },
           { name = 'path' },
           { name = 'nvim_lsp' },
@@ -79,6 +81,7 @@ return {
         }, {
           { name = 'cmdline' }
         })
+      :hawkey
       })
     end
   },

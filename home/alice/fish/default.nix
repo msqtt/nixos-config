@@ -51,6 +51,7 @@
         ns = "notify-send";
         "2z" = "${ap} trans :zh";
         "2e" = "${ap} trans :en";
+        lg = "lazygit";
       };
     plugins = [
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }

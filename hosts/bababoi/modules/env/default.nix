@@ -8,127 +8,127 @@
     clipboard.register = "unnamedplus";
     colorschemes.catppuccin.enable = true;
     options = {
-      langmap = ''qq,dw,re,wr,bt,jy,fu,ui,po,\;p,aa,ss,hd,tf,gg,yh,nj,ek,ol,i\;,zz,xx,mc,cv,vb,kn,lm,QQ,DW,RE,WR,BT,JY,FU,UI,PO,\:P,AA,SS,HD,TF,GG,YH,NJ,EK,OL,I\:,ZZ,XX,MC,CV,VB,KN,LM'';
-      clipboard      = "unnamedplus";
-      ttyfast        = true;
-      autochdir      = false;
-      exrc           = true;
-      secure         = false;
-      number         = true;
+      langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
+      clipboard = "unnamedplus";
+      ttyfast = true;
+      autochdir = false;
+      exrc = true;
+      secure = false;
+      number = true;
       relativenumber = true;
-      cursorline     = true;
-      expandtab      = true;
-      tabstop        = 2;
-      smarttab       = true;
-      shiftwidth     = 2;
-      softtabstop    = 2;
-      autoindent     = true;
-      list           = true;
-      listchars      = "tab:  ,trail:▫";
-      fillchars      = "vert:|";
-      scrolloff      = 4;
-      ttimeoutlen    = 0;
-      timeout        = false;
-      viewoptions    = "cursor,folds,slash,unix";
-      wrap           = true;
-      textwidth      = 0;
-      indentexpr     = "";
-      foldlevel      = 99;
-      foldenable     = true;
+      cursorline = true;
+      expandtab = true;
+      tabstop = 2;
+      smarttab = true;
+      shiftwidth = 2;
+      softtabstop = 2;
+      autoindent = true;
+      list = true;
+      listchars = "tab:  ,trail:▫";
+      fillchars = "vert:|";
+      scrolloff = 4;
+      ttimeoutlen = 0;
+      timeout = false;
+      viewoptions = "cursor,folds,slash,unix";
+      wrap = true;
+      textwidth = 0;
+      indentexpr = "";
+      foldlevel = 99;
+      foldenable = true;
       foldlevelstart = 99;
-      splitright     = true;
-      splitbelow     = true;
-      showmode       = false;
-      smartcase      = true;
-      shortmess      = "aoOTIcF";
-      inccommand     = "split";
-      completeopt    = "longest,noinsert,menuone,noselect,preview";
-      visualbell     = true;
-      colorcolumn    = "100";
-      updatetime     = 100;
-      virtualedit    = "block";
-      ignorecase     = true;
-      foldmethod     = "manual";
+      splitright = true;
+      splitbelow = true;
+      showmode = false;
+      smartcase = true;
+      shortmess = "aoOTIcF";
+      inccommand = "split";
+      completeopt = "longest,noinsert,menuone,noselect,preview";
+      visualbell = true;
+      colorcolumn = "100";
+      updatetime = 100;
+      virtualedit = "block";
+      ignorecase = true;
+      foldmethod = "manual";
     };
     keymaps = [
       {
         key = "<";
         action = "<gv";
-        mode = ["v"];
+        mode = [ "v" ];
       }
       {
         key = ">";
         action = ">gv";
-        mode = ["v"];
+        mode = [ "v" ];
       }
       {
-        key = "N";
+        key = "J";
         action = "<cmd>move '>+1<CR>gv-gv";
         options.silent = true;
-        mode = ["v"];
+        mode = [ "v" ];
       }
       {
-        key = "E";
-        action = "<cmd>move '>-1<CR>gv-gv";
+        key = "K";
+        action = "<cmd>move '>-2<CR>gv-gv";
         options.silent = true;
-        mode = ["v"];
+        mode = [ "v" ];
       }
       {
         key = "H";
         action = "I<ESC>l";
-        mode = ["n"];
+        mode = [ "n" ];
       }
       {
         key = "L";
         action = "$";
-        mode = ["n"];
+        mode = [ "n" ];
       }
       {
         key = "<leader>q";
         action = "<cmd>q!<CR>";
-        mode = ["n"];
+        mode = [ "n" ];
       }
       {
         key = "<leader>w";
         action = "<cmd>w!<CR>";
-        mode = ["n"];
+        mode = [ "n" ];
       }
-      { 
+      {
         key = "cc";
         action = "<C-w>c";
-        mode = ["n"];
+        mode = [ "n" ];
       }
-      { 
+      {
         key = "co";
         action = "<C-w>o";
-        mode = ["n"];
+        mode = [ "n" ];
       }
-      { 
+      {
         key = "<tab>";
         action = "<cmd>tabn<CR>";
         options.silent = true;
-        mode = ["n"];
+        mode = [ "n" ];
       }
-      { 
+      {
         key = "<S-tab>";
         action = "<cmd>tabp<CR>";
         options.silent = true;
-        mode = ["n"];
+        mode = [ "n" ];
       }
       {
         key = "S";
-        mode=["n"];
+        mode = [ "n" ];
         action = "viw";
       }
       {
         key = "s";
-        mode=["n" "x" "o"];
+        mode = [ "n" "x" "o" ];
         lua = true;
         action = ''require("flash").jump'';
       }
       {
         key = "<C-s>";
-        mode=["n" "x" "o"];
+        mode = [ "n" "x" "o" ];
         lua = true;
         action = ''require("flash").treesitter'';
       }
@@ -175,6 +175,7 @@
             # Navigate in diagnostics
             "<leader>k" = "goto_prev";
             "<leader>j" = "goto_next";
+            gl = "open_float";
           };
           lspBuf = {
             gd = "definition";
@@ -182,12 +183,19 @@
             gt = "type_definition";
             gi = "implementation";
             K = "hover";
+            ga = "code_action";
             "<F2>" = "rename";
           };
         };
         servers = {
-          nil_ls.enable = true;
-          rust-analyzer= {
+          rnix-lsp.enable = true;
+          volar.enable = true;
+          tsserver.enable = true;
+          gopls = {
+            enable = true;
+            extraOptions = { completeUnimported = true; };
+          };
+          rust-analyzer = {
             enable = true;
             installRustc = false;
             installCargo = false;
@@ -205,33 +213,59 @@
             path = "[path]";
             luasnip = "[snip]";
             buffer = "[buffer]";
-            emoji="[emoji]";
+            emoji = "[emoji]";
           };
         };
       };
+      cmp-emoji.enable = true;
+      cmp-cmdline.enable = true;
+      cmp-path.enable = true;
+      lsp-format.enable = true;
       nvim-cmp = {
         enable = true;
         snippet.expand = "luasnip";
+        window = {
+          completion.border = [
+            "╭"
+            "─"
+            "╮"
+            "│"
+            "╯"
+            "─"
+            "╰"
+            "│"
+          ];
+          documentation.border = [
+            "╭"
+            "─"
+            "╮"
+            "│"
+            "╯"
+            "─"
+            "╰"
+            "│"
+          ];
+        };
         mapping = {
           "<C-d>" = "cmp.mapping.scroll_docs(-4)";
           "<C-f>" = "cmp.mapping.scroll_docs(4)";
           "<C-Space>" = "cmp.mapping.complete()";
           "<C-e>" = "cmp.mapping.close()";
           "<C-n>" = {
-            modes = ["i" "s"];
+            modes = [ "i" "s" ];
             action = "cmp.mapping.select_next_item()";
           };
           "<C-p>" = {
-            modes = ["i" "s"];
+            modes = [ "i" "s" ];
             action = "cmp.mapping.select_prev_item()";
           };
           "<CR>" = "cmp.mapping.confirm({ select = true })";
         };
         sources = [
-          {name = "path";}
-          {name = "nvim_lsp";}
-          {name = "luasnip";}
-          {name = "emoji";}
+          { name = "path"; }
+          { name = "nvim_lsp"; }
+          { name = "luasnip"; }
+          { name = "emoji"; }
           {
             name = "buffer";
             # Words from other open buffers can also be suggested.
@@ -252,6 +286,7 @@
     systemPackages = with pkgs; [
       gcc
       git
+      netcat
       wget
       docker-compose
       # virt-manager
