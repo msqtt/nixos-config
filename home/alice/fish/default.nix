@@ -6,6 +6,12 @@
     recursive = true;
   };
 
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+    };
+  };
   programs.fish = {
     enable = true;
     loginShellInit = ''
@@ -22,6 +28,7 @@
       direnv hook fish | source
       set -x LF_BOOKMARK_PATH $HOME/.bookmark
       fish_add_path $HOME/bin
+      zoxide init fish | source
     '';
     shellAbbrs =
       let
@@ -57,6 +64,7 @@
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
       { name = "done"; src = pkgs.fishPlugins.done.src; }
       { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
+      { name = "fzf"; src = pkgs.fishPlugins.fzf-fish.src; }
     ];
   };
 }

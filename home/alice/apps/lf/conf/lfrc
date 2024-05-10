@@ -112,9 +112,11 @@ cmd link %{{
 }}
 
 
-cmd yank-dirname $dirname -- "$f" | head -c-1 | wl-copy #; xclip -i -selection clipboard
-cmd yank-path $printf '%s' "$fx" | wl-copy #; xclip -i -selection clipboard
-cmd yank-basename $basename -a -- $fx | head -c-1 | wl-copy #; xclip -i -selection clipboard
+cmd yank-dirname $dirname -- "$f" | head -c-1 | if [ "$XDG_SESSION_TYPE" == "wayland" ]; then wl-copy; else xclip -i -selection clipboard; fi
+cmd yank-path $printf '%s' "$fx" | if [ "$XDG_SESSION_TYPE" == "wayland" ]; then wl-copy; else xclip -i -selection clipboard; fi
+
+cmd yank-basename $basename -a -- $fx | head -c-1 | if [ "$XDG_SESSION_TYPE" == "wayland" ]; then wl-copy; else xclip -i -selection clipboard; fi
+
 cmd yank-basename-without-extension ${{
     echo "$fx" |
       xargs -r -d '\n' basename -a |
@@ -132,11 +134,11 @@ cmd yank-basename-without-extension ${{
           print $0
       }' |
       if [ -n "$fs" ]; then cat; else tr -d '\n'; fi |
-			wl-copy
+			if [ "$XDG_SESSION_TYPE" == "wayland" ]; then wl-copy; else xclip -i -selection clipboard; fi
       # xclip -i -selection clipboard
 }}
 cmd yank-content ${{
-	cat "$fx" | wl-copy #; xclip -i -selection clipboard
+	cat "$fx" | if [ "$XDG_SESSION_TYPE" == "wayland" ]; then wl-copy; else xclip -i -selection clipboard; fi
 }}
 
 cmd lazygit ${{

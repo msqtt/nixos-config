@@ -18,6 +18,8 @@
       set -g set-clipboard on
 
       set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+
       set -q -g status-utf8 on
       setw -q -g utf8 on
 

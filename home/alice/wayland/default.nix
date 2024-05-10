@@ -11,8 +11,8 @@
     wlr-randr
     wl-clipboard
     wl-mirror
-    grim
-    slurp
+    # grim
+    # slurp
     swaylock
     wev
     # hyprpicker # color picker

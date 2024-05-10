@@ -1,5 +1,9 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
+
+  imports = [
+    # ./niri
+  ];
+
   programs.nixvim = {
     enable = true;
     viAlias = true;
@@ -10,6 +14,7 @@
     options = {
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
+      termguicolors = true;
       ttyfast = true;
       autochdir = false;
       exrc = true;
@@ -121,6 +126,11 @@
         action = "viw";
       }
       {
+        key = "vv";
+        mode = [ "n" ];
+        action = "_v$";
+      }
+      {
         key = "s";
         mode = [ "n" "x" "o" ];
         lua = true;
@@ -131,6 +141,16 @@
         mode = [ "n" "x" "o" ];
         lua = true;
         action = ''require("flash").treesitter'';
+      }
+      {
+        key = "<C-c>";
+        mode = [ "n" "x" "o" ];
+        action = "<ESC>";
+      }
+      {
+        key = "<C-d>";
+        mode = [ "i" ];
+        action = "<Delete>";
       }
     ];
 
@@ -143,6 +163,7 @@
     extraPlugins = with pkgs.vimPlugins; [
       nvim-surround
       comment-nvim
+      friendly-snippets
     ];
     plugins = {
       treesitter.enable = true;
@@ -161,6 +182,7 @@
           "<leader>fh" = "help_tags";
           "<leader>fd" = "diagnostics";
           # FZF like bindings
+          "<leader>/" = "current_buffer_fuzzy_find";
           "<C-p>" = "git_files";
           "<leader>p" = "oldfiles";
           "<C-f>" = "live_grep";
@@ -202,7 +224,10 @@
           };
         };
       };
-      luasnip.enable = true;
+      luasnip = {
+        enable = true;
+        fromVscode = [{ }];
+      };
       lspkind = {
         enable = true;
         cmp = {
@@ -235,22 +260,28 @@
             "╰"
             "│"
           ];
-          documentation.border = [
-            "╭"
-            "─"
-            "╮"
-            "│"
-            "╯"
-            "─"
-            "╰"
-            "│"
-          ];
         };
         mapping = {
           "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
+          "<C-u>" = "cmp.mapping.scroll_docs(4)";
           "<C-Space>" = "cmp.mapping.complete()";
           "<C-e>" = "cmp.mapping.close()";
+          "<C-.>" = ''
+            function(fallback)
+              local luasnip = require("luasnip")
+              if luasnip.locally_jumpable(1) then
+                luasnip.jump(1)
+              end
+            end
+          '';
+          "<C-,>" = ''
+            function(fallback)
+              local luasnip = require("luasnip")
+              if luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+              end
+            end
+          '';
           "<C-n>" = {
             modes = [ "i" "s" ];
             action = "cmp.mapping.select_next_item()";

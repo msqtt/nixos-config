@@ -8,6 +8,7 @@
     ./mako.nix
     ./foot.nix
     # ./zathura.nix
+    ./wezterm.nix
     ./obs.nix
     ./qutebrowser.nix
     ./fbterm.nix
@@ -31,13 +32,11 @@
     chafa
 
     # daily use
-    wezterm
     gimp
     flameshot
     thunderbird-unwrapped
     pulsemixer
     blueberry
-    entr
     gomuks
     grc
     firefox
@@ -46,12 +45,23 @@
     nur.repos.linyinfeng.wemeet
 
     # cli shit
+    pv
+    bat
+    du-dust
+    delta
+    ripgrep # recursively searches directories for a regex pattern
+    jq # A lightweight and flexible command-line JSON processor
+    fzf # A command-line fuzzy finder
+    fd
+    cowsay
+    zoxide
+    entr
+
+
     xclip
     caddy
     distrobox
     dogdns
-    du-dust
-    delta
     httpie
     cheat
     netcat
@@ -73,21 +83,16 @@
     p7zip
 
     # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    fzf # A command-line fuzzy finder
-    fd
 
     # misc
-    cowsay
     file
     tree
     which
     zstd
+    yewtube
 
     # nix related
     #
-    rnix-lsp
     home-manager
 
     # productivity
