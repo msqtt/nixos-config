@@ -34,7 +34,7 @@
     # daily use
     gimp
     flameshot
-    thunderbird-unwrapped
+    thunderbird
     pulsemixer
     blueberry
     gomuks

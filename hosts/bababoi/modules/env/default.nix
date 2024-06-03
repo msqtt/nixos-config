@@ -11,7 +11,7 @@
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
     colorschemes.catppuccin.enable = true;
-    options = {
+    opts = {
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
       termguicolors = true;
@@ -152,6 +152,20 @@
         mode = [ "i" ];
         action = "<Delete>";
       }
+      {
+        key = "wpg";
+        mode = [ "c" ];
+        action = "w !jbl -p 50 | xclip -sel c -t image/png";
+      }
+      {
+        key = "<C-l>";
+        mode = [ "n" ];
+        action = "<C-i>";
+        options = {
+          silent = true;
+          noremap = true;
+        };
+      }
     ];
 
     extraConfigLua = ''
@@ -187,7 +201,6 @@
           "<leader>p" = "oldfiles";
           "<C-f>" = "live_grep";
         };
-        keymapsSilent = true;
       };
       lsp = {
         enable = true;
@@ -210,7 +223,7 @@
           };
         };
         servers = {
-          rnix-lsp.enable = true;
+          nixd.enable = true;
           volar.enable = true;
           tsserver.enable = true;
           gopls = {
@@ -246,63 +259,60 @@
       cmp-cmdline.enable = true;
       cmp-path.enable = true;
       lsp-format.enable = true;
-      nvim-cmp = {
+      cmp = {
         enable = true;
-        snippet.expand = "luasnip";
-        window = {
-          completion.border = [
-            "╭"
-            "─"
-            "╮"
-            "│"
-            "╯"
-            "─"
-            "╰"
-            "│"
+        settings = {
+          snippet.expand = "luasnip";
+          experimental.ghost_text = true;
+          window = {
+            completion.border = [
+              "╭"
+              "─"
+              "╮"
+              "│"
+              "╯"
+              "─"
+              "╰"
+              "│"
+            ];
+          };
+          mapping = {
+            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-u>" = "cmp.mapping.scroll_docs(4)";
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-e>" = "cmp.mapping.close()";
+            "<C-.>" = ''
+              function(fallback)
+                local luasnip = require("luasnip")
+                if luasnip.locally_jumpable(1) then
+                  luasnip.jump(1)
+                end
+              end
+            '';
+            "<C-,>" = ''
+              function(fallback)
+                local luasnip = require("luasnip")
+                if luasnip.locally_jumpable(-1) then
+                  luasnip.jump(-1)
+                end
+              end
+            '';
+            "<C-n>" = "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select })";
+            "<C-p>" = "cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select })";
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+          };
+          sources = [
+            { name = "path"; }
+            { name = "nvim_lsp"; }
+            { name = "luasnip"; }
+            { name = "emoji"; }
+            {
+              name = "buffer";
+              # Words from other open buffers can also be suggested.
+              option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
+            }
           ];
         };
-        mapping = {
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-u>" = "cmp.mapping.scroll_docs(4)";
-          "<C-Space>" = "cmp.mapping.complete()";
-          "<C-e>" = "cmp.mapping.close()";
-          "<C-.>" = ''
-            function(fallback)
-              local luasnip = require("luasnip")
-              if luasnip.locally_jumpable(1) then
-                luasnip.jump(1)
-              end
-            end
-          '';
-          "<C-,>" = ''
-            function(fallback)
-              local luasnip = require("luasnip")
-              if luasnip.locally_jumpable(-1) then
-                luasnip.jump(-1)
-              end
-            end
-          '';
-          "<C-n>" = {
-            modes = [ "i" "s" ];
-            action = "cmp.mapping.select_next_item()";
-          };
-          "<C-p>" = {
-            modes = [ "i" "s" ];
-            action = "cmp.mapping.select_prev_item()";
-          };
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
-        };
-        sources = [
-          { name = "path"; }
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "emoji"; }
-          {
-            name = "buffer";
-            # Words from other open buffers can also be suggested.
-            option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-          }
-        ];
       };
     };
   };

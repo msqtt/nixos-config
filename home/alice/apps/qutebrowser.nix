@@ -5,15 +5,15 @@
     enableDefaultBindings = false;
     settings = {
       content.proxy = "socks5://localhost:20170";
-      colors.webpage.darkmode.enabled = true;
-      editor.command = [ "footclient" "-e" "nvim" "{file}" "+call cursor({line}, {column})" ];
+      colors.webpage.darkmode.enabled = false;
+      editor.command = [ "wezterm" "start" "--always-new-process" "--" "nvim" "{file}" "+call cursor({line}, {column})" ];
     };
     keyBindings = {
       caret = {
         "$" = "move-to-end-of-line";
         "0" = "move-to-start-of-line";
         "<Ctrl-Space>" = "selection-drop";
-        "<Escape>" = "mode-leave";
+        "<Ctrl-C>" = "mode-leave";
         "<Return>" = "yank selection";
         "<Space>" = "selection-toggle";
         "G" = "move-to-end-of-document";

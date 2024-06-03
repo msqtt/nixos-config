@@ -5,20 +5,15 @@
     http_proxy = "http://127.0.0.1:20171";
     https_proxy = "http://127.0.0.1:20171";
   };
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    oxygen
-    konsole
-  ];
   services = {
     # List services that you want to enable:
+    xserver.enable = true;
+
+    # running on wayland
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+
     # Enable the OpenSSH daemon.
-    xserver = {
-      enable = true;
-      displayManager.sddm.enable = true;
-      # running on wayland
-      displayManager.defaultSession = "plasma";
-      desktopManager.plasma5.enable = true;
-    };
     openssh = {
       enable = true;
       settings = {
@@ -32,18 +27,19 @@
     tlp.enable = false;
     tailscale.enable = true;
     # keybord layout shit.
-    xserver = {
+    xserver.xkb = {
       layout = "us";
-      xkbVariant = "workman";
-      xkbOptions = "ctrl:nocaps";
-      libinput = {
-        enable = true;
-        touchpad = {
-          tapping = true;
-          disableWhileTyping = true;
-        };
+      variant = "workman";
+      options = "ctrl:nocaps";
+    };
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+        disableWhileTyping = true;
       };
     };
   };
 
 }
+

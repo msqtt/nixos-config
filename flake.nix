@@ -17,7 +17,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-4469e2.url = "github:NixOS/nixpkgs/4469e22700c47792f93daa882786d36f9bf8bc2a";
     nur.url = "github:nix-community/NUR";
     # here is my owe nur.
@@ -26,14 +26,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    catppuccin.url = "github:catppuccin/nix";
+
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixvim = {
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-      url = "github:nix-community/nixvim/nixos-23.11";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -59,19 +60,31 @@
               config.allowUnfree = true;
             };
           };
+
           modules = [
             ./hosts/bababoi
 
             (args: { nixpkgs.overlays = overlays ++ import ./overlays args; })
 
+            inputs.catppuccin.nixosModules.catppuccin
+            {
+              catppuccin.flavor = "mocha";
+            }
+
+            inputs.nixvim.nixosModules.nixvim
             home-manager.nixosModules.home-manager
             nur.nixosModules.nur
-            inputs.nixvim.nixosModules.nixvim
+
             {
 
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.alice = import ./home/alice;
+              home-manager.users.alice = {
+                imports = [
+                  ./home/alice
+                  inputs.catppuccin.homeManagerModules.catppuccin
+                ];
+              };
               # 使用 home-manager.extraSpecialArgs 自定义传递给 ./home.nix 的参数
               home-manager.extraSpecialArgs = specialArgs;
             }

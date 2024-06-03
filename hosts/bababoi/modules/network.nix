@@ -11,6 +11,8 @@
     #   noProxy = "127.0.0.1,localhost,internal.domain";
     # };
     extraHosts = ''
+      192.168.49.2 dashboard.com
+      127.0.0.1 host
       125.217.53.138 mypi
       125.217.52.212 kexie2
       43.163.233.244 kexieserver

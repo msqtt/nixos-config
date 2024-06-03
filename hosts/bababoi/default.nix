@@ -83,9 +83,9 @@
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "nix-2.15.3"
-  ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "nix-2.15.3"
+  # ];
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "wemeet"
     "Oracle_VM_VirtualBox_Extension_Pack"

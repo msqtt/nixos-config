@@ -26,7 +26,7 @@
     enable = true;
     settings = {
       gui = {
-        showIcons = false;
+        showIcons = true;
         # nerdFontsVersion = "3";
       };
       keybinding = {

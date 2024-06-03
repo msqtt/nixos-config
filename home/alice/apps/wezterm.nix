@@ -12,6 +12,12 @@
       -- the plugin is currently made for Catppuccin only
       c.color_scheme = "Catppuccin Mocha"
 
+      c.font = wezterm.font_with_fallback {
+        'Fira Code',
+        'Noto Sans Mono CJK SC',
+        'DengXian',
+      }
+
       c.use_fancy_tab_bar = false
 
       c.window_padding = {

@@ -8,14 +8,13 @@
       noto-fonts-emoji
       source-han-sans
       source-han-serif
-      source-code-pro
       fira-code
     ];
     fontconfig = {
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [
-          "Source Code Pro"
+          "Fira Code"
           "Noto Sans Mono CJK SC"
         ];
         sansSerif = [
