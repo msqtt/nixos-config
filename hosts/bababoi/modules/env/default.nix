@@ -134,13 +134,13 @@
         key = "s";
         mode = [ "n" "x" "o" ];
         lua = true;
-        action = ''require("flash").jump'';
+        action = "require('flash').jump";
       }
       {
         key = "<C-s>";
         mode = [ "n" "x" "o" ];
         lua = true;
-        action = ''require("flash").treesitter'';
+        action = "require('flash').treesitter";
       }
       {
         key = "<C-c>";
@@ -155,7 +155,7 @@
       {
         key = "wpg";
         mode = [ "c" ];
-        action = "w !jbl -p 50 | xclip -sel c -t image/png";
+        action = "w !jbl -p 50 | wl-copy";
       }
       {
         key = "<C-l>";
@@ -185,7 +185,7 @@
       nvim-autopairs.enable = true;
       flash.enable = true;
       startify.enable = true;
-      indent-blankline.enable = true;
+      indent-blankline.enable = false;
       telescope = {
         enable = true;
         keymaps = {
@@ -227,7 +227,7 @@
           volar.enable = true;
           tsserver.enable = true;
           gopls = {
-            enable = true;
+            enable = false;
             extraOptions = { completeUnimported = true; };
           };
           rust-analyzer = {
@@ -263,7 +263,7 @@
         enable = true;
         settings = {
           snippet.expand = "luasnip";
-          experimental.ghost_text = true;
+          experimental.ghost_text = false;
           window = {
             completion.border = [
               "╭"
@@ -327,11 +327,12 @@
     systemPackages = with pkgs; [
       gcc
       git
-      netcat
       wget
-      docker-compose
+      tldr
       # virt-manager
       # qemu_kvm
+      # podman-compose
+      docker-compose
       (
         let base = pkgs.appimageTools.defaultFhsEnvArgs; in
         pkgs.buildFHSUserEnv (base // {

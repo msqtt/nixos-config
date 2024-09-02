@@ -5,13 +5,13 @@
     ./tmux
     ./misc
     ./direnv
-    ./mako.nix
-    ./foot.nix
+    # ./mako.nix
+    # ./foot.nix
     # ./zathura.nix
     ./wezterm.nix
     ./obs.nix
     ./qutebrowser.nix
-    ./fbterm.nix
+    # ./fbterm.nix
   ];
 
   home.packages = with pkgs;[
@@ -32,6 +32,7 @@
     chafa
 
     # daily use
+    telegram-desktop
     gimp
     flameshot
     thunderbird

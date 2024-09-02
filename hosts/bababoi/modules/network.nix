@@ -2,9 +2,10 @@
 {
   networking = {
     hostName = "bababoi";
-    wireless.iwd.enable = true;
-    firewall.enable = true;
-    firewall.allowedTCPPorts = [ 20170 20171 8080 4321 ];
+    networkmanager.enable = true;
+    firewall.enable = false;
+    # firewall.allowedTCPPorts = [ 20170 20171 8080 4321 12345 ];
+    # firewall.allowedUDPPorts = [ 12345 ];
     # this will proxy whole system.
     # proxy = { 
     #   default = "http://127.0.0.1:20171";
@@ -13,7 +14,7 @@
     extraHosts = ''
       192.168.49.2 dashboard.com
       127.0.0.1 host
-      125.217.53.138 mypi
+      192.168.100.5 mypi
       125.217.52.212 kexie2
       43.163.233.244 kexieserver
       107.174.247.79 ti

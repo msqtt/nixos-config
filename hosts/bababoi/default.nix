@@ -11,6 +11,7 @@
       ./modules/font.nix
       ./modules/network.nix
       ./modules/virt.nix
+      ./modules/man.nix
     ];
   # hibernate resume config
   boot = {

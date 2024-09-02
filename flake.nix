@@ -34,9 +34,10 @@
     };
     nixvim = {
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim/nixos-24.05";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
+    daeuniverse.url = "github:daeuniverse/flake.nix";
   };
 
   outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
@@ -70,7 +71,8 @@
             {
               catppuccin.flavor = "mocha";
             }
-
+            inputs.daeuniverse.nixosModules.dae
+            inputs.daeuniverse.nixosModules.daed
             inputs.nixvim.nixosModules.nixvim
             home-manager.nixosModules.home-manager
             nur.nixosModules.nur

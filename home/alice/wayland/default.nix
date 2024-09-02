@@ -5,15 +5,15 @@
   ];
 
   home.packages = with pkgs;[
-    swappy
+    # swappy
     # swww
-    bemenu
-    wlr-randr
+    # bemenu
+    # wlr-randr
     wl-clipboard
     wl-mirror
     # grim
     # slurp
-    swaylock
+    # swaylock
     wev
     # hyprpicker # color picker
   ];
