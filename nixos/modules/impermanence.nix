@@ -5,6 +5,7 @@
     directories = [
       "/etc/nixos"
       "/var/log"
+      "/var/lib/docker"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
@@ -31,11 +32,13 @@
         { directory = ".local/share/keyrings"; mode = "0700"; }
         { directory = ".local/share/TelegramDesktop"; mode = "0700"; }
 
+        ".config/Code"
         ".local/share/direnv"
       ];
       files = [
         # ".screenrc"
         "Makefile"
+        ".config/fcitx5/conf/classicui.conf"
       ];
     };
   };

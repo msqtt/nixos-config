@@ -14,6 +14,7 @@
     firefox
     telegram-desktop
     thunderbird
+    vscode
   ];
 
   programs.git = {
@@ -33,8 +34,21 @@
     settings.git_protocol = "ssh";
   };
 
+
+   i18n.inputMethod = {
+      # type = "fcitx5";
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        fcitx5-mozc
+        kdePackages.fcitx5-qt
+        fcitx5-rime
+        libsForQt5.fcitx5-configtool
+      ];
+  };
+
+
   imports = [
-    ./fcitx5
+
   ];
 
   # This value determines the Home Manager release that your

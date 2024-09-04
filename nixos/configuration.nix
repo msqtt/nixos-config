@@ -23,10 +23,10 @@
   networking = {
     hostName = "foobar"; # Define your hostname.
     networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-#     proxy = {
-#      default = "socks5+h://192.168.100.5:20170";
-#      noProxy = "127.0.0.1,localhost,internal.domain";
-#     };
+    # proxy = {
+    #  default = "socks5+h://192.168.100.5:20170";
+    # noProxy = "127.0.0.1,localhost,internal.domain";
+    # };
 
     # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
@@ -39,7 +39,41 @@
   time.timeZone = "Asia/Shanghai";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5 = {
+        plasma6Support = true;
+        addons = with pkgs; [
+          kdePackages.fcitx5-qt
+          fcitx5-lua
+          fcitx5-rime  # table input method support
+          libsForQt5.fcitx5-configtool
+          fcitx5-material-color
+        ];
+        settings.inputMethod = {
+          "Groups/0" = {
+            Name = "Default";
+            "Default Layout"="us";
+            DefaultIM ="rime";
+          };
+          "Groups/0/Items/0" = {
+            Name = "keyboard-us";
+            Layout = "";
+          };
+          "Groups/0/Items/1" = {
+            Name = "rime";
+            Layout = "";
+          };
+          GroupOrder = {
+            "0" = "Default";
+          };
+        };
+      };
+    };
+  };
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -92,6 +126,7 @@
 
     libinput.enable = true;
 
+    xserver.enable = true;
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
@@ -116,6 +151,10 @@
     # system.copySystemConfiguration = true;
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   security = {
     doas = {
@@ -157,12 +196,14 @@
     tldr
     btop
     iotop
-    podman-compose
+    # podman-compose
+    docker-compose
   ];
 
   virtualisation = {
+    docker.enable = true;
     podman = {
-      enable = true;
+      enable = false;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
       dockerCompat = true;
 

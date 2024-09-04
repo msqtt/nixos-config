@@ -17,7 +17,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -29,7 +29,7 @@
     impermanence.url = "github:nix-community/impermanence";
 
     my-nur = {
-      url = "github:msqtt/NUR";
+      url = "github:msqtt/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -37,15 +37,13 @@
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
-      # pkgs = nixpkgs.legacyPackages.${system};
-      overlays = with inputs; [
-        my-nur.overlay
-      ];
+      overlays = builtins.attrValues inputs.my-nur.legacyPackages.${system}.overlays;
       specialArgs = { inherit inputs ; };
     in {
       nixosConfigurations.foobar = nixpkgs.lib.nixosSystem {
           specialArgs = specialArgs;
           modules = [
+            # substituters
             {
               nix.settings.trusted-users = [ "bob" ];
               nix.settings = {
@@ -58,13 +56,20 @@
                   "https://cache.nixos.org"
                 ];
               };
-
+              
             }
 
-            { nixpkgs.overlays = overlays; }
+            { 
+              nixpkgs = {
+                config.allowUnfree = true;
+                overlays = overlays;
+              };
+            }
 
+            # system config
             ./nixos/configuration.nix
 
+            # home config
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
