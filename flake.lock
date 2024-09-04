@@ -152,6 +152,21 @@
         "type": "github"
       }
     },
+    "my-nur": {
+      "locked": {
+        "lastModified": 1725438017,
+        "narHash": "sha256-SfTi3i6qUxBva226MRMG2Sv5zbg/mUZWflCslHHFCvY=",
+        "owner": "msqtt",
+        "repo": "NUR",
+        "rev": "6d04b4ae268db270adf32b8236c5bf677bb00b54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "msqtt",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "nix-eval-jobs": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -316,6 +331,7 @@
         "daeuniverse": "daeuniverse",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "my-nur": "my-nur",
         "nixpkgs": "nixpkgs_4"
       }
     },

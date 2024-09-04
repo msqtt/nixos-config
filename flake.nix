@@ -27,15 +27,24 @@
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
     impermanence.url = "github:nix-community/impermanence";
+
+    my-nur = {
+      url = "github:msqtt/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
       # pkgs = nixpkgs.legacyPackages.${system};
+      overlays = with inputs; [
+        my-nur.overlay
+      ];
+      specialArgs = { inherit inputs ; };
     in {
       nixosConfigurations.foobar = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs ; };
+          specialArgs = specialArgs;
           modules = [
             {
               nix.settings.trusted-users = [ "bob" ];
@@ -52,12 +61,14 @@
 
             }
 
+            { nixpkgs.overlays = overlays; }
+
             ./nixos/configuration.nix
 
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.extraSpecialArgs = { inherit inputs ; };
+              home-manager.extraSpecialArgs = specialArgs;
               home-manager.users.bob.imports= [ ./home-manager/home.nix ];
             }
 

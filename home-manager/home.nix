@@ -32,6 +32,11 @@
     enable = true;
     settings.git_protocol = "ssh";
   };
+
+  imports = [
+    ./fcitx5
+  ];
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
