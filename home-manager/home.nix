@@ -16,97 +16,118 @@
     telegram-desktop
     thunderbird
     vscode
+
+
   ] ++ (with inputs.my-nur; [
     bobibo
   ]);
 
-  programs.git = {
-    enable = true;
-    userName  = "msqtt";
-    userEmail = "mosquito@email.cn";
-    aliases = {
-      ci = "commit";
-      co = "checkout";
-      s = "status";
-    };
-
-  };
-
-  programs.gh = {
-    enable = true;
-    settings.git_protocol = "ssh";
-  };
-
   programs = {
-    nushell = { 
+    git = {
+      enable = true;
+      userName = "msqtt";
+      userEmail = "mosquito@email.cn";
+      aliases = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
+    };
+    gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
+  };
+  programs = {
+    nushell = {
       enable = true;
       # The config.nu can be anywhere you want if you like to edit your Nushell with Nu
       # configFile.source = ./.../config.nu;
       # for editing directly to config.nu 
       extraConfig = ''
-       let carapace_completer = {|spans|
-       carapace $spans.0 nushell $spans | from json
-       }
-       $env.config = {
-        show_banner: false,
-        completions: {
-          case_sensitive: false # case-sensitive completions
-          quick: true    # set to false to prevent auto-selecting completions
-          partial: true    # set to false to prevent partial filling of the prompt
-          algorithm: "fuzzy"    # prefix or fuzzy
-          external: {
-            # set to false to prevent nushell looking into $env.PATH to find more suggestions
-            enable: true 
-            # set to lower can improve completion performance at the cost of omitting some options
-            max_results: 100 
-            completer: $carapace_completer # check 'carapace_completer' 
-          }
+        let carapace_completer = {|spans|
+        carapace $spans.0 nushell $spans | from json
         }
-       } 
-       $env.PATH = ($env.PATH | 
-       split row (char esep) |
-       prepend /home/bob/Bin |
-       append /usr/bin/env
-       )
-       '';
+        $env.config = {
+         show_banner: false,
+         completions: {
+           case_sensitive: false # case-sensitive completions
+           quick: true    # set to false to prevent auto-selecting completions
+           partial: true    # set to false to prevent partial filling of the prompt
+           algorithm: "fuzzy"    # prefix or fuzzy
+           external: {
+             # set to false to prevent nushell looking into $env.PATH to find more suggestions
+             enable: true 
+             # set to lower can improve completion performance at the cost of omitting some options
+             max_results: 100 
+             completer: $carapace_completer # check 'carapace_completer' 
+           }
+         }
+        } 
+        $env.PATH = ($env.PATH | 
+        split row (char esep) |
+        prepend /home/bob/Bin |
+        append /usr/bin/env
+        )
+      '';
+
       shellAliases = {
         ll = "ls -l";
         la = "ls -a";
         lla = "ls -la";
       };
-   };  
+    };
 
-  carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-  
-  thefuck = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  direnv = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-   starship = {
+    carapace = {
       enable = true;
       enableNushellIntegration = true;
-       settings = {
-         add_newline = true;
-         character = { 
+    };
+
+    thefuck = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+
+    direnv = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableNushellIntegration = true;
+    };
+
+    starship = {
+      enable = true;
+      enableNushellIntegration = true;
+      settings = {
+        add_newline = true;
+        character = {
           success_symbol = "[➜](bold green)";
           error_symbol = "[➜](bold red)";
-       };
+        };
       };
+    };
+
+    yazi = {
+      enable = true;
+      enableNushellIntegration = true;
+      keymap = {
+        manage.keymap = [
+          { run = "forward"; on = [ "n" ]; }
+          { run = "back"; on = [ "e" ]; }
+
+          { run = "leave"; on = [ "y" ]; }
+          { run = "yank"; on = [ "h" ]; }
+
+          { run = "enter"; on = [ "o" ]; }
+          { run = "open"; on = [ "l" ]; }
+        ];
+      };
+    };
+
   };
-};
 
   imports = [
   ];

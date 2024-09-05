@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/daed.nix
       ./modules/impermanence.nix
@@ -23,7 +24,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking = {
     hostName = "foobar"; # Define your hostname.
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
     # proxy = {
     #  default = "socks5+h://192.168.100.5:20170";
     # noProxy = "127.0.0.1,localhost,internal.domain";
@@ -50,15 +51,15 @@
         addons = with pkgs; [
           kdePackages.fcitx5-qt
           fcitx5-lua
-          fcitx5-rime  # table input method support
+          fcitx5-rime # table input method support
           libsForQt5.fcitx5-configtool
           fcitx5-material-color
         ];
         settings.inputMethod = {
           "Groups/0" = {
             Name = "Default";
-            "Default Layout"="us";
-            DefaultIM ="rime";
+            "Default Layout" = "us";
+            DefaultIM = "rime";
           };
           "Groups/0/Items/0" = {
             Name = "keyboard-us";
@@ -87,34 +88,34 @@
   };
 
   fonts = {
-      enableDefaultPackages = true;
-      packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk
-        noto-fonts-emoji
-        source-han-sans
-        source-han-serif
-        fira-code
-      ];
-      fontconfig = {
-        defaultFonts = {
-          emoji = [ "Noto Color Emoji" ];
-          monospace = [
-            "Fira Code"
-            "Noto Sans Mono CJK SC"
-          ];
-          sansSerif = [
-            "Noto Sans CJK SC"
-            "Source Han Sans SC"
-            "DejaVu Sans"
-          ];
-          serif = [
-            "Noto Serif CJK SC"
-            "Source Han Serif SC"
-            "DejaVu Serif"
-          ];
-        };
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      source-han-sans
+      source-han-serif
+      fira-code
+    ];
+    fontconfig = {
+      defaultFonts = {
+        emoji = [ "Noto Color Emoji" ];
+        monospace = [
+          "Fira Code"
+          "Noto Sans Mono CJK SC"
+        ];
+        sansSerif = [
+          "Noto Sans CJK SC"
+          "Source Han Sans SC"
+          "DejaVu Sans"
+        ];
+        serif = [
+          "Noto Serif CJK SC"
+          "Source Han Serif SC"
+          "DejaVu Serif"
+        ];
       };
+    };
   };
 
   environment = {
@@ -172,7 +173,7 @@
         # Optional, retains environment variables while running commands
         # e.g. retains your NIX_PATH when applying your config
         keepEnv = true;
-        persist = true;  # Optional, only require password verification a single time
+        persist = true; # Optional, only require password verification a single time
       }];
     };
     sudo.enable = false;
@@ -196,25 +197,36 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wl-clipboard
+    # basic tools
     tree
     gnumake
     wget
     curl
     git
-    tldr
+    wl-clipboard
+
+    # for monitor
     btop
     iotop
+
+    # useful cli tools
+    tldr
     dust
     delta
+    jq
     fzf
     bat
     fd
     ripgrep
-    fastfetch
+
+    zip
+    unar
+    xz
+    p7zip
+
     # podman-compose
     docker-compose
+    fastfetch
   ];
 
   virtualisation = {

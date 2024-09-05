@@ -20,11 +20,11 @@
             };
             root = {
               end = "-14G";
-               content = {
-                 type = "filesystem";
-                 format = "ext4";
-                 mountpoint = "/";
-               };
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
             };
             plainSwap = {
               size = "100%";

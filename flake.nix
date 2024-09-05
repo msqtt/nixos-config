@@ -29,7 +29,7 @@
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
-  };
+    };
 
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
@@ -44,53 +44,57 @@
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays;
-      specialArgs = { inherit inputs ; my-nur = my-nurpkgs; };
-    in {
+      specialArgs = { inherit inputs; my-nur = my-nurpkgs; };
+    in
+    {
+      formatter.x86_64-linux = pkgs.nixpkgs-fmt;
+
       nixosConfigurations.foobar = nixpkgs.lib.nixosSystem {
-          specialArgs = specialArgs;
-          modules = [
-            # substituters
-            {
-              nix.settings.trusted-users = [ "bob" ];
-              nix.settings = {
-                substituters = [
-                  # cache mirror located in China
-                  # status: https://mirror.sjtu.edu.cn/
-                  # "https://mirror.sjtu.edu.cn/nix-channels/store"
-                  # status: https://mirrors.ustc.edu.cn/status/
-                  "https://mirrors.ustc.edu.cn/nix-channels/store"
-                  "https://cache.nixos.org"
-                ];
-              };
-            }
+        specialArgs = specialArgs;
+        modules = [
+          # substituters
+          {
+            nix.settings.trusted-users = [ "bob" ];
+            nix.settings = {
+              substituters = [
+                # cache mirror located in China
+                # status: https://mirror.sjtu.edu.cn/
+                # "https://mirror.sjtu.edu.cn/nix-channels/store"
+                # status: https://mirrors.ustc.edu.cn/status/
+                "https://mirrors.ustc.edu.cn/nix-channels/store"
+                "https://cache.nixos.org"
+              ];
+            };
+          }
 
-            {
-              nixpkgs = {
-                config.allowUnfree = true;
-                overlays = overlays;
-              };
-            }
+          {
+            nixpkgs = {
+              config.allowUnfree = true;
+              overlays = overlays;
+            };
+          }
 
-            # system config
-            ./nixos/configuration.nix
+          # system config
+          ./nixos/configuration.nix
 
-            # home config
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.bob.imports= [ ./home-manager/home.nix ];
-              home-manager.sharedModules = [ ];
-            }
+          # home config
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.bob.imports = [ ./home-manager/home.nix ];
+            home-manager.sharedModules = [ ];
+          }
 
-          ] ++ (with inputs; [
-            # other nixos modules
-              daeuniverse.nixosModules.daed
-              impermanence.nixosModules.impermanence
-              nixvim.nixosModules.nixvim
-          ]);
+        ] ++ (with inputs; [
+          # other nixos modules
+          daeuniverse.nixosModules.daed
+          impermanence.nixosModules.impermanence
+          nixvim.nixosModules.nixvim
+        ]);
       };
-  };
+    };
 }

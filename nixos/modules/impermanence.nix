@@ -1,6 +1,6 @@
 {
   environment.persistence."/nix/persist" = {
-    enable = true;  # NB: Defaults to true, not needed
+    enable = true; # NB: Defaults to true, not needed
     hideMounts = true;
     directories = [
       "/etc/nixos"
@@ -34,7 +34,7 @@
 
         ".config/Code"
         ".local/share/direnv"
-        
+
         ".vscode"
         ".local/share/zoxide"
       ];

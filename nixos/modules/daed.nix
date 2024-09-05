@@ -2,14 +2,14 @@
 {
   # daed - dae with a web dashboard
   services.daed = {
+    enable = true;
+
+    openFirewall = {
       enable = true;
+      port = 12345;
+    };
 
-      openFirewall = {
-        enable = true;
-        port = 12345;
-      };
-
-      /* default options
+    /* default options
 
       package = inputs.daeuniverse.packages.x86_64-linux.daed;
       configDir = "/etc/daed";
