@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./modules/daed.nix
       ./modules/impermanence.nix
+      ./modules/nixvim.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -116,6 +117,12 @@
       };
   };
 
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      # LIBSEAT_BACKEND = "logind";
+    };
+  };
 
   # List services that you want to enable:
   services = {

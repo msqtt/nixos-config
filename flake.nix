@@ -24,11 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
+    nixvim = {
+      #url = "github:nix-community/nixvim";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
+  };
 
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
@@ -63,10 +64,9 @@
                   "https://cache.nixos.org"
                 ];
               };
-              
             }
 
-            { 
+            {
               nixpkgs = {
                 config.allowUnfree = true;
                 overlays = overlays;
@@ -82,12 +82,14 @@
               home-manager.useGlobalPkgs = true;
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.users.bob.imports= [ ./home-manager/home.nix ];
-              home-manager.sharedModules = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.sharedModules = [ ];
             }
 
           ] ++ (with inputs; [
+            # other nixos modules
               daeuniverse.nixosModules.daed
               impermanence.nixosModules.impermanence
+              nixvim.nixosModules.nixvim
           ]);
       };
   };

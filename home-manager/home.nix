@@ -68,7 +68,6 @@
        prepend /home/bob/Bin |
        append /usr/bin/env
        )
-       $env.EDITOR = "code"
        '';
       shellAliases = {
         ll = "ls -l";
