@@ -24,6 +24,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
     impermanence.url = "github:nix-community/impermanence";
@@ -37,8 +43,9 @@
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
-      overlays = builtins.attrValues inputs.my-nur.legacyPackages.${system}.overlays;
-      specialArgs = { inherit inputs ; };
+      my-nurpkgs = inputs.my-nur.legacyPackages.${system};
+      overlays = builtins.attrValues my-nurpkgs.overlays;
+      specialArgs = { inherit inputs ; my-nur = my-nurpkgs; };
     in {
       nixosConfigurations.foobar = nixpkgs.lib.nixosSystem {
           specialArgs = specialArgs;
@@ -75,6 +82,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.extraSpecialArgs = specialArgs;
               home-manager.users.bob.imports= [ ./home-manager/home.nix ];
+              home-manager.sharedModules = [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
             }
 
           ] ++ (with inputs; [

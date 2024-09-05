@@ -34,11 +34,15 @@
 
         ".config/Code"
         ".local/share/direnv"
+        
+        ".vscode"
+        ".local/share/zoxide"
       ];
       files = [
         # ".screenrc"
         "Makefile"
         ".config/fcitx5/conf/classicui.conf"
+        ".config/nushell/history.txt"
       ];
     };
   };

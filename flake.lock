@@ -9,11 +9,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1724675752,
-        "narHash": "sha256-gzbzqhdmEWfzIViXFqkKYuKGQhdh1qt06y2ERNy42hg=",
+        "lastModified": 1725458614,
+        "narHash": "sha256-ln88BxFwYmIRuUVPj14hpBoDc34KP8T837EW7swL2Gs=",
         "owner": "daeuniverse",
         "repo": "flake.nix",
-        "rev": "1cd5ae6316666e82c547cdad963d6ef28bd7c43b",
+        "rev": "6b8bde96dabf6eace89b71929be967d15e379ce2",
         "type": "github"
       },
       "original": {
@@ -307,6 +307,29 @@
         "type": "github"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1725327224,
+        "narHash": "sha256-+cMfiE+zigDuChOFlhUH3yN7Yll9hr1LRBHsO09pqjY=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "3f1589c38428bd8121fd5deebd86ce4108b29d6e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -337,7 +360,8 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "my-nur": "my-nur",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_4",
+        "plasma-manager": "plasma-manager"
       }
     },
     "treefmt-nix": {

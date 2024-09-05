@@ -132,7 +132,7 @@
       wayland.enable = true;
     };
 
-    desktopManager.plasma6.enable = true;
+    # desktopManager.plasma6.enable = false;
 
     # Configure keymap in X11
     # services.xserver.xkb.layout = "us";
@@ -174,6 +174,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     bob = {
+      shell = pkgs.nushell;
       isNormalUser = true;
       extraGroups = [ "wheel" "audio" "video" "docker" ]; # Enable ‘sudo’ for the user.
 
@@ -189,6 +190,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wl-clipboard
+    tree
     gnumake
     wget
     curl
@@ -196,6 +199,13 @@
     tldr
     btop
     iotop
+    dust
+    delta
+    fzf
+    bat
+    fd
+    ripgrep
+    fastfetch
     # podman-compose
     docker-compose
   ];
@@ -232,7 +242,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-
-
-
-
