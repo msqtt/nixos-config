@@ -24,18 +24,18 @@
         "Projects"
         "VirtualBox VMs"
 
-        { directory = ".gnupg"; mode = "0700"; }
+        # { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
         { directory = ".mozilla"; mode = "0700"; }
         { directory = ".thunderbird"; mode = "0700"; }
         # { directory = ".nixops"; mode = "0700"; }
         { directory = ".local/share/keyrings"; mode = "0700"; }
-        { directory = ".local/share/TelegramDesktop"; mode = "0700"; }
+        #{ directory = ".local/share/TelegramDesktop"; mode = "0700"; }
 
         ".config/Code"
-        ".local/share/direnv"
+        ".vscode" # plugin
 
-        ".vscode"
+        ".local/share/direnv"
         ".local/share/zoxide"
       ];
       files = [

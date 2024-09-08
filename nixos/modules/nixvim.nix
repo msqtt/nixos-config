@@ -168,73 +168,41 @@ in
     ];
 
     extraConfigLua = ''
+        ----------------------------
+        function RunCmd(cmd)
+          local ter_nr = vim.g.terminal_buffer_nr
+          if ter_nr then
+            vim.g.terminal_buffer_nr = nil
+            pcall(vim.api.nvim_buf_delete, ter_nr, { force = true })
+          end
+          vim.cmd("sp | term " .. cmd)
+          -- 获取当前 buffer 的编号并存储到变量中
+          vim.g.terminal_buffer_nr = vim.fn.bufnr("%")
+        end
+
+        function CloseCmd()
+          local ter_nr = vim.g.terminal_buffer_nr
+          if ter_nr then
+            vim.g.terminal_buffer_nr = nil
+            pcall(vim.api.nvim_buf_delete, ter_nr, { force = true })
+          end
+        end
+
+        vim.cmd("command! -nargs=1 RunCmd lua RunCmd(<f-args>)")
+        vim.cmd("command! CloseCmd lua CloseCmd()")
+
+        vim.keymap.set({ "n" }, "!", ":RunCmd ", {noremap =  true})
+        vim.keymap.set({ "n" }, "d!", "<cmd>CloseCmd<CR>", {noremap =  true})
+        ----------------------------
+
         require("nvim-surround").setup()
-        require("bufferline").setup({
-          options = {
-              buffer_close_icon = "",
-              close_command = "bdelete %d",
-              close_icon = "",
-              indicator = {
-                style = "icon",
-                icon = " ",
-              },
-              left_trunc_marker = "",
-              modified_icon = "●",
-              offsets = { { filetype = "NvimTree", text = "EXPLORER", text_align = "center" } },
-              right_mouse_command = "bdelete! %d",
-              right_trunc_marker = "",
-              show_close_icon = false,
-              show_tab_indicators = true,
-          },
-          highlights = {
-              fill = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "StatusLineNC" },
-              },
-              background = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "StatusLine" },
-              },
-              buffer_visible = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "Normal" },
-              },
-              buffer_selected = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "Normal" },
-              },
-              separator = {
-                  fg = { attribute = "bg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "StatusLine" },
-              },
-              separator_selected = {
-                  fg = { attribute = "fg", highlight = "Special" },
-                  bg = { attribute = "bg", highlight = "Normal" },
-              },
-              separator_visible = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "StatusLineNC" },
-              },
-              close_button = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "StatusLine" },
-              },
-              close_button_selected = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "Normal" },
-              },
-              close_button_visible = {
-                  fg = { attribute = "fg", highlight = "Normal" },
-                  bg = { attribute = "bg", highlight = "Normal" },
-              },
-          },
-      })
     '';
 
     extraPlugins = with pkgs.vimPlugins; [
       nvim-surround
     ];
     plugins = {
+      # yazi.enable = true;
       friendly-snippets.enable = true;
       comment.enable = true;
       treesitter.enable = true;
@@ -246,9 +214,6 @@ in
       lualine = {
         enable = true;
         theme = "vscode";
-      };
-      bufferline = {
-        enable = true;
       };
       telescope = {
         enable = true;
@@ -264,6 +229,17 @@ in
           "<C-p>" = "git_files";
           "<leader>p" = "oldfiles";
           "<C-f>" = "live_grep";
+        };
+      };
+
+      harpoon = {
+        enable = true;
+        keymaps = {
+          addFile = "<leader>ya";
+          cmdToggleQuickMenu = "<leader>yc";
+          toggleQuickMenu = "<leader>yy";
+          navNext = "<leader>yn";
+          navPrev = "<leader>yp";
         };
       };
       lsp = {

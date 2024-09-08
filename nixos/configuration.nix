@@ -96,6 +96,7 @@
       source-han-sans
       source-han-serif
       fira-code
+      terminus-nerdfont
     ];
     fontconfig = {
       defaultFonts = {
@@ -184,7 +185,7 @@
     bob = {
       shell = pkgs.nushell;
       isNormalUser = true;
-      extraGroups = [ "wheel" "audio" "video" "docker" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
 
       # To generate a hash to put in initialHashedPassword
       # you can do this:
@@ -226,6 +227,7 @@
 
     # podman-compose
     docker-compose
+    distrobox
     fastfetch
   ];
 
@@ -239,6 +241,8 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
+    virtualbox.host.enable = true;
+    virtualbox.host.enableExtensionPack = true;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

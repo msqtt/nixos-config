@@ -33,9 +33,17 @@
         s = "status";
       };
     };
+
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
+    };
+
+    lazygit = {
+      enable = true;
+      settings = {
+        gui.showIcons = false;
+      };
     };
   };
   programs = {
@@ -75,6 +83,7 @@
         ll = "ls -l";
         la = "ls -a";
         lla = "ls -la";
+        lg = "lazygit";
       };
     };
 
@@ -114,19 +123,64 @@
       enable = true;
       enableNushellIntegration = true;
       keymap = {
-        manage.keymap = [
-          { run = "forward"; on = [ "n" ]; }
-          { run = "back"; on = [ "e" ]; }
+        manager.prepend_keymap = [
+          { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
+          { on = [ "n" ]; run = "arrow 1"; desc = "Move cursor down"; }
+          { on = [ "E" ]; run = "seek -5"; desc = "Seek up 5 units in the preview"; }
+          { on = [ "N" ]; run = "seek 5"; desc = "Seek down 5 units in the preview"; }
+          { on = [ "y" ]; run = "leave"; desc = "Go back to the parent directory"; }
+          { on = [ "o" ]; run = "enter"; desc = "Enter the child directory"; }
+          { on = [ "Y" ]; run = "back"; desc = "Go back to the previous directory"; }
+          { on = [ "O" ]; run = "forward"; desc = "Go forward to the next directory"; }
 
-          { run = "leave"; on = [ "y" ]; }
-          { run = "yank"; on = [ "h" ]; }
-
-          { run = "enter"; on = [ "o" ]; }
-          { run = "open"; on = [ "l" ]; }
+          { on = [ "j" ]; run = "find_arrow"; desc = "Go to the next found"; }
+          { on = [ "J" ]; run = "find_arrow --previous"; desc = "Go to the previous found"; }
+          { on = [ "h" ]; run = "yank"; desc = "Yank selected files (copy)"; }
+          { on = [ "H" ]; run = "unyank"; desc = "Cancel the yank status"; }
+          { on = [ "l" ]; run = "open"; desc = "Open selected files"; }
+          { on = [ "L" ]; run = "open --interactive"; desc = "Open selected files interactively"; }
+        ];
+        tasks.prepend_keymap = [
+          { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
+          { on = [ "n" ]; run = "arrow 1"; desc = "Move cursor down"; }
+        ];
+        select.prepend_keymap = [
+          { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
+          { on = [ "n" ]; run = "arrow 1"; desc = "Move cursor down"; }
+        ];
+        input.prepend_keymap = [
+          { on = [ "<C-c>" ]; run = "close"; desc = "Cancel input"; }
         ];
       };
     };
 
+  };
+
+  programs.wezterm = {
+    enable = true;
+    extraConfig = ''
+      local wezterm = require("wezterm")
+      return {
+        color_scheme = "Hardcore",
+
+        window_padding = {
+          left = 2,
+          right = 2,
+          top = 0,
+          bottom = 0,
+        },
+
+        font = wezterm.font_with_fallback({
+          "Fira Code",
+          { family = "Terminess Nerd Font Mono", scale = 1.5 },
+        }),
+        hide_mouse_cursor_when_typing = true,
+        hide_tab_bar_if_only_one_tab = true,
+        use_cap_height_to_scale_fallback_fonts = true,
+        font_size = 14,
+        scrollback_lines = 5000,
+      }
+    '';
   };
 
   imports = [
@@ -143,6 +197,6 @@
   home.stateVersion = "24.05";
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs.home-manager.enable = false;
 
 }
