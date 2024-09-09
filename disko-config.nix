@@ -1,37 +1,36 @@
 {
   disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = "/dev/nvme0n1";
-        content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              priority = 1;
-              name = "ESP";
-              size = "128M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-              };
-            };
-            root = {
-              end = "-14G";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
-              };
-            };
-            plainSwap = {
-              size = "100%";
-              content = {
-                type = "swap";
-                discardPolicy = "both";
-                resumeDevice = true; # resume from hiberation from this device
+    disk.vda = {
+      device = "/dev/vda";
+      type = "disk";
+      content = {
+        type = "gpt";
+        partitions = {
+          boot = {
+            type = "EF02";
+            label = "BOOT";
+            start = "0";
+            end = "+1M";
+          };
+          root = {
+            label = "ROOT";
+            end = "-0";
+            content = {
+              type = "btrfs";
+              extraArgs = [ "-f" ];
+              subvolumes = {
+                "boot" = {
+                  mountpoint = "/boot";
+                  mountOptions = [ "compress=zstd" ];
+                };
+                "nix" = {
+                  mountpoint = "/nix";
+                  mountOptions = [ "compress=zstd" ];
+                };
+                "persist" = {
+                  mountpoint = "/persist";
+                  mountOptions = [ "compress=zstd" ];
+                };
               };
             };
           };
@@ -42,7 +41,8 @@
       "/" = {
         fsType = "tmpfs";
         mountOptions = [
-          "size=2G"
+          "defaults"
+          "mode=755"
         ];
       };
     };

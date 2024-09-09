@@ -12,7 +12,7 @@
     figlet
     cowsay
     firefox
-    google-chrome
+    chromium
     telegram-desktop
     thunderbird
     vscode
@@ -20,6 +20,7 @@
 
   ] ++ (with inputs.my-nur; [
     bobibo
+    jbl
   ]);
 
   programs = {
