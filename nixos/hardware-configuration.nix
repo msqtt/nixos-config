@@ -13,6 +13,11 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.kernelParams = [ "resume_offset=11381542" ];
+  # get by: btrfs inspect-internal map-swapfile -r /swap/swapfile
+  boot.resumeDevice = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
+  swapDevices = [ { device = "/swap/swapfile"; } ];
+  
   fileSystems."/" =
     { device = "none";
       fsType = "tmpfs";
@@ -21,14 +26,20 @@
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
     { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
       neededForBoot = true;
       fsType = "btrfs";
-      options = [ "subvol=persist" ];
+      options = [ "subvol=persist" "compress=zstd" ];
+    };
+
+  fileSystems."/swap" =
+    { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
+      fsType = "btrfs";
+      options = [ "subvol=swap" "noatime" ];
     };
 
   fileSystems."/boot" =
@@ -37,7 +48,6 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

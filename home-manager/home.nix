@@ -5,6 +5,17 @@
   # paths it should manage.
   home.username = "bob";
   home.homeDirectory = "/home/bob";
+  home.sessionVariables = {
+    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
+  };
+  
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = "firefox-esr.desktop";
+    "x-scheme-handler/http" = "firefox-esr.desktop";
+    "x-scheme-handler/https" = "firefox-esr.desktop";
+    "x-scheme-handler/about" = "firefox-esr.desktop";
+    "x-scheme-handler/unknown" = "firefox-esr.desktop";
+  };
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
