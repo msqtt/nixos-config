@@ -1,17 +1,22 @@
 {
   disko.devices = {
-    disk.vda = {
-      device = "/dev/vda";
+    disk.main = {
+      device = "/dev/nvme0n1";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          boot = {
-            type = "EF02";
-            label = "BOOT";
-            start = "0";
-            end = "+1M";
-          };
+            ESP = {
+              priority = 1;
+              name = "ESP";
+              size = "128M";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+              };
+            };
           root = {
             label = "ROOT";
             end = "-0";
@@ -19,10 +24,6 @@
               type = "btrfs";
               extraArgs = [ "-f" ];
               subvolumes = {
-                "boot" = {
-                  mountpoint = "/boot";
-                  mountOptions = [ "compress=zstd" ];
-                };
                 "nix" = {
                   mountpoint = "/nix";
                   mountOptions = [ "compress=zstd" ];
@@ -47,4 +48,5 @@
       };
     };
   };
+  fileSystems."/persist".neededForBoot = true;
 }

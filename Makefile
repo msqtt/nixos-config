@@ -1,1 +1,1 @@
-/nix/persist/home/bob/Makefile
+/persist/home/bob/Makefile

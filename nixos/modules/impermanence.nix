@@ -1,5 +1,5 @@
 {
-  environment.persistence."/nix/persist" = {
+  environment.persistence."/persist" = {
     enable = true; # NB: Defaults to true, not needed
     hideMounts = true;
     directories = [
