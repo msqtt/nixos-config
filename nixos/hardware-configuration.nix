@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -16,34 +17,39 @@
   boot.kernelParams = [ "resume_offset=11381542" ];
   # get by: btrfs inspect-internal map-swapfile -r /swap/swapfile
   boot.resumeDevice = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
-  swapDevices = [ { device = "/swap/swapfile"; } ];
-  
+  swapDevices = [{ device = "/swap/swapfile"; }];
+
   fileSystems."/" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "tmpfs";
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
+    {
+      device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
       fsType = "btrfs";
       options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/persist" =
-    { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
+    {
+      device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
       neededForBoot = true;
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" ];
     };
 
   fileSystems."/swap" =
-    { device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
+    {
+      device = "/dev/disk/by-uuid/966c87df-0319-4efc-aafb-edf9a2a4ae56";
       fsType = "btrfs";
       options = [ "subvol=swap" "noatime" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3330-C66A";
+    {
+      device = "/dev/disk/by-uuid/3330-C66A";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };

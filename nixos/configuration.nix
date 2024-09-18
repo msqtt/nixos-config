@@ -37,6 +37,17 @@
     # firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
     firewall.enable = false;
+
+
+    extraHosts = ''
+      127.0.0.1 host
+      192.168.100.5 mypi
+      125.217.52.212 kexie2
+      43.163.233.244 kexieserver
+      107.174.247.79 ti
+      114.132.248.191 xyzserver
+      8.219.10.91 myserver
+    '';
   };
 
   # Set your time zone.
@@ -137,7 +148,15 @@
 
     libinput.enable = true;
 
-    xserver.enable = true;
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "workman";
+        options = "ctrl:nocaps";
+      };
+    };
+
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;
@@ -150,8 +169,6 @@
     # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
 
-    # Enable the OpenSSH daemon.
-    # services.openssh.enable = true;
 
     # Enable the X11 windowing system.
     # services.xserver.enable = true;
@@ -161,6 +178,12 @@
     # accidentally delete configuration.nix.
     # system.copySystemConfiguration = true;
   };
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = false;
+  };
+  security.duosec.allowTcpForwarding = true;
 
   hardware.bluetooth = {
     enable = true;
@@ -234,7 +257,10 @@
   ];
 
   virtualisation = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      storageDriver = "btrfs";
+    };
     podman = {
       enable = false;
       # Create a `docker` alias for podman, to use it as a drop-in replacement
@@ -243,8 +269,10 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
-    virtualbox.host.enable = true;
-    virtualbox.host.enableExtensionPack = true;
+    virtualbox.host = {
+      enable = true;
+      enableExtensionPack = true;
+    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

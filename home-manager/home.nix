@@ -8,7 +8,7 @@
   home.sessionVariables = {
     DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
   };
-  
+
   xdg.mimeApps.defaultApplications = {
     "text/html" = "firefox-esr.desktop";
     "x-scheme-handler/http" = "firefox-esr.desktop";
@@ -19,7 +19,6 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    lolcat
     figlet
     cowsay
     firefox
@@ -27,7 +26,9 @@
     telegram-desktop
     thunderbird
     vscode
-
+    libreoffice-qt
+    dbeaver-bin
+    jetbrains.idea-ultimate
 
   ] ++ (with inputs.my-nur; [
     bobibo
@@ -66,7 +67,7 @@
       # for editing directly to config.nu 
       extraConfig = ''
         let carapace_completer = {|spans|
-        carapace $spans.0 nushell $spans | from json
+            carapace $spans.0 nushell ...$spans | from json
         }
         $env.config = {
          show_banner: false,
@@ -189,7 +190,7 @@
         hide_mouse_cursor_when_typing = true,
         hide_tab_bar_if_only_one_tab = true,
         use_cap_height_to_scale_fallback_fonts = true,
-        font_size = 14,
+        font_size = 12,
         scrollback_lines = 5000,
       }
     '';

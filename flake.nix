@@ -31,7 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    daeuniverse.url = "github:daeuniverse/flake.nix";
+    daeuniverse.url = "github:msqtt/dae";
 
     impermanence.url = "github:nix-community/impermanence";
 
