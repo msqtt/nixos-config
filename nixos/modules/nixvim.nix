@@ -48,7 +48,7 @@ in
       inccommand = "split";
       completeopt = "longest,noinsert,menuone,noselect,preview";
       visualbell = true;
-      colorcolumn = "100";
+      colorcolumn = "80";
       updatetime = 100;
       virtualedit = "block";
       ignorecase = true;

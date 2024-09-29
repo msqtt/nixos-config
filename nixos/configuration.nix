@@ -55,6 +55,8 @@
 
   # Select internationalisation properties.
 
+  documentation.dev.enable = true;
+
   i18n = {
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
@@ -103,6 +105,7 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
+      wqy_zenhei
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
@@ -129,13 +132,6 @@
           "DejaVu Serif"
         ];
       };
-    };
-  };
-
-  environment = {
-    variables = {
-      EDITOR = "nvim";
-      # LIBSEAT_BACKEND = "logind";
     };
   };
 
@@ -222,76 +218,83 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # basic tools
-    tree
-    gnumake
-    wget
-    curl
-    git
-    wl-clipboard
-
-    # for monitor
-    btop
-    iotop
-
-    # useful cli tools
-    tldr
-    dust
-    delta
-    jq
-    fzf
-    bat
-    fd
-    ripgrep
-
-    zip
-    unar
-    xz
-    p7zip
-
-    # podman-compose
-    docker-compose
-    distrobox
-    fastfetch
-  ];
-
-  virtualisation = {
-    docker = {
-      enable = true;
-      storageDriver = "btrfs";
+  environment = {
+    variables = {
+      EDITOR = "nvim";
+      # LIBSEAT_BACKEND = "logind";
     };
-    podman = {
-      enable = false;
-      # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
+    systemPackages = with pkgs; [
+      # for linux man doc
+      man-pages
+      man-pages-posix
 
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
-    };
-    virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
-    };
+      # basic tools
+      tree
+      gnumake
+      wget
+      curl
+      git
+      wl-clipboard
+
+      # for monitor
+      btop
+      iotop
+
+      # useful cli tools
+      tldr
+      dust
+      delta
+      fzf
+      bat
+      fd
+      ripgrep
+
+      unar
+      xz
+      p7zip
+
+      # podman-compose
+      docker-compose
+      distrobox
+      fastfetch
+    ];
   };
+    virtualisation = {
+      docker = {
+        enable = true;
+        storageDriver = "btrfs";
+      };
+      podman = {
+        enable = false;
+        # Create a `docker` alias for podman, to use it as a drop-in replacement
+        dockerCompat = true;
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "24.05"; # Did you read the comment?
+        # Required for containers under podman-compose to be able to talk to each other.
+        defaultNetwork.settings.dns_enabled = true;
+      };
+      virtualbox.host = {
+        enable = true;
+        enableExtensionPack = true;
+      };
+    };
 
-}
+    # This option defines the first version of NixOS you have installed on this particular machine,
+    # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+    #
+    # Most users should NEVER change this value after the initial install, for any reason,
+    # even if you've upgraded your system to a new NixOS release.
+    #
+    # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+    # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+    # to actually do that.
+    #
+    # This value being lower than the current NixOS release does NOT mean your system is
+    # out of date, out of support, or vulnerable.
+    #
+    # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+    # and migrated your data accordingly.
+    #
+    # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+    system.stateVersion = "24.05"; # Did you read the comment?
+
+  }

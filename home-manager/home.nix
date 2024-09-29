@@ -23,12 +23,12 @@
     cowsay
     firefox
     chromium
-    telegram-desktop
     thunderbird
     vscode
     libreoffice-qt
     dbeaver-bin
     jetbrains.idea-ultimate
+    obs-studio
 
   ] ++ (with inputs.my-nur; [
     bobibo
@@ -97,6 +97,7 @@
         la = "ls -a";
         lla = "ls -la";
         lg = "lazygit";
+        sudo = "doas";
       };
     };
 
@@ -108,6 +109,7 @@
     thefuck = {
       enable = true;
       enableNushellIntegration = true;
+      enableInstantMode = true;
     };
 
     direnv = {
