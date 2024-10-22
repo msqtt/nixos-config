@@ -264,10 +264,11 @@ in
         };
         servers = {
           nixd.enable = true;
+          pylsp.enable = true;
           volar.enable = true;
           tsserver.enable = true;
           gopls = {
-            enable = false;
+            enable = true;
             extraOptions = { completeUnimported = true; };
           };
           rust-analyzer = {

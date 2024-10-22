@@ -137,6 +137,12 @@
 
   # List services that you want to enable:
   services = {
+
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+    };
+
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -161,13 +167,11 @@
     desktopManager.plasma6.enable = true;
 
     # Configure keymap in X11
-    # services.xserver.xkb.layout = "us";
-    # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-
+    # xserver.xkb.layout = "us";
+    # xserver.xkb.options = "eurosign:e,caps:escape";
 
     # Enable the X11 windowing system.
-    # services.xserver.enable = true;
+    # xserver.enable = true;
 
     # Copy the NixOS configuration file and link it from the resulting system
     # (/run/current-system/configuration.nix). This is useful in case you
@@ -175,10 +179,6 @@
     # system.copySystemConfiguration = true;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = false;
-  };
   security.duosec.allowTcpForwarding = true;
 
   hardware.bluetooth = {
