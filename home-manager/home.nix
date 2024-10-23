@@ -127,9 +127,44 @@
       enableNushellIntegration = true;
       settings = {
         add_newline = true;
+        palette = "catppuccin_mocha";
         character = {
-          success_symbol = "[➜](bold green)";
-          error_symbol = "[➜](bold red)";
+          success_symbol = "[[󰄛](green) ❯](peach)";
+          error_symbol = "[[󰄛](red) ❯](peach)";
+          vimcmd_symbol = "[󰄛 ❮](subtext1)"; # For use with zsh-vi-mode
+        };
+        git_branch.style = "bold mauve";
+        directory = {
+          truncation_length = 4;
+          style = "bold lavender";
+        };
+        palettes.catppuccin_mocha = {
+          rosewater = "#f5e0dc";
+          flamingo = "#f2cdcd";
+          pink = "#f5c2e7";
+          mauve = "#cba6f7";
+          red = "#f38ba8";
+          maroon = "#eba0ac";
+          peach = "#fab387";
+          yellow = "#f9e2af";
+          green = "#a6e3a1";
+          teal = "#94e2d5";
+          sky = "#89dceb";
+          sapphire = "#74c7ec";
+          blue = "#89b4fa";
+          lavender = "#b4befe";
+          text = "#cdd6f4";
+          subtext1 = "#bac2de";
+          subtext0 = "#a6adc8";
+          overlay2 = "#9399b2";
+          overlay1 = "#7f849c";
+          overlay0 = "#6c7086";
+          surface2 = "#585b70";
+          surface1 = "#45475a";
+          surface0 = "#313244";
+          base = "#1e1e2e";
+          mantle = "#181825";
+          crust = "#11111b";
         };
       };
     };
@@ -175,8 +210,13 @@
     enable = true;
     extraConfig = ''
       local act = wezterm.action;
+
+      wezterm.on('update-right-status', function(window, pane)
+        window:set_right_status(window:active_workspace())
+      end)
+
       return {
-        color_scheme = "Hardcore",
+        color_scheme = "Catppuccin Mocha",
 
         window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
 
@@ -201,6 +241,31 @@
           -- show the pane selection mode, but have it swap the active and selected panes
           { mods = 'LEADER', key = '0', action = act.PaneSelect { mode = 'SwapWithActive' } },
           { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
+          {
+            key = "w",
+            mods = "LEADER",
+            action = act.PromptInputLine({
+              description = wezterm.format({
+                { Attribute = { Intensity = "Bold" } },
+                { Foreground = { AnsiColor = "Fuchsia" } },
+                { Text = "Enter name for new workspace" },
+              }),
+              action = wezterm.action_callback(function(window, pane, line)
+                -- line will be `nil` if they hit escape without entering anything
+                -- An empty string if they just hit enter
+                -- Or the actual line of text they wrote
+                if line then
+                  window:perform_action(
+                    act.SwitchToWorkspace({
+                      name = line,
+                    }),
+                    pane
+                  )
+                end
+              end),
+            }),
+          },
+          { key = 'p', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' }, },
         },
 
         key_tables = {

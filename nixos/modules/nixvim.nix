@@ -9,7 +9,10 @@ in
     vimAlias = true;
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
-    colorschemes.vscode.enable = true;
+    colorschemes.catppuccin = {
+      enable = true;
+      settings.background.dark = "mocha";
+    };
     opts = {
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
@@ -213,7 +216,6 @@ in
       indent-blankline.enable = false;
       lualine = {
         enable = true;
-        theme = "vscode";
       };
       telescope = {
         enable = true;
