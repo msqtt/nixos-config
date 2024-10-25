@@ -59,6 +59,7 @@
       };
     };
   };
+
   programs = {
     nushell = {
       enable = true;
@@ -219,6 +220,7 @@
         color_scheme = "Catppuccin Mocha",
 
         window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
+        window_decorations = "NONE",
 
         font = wezterm.font_with_fallback({
           "Fira Code",
@@ -369,6 +371,8 @@
   };
 
   imports = [
+    ./niri.nix
+    ./plasma.nix
   ];
 
   # This value determines the Home Manager release that your

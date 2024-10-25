@@ -151,7 +151,7 @@
     libinput.enable = true;
 
     xserver = {
-      enable = true;
+      # enable = true;
       xkb = {
         layout = "us";
         variant = "workman";
@@ -179,14 +179,15 @@
     # system.copySystemConfiguration = true;
   };
 
-  security.duosec.allowTcpForwarding = true;
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
 
   security = {
+    # duosec.allowTcpForwarding = true;
+    pam.services.swaylock = {};
+
     doas = {
       enable = true;
       wheelNeedsPassword = false;
@@ -219,9 +220,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
+
+    plasma6.excludePackages = with pkgs.kdePackages; [
+      konsole
+      oxygen
+      kate
+      elisa
+    ];
+
     variables = {
       EDITOR = "nvim";
       # LIBSEAT_BACKEND = "logind";
+      NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
       # for linux man doc
@@ -234,7 +244,6 @@
       wget
       curl
       git
-      wl-clipboard
 
       # for monitor
       btop
@@ -257,8 +266,25 @@
       docker-compose
       distrobox
       fastfetch
+
+      #  wayland
+      wl-clipboard
+      fuzzel
+      xwayland-satellite-stable
+      libsecret
+      gammastep
+      mako
+      swaybg
+      swaylock
+      eww
     ];
   };
+
+  programs.niri = {
+    enable = true;
+    #package = pkgs.niri;
+  };
+
   virtualisation = {
     docker = {
       enable = true;
@@ -277,6 +303,7 @@
       enableExtensionPack = true;
     };
   };
+
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

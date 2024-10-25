@@ -168,6 +168,11 @@ in
           noremap = true;
         };
       }
+      {
+        key = "<A-t>";
+        action = "<cmd>tabe<CR>";
+        mode = [ "n" ];
+      }
     ];
 
     extraConfigLua = ''
