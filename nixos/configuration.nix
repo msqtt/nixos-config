@@ -25,7 +25,7 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking = {
-    hostName = "foobar"; # Define your hostname.
+    hostName = "foo"; # Define your hostname.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
     # proxy = {
     #  default = "socks5+h://192.168.100.5:20170";
@@ -151,7 +151,7 @@
     libinput.enable = true;
 
     xserver = {
-      # enable = true;
+      enable = true;
       xkb = {
         layout = "us";
         variant = "workman";
@@ -267,8 +267,9 @@
       distrobox
       fastfetch
 
-      #  wayland
+      #  wayland composer
       wl-clipboard
+      xsel
       fuzzel
       xwayland-satellite-stable
       libsecret
@@ -276,7 +277,6 @@
       mako
       swaybg
       swaylock
-      eww
     ];
   };
 

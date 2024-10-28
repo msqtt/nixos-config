@@ -1,9 +1,8 @@
 {
   programs.niri.config = ''
-      spawn-at-startup "gammastep" "-O" "4500K" "-b" "0.9"
+      spawn-at-startup "gammastep" "-O" "4500K" "-b" "0.8"
       spawn-at-startup "mako" "--background-color=#1e1e2e" "--text-color=#cdd6f4" "--border-color=#f5c2e7" "--progress-color=#313244" "--border-size=2" "--max-icon-size=32" "--border-radius=4"
       spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/bob/Documents/wallpaper/nix-wallpaper-watersplash.png"
-
 
       input {
         keyboard {
@@ -17,6 +16,23 @@
             repeat-rate 30
             track-layout "global"
         }
+
+        touchpad {
+          // off
+          // tap
+          // dwt
+          // dwtp
+          natural-scroll
+          // accel-speed 0.2
+          // accel-profile "flat"
+          // scroll-method "two-finger"
+          // tap-button-map "left-middle-right"
+          // click-method "clickfinger"
+          // left-handed
+          // disabled-on-external-mouse
+          // middle-emulation
+        }
+
       }
 
       output "HDMI-A-1" {
@@ -71,6 +87,7 @@
 
         Mod+Space { spawn "fuzzel"; }
         Mod+Return { spawn "wezterm"; }
+        Mod+B {spawn "waybar"; }
 
         XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
         XF86AudioLowerVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -81,8 +98,8 @@
         Mod+BackSpace { close-window; }
 
         Mod+Y     { focus-column-left; }
-        Mod+N     { focus-window-down; }
-        Mod+E     { focus-window-up; }
+        Mod+D     { focus-window-down; }
+        Mod+U     { focus-window-up; }
         Mod+O     { focus-column-right; }
         Mod+Left  { focus-column-left; }
         Mod+Down  { focus-window-down; }
@@ -90,8 +107,8 @@
         Mod+Right { focus-column-right; }
 
         Mod+Ctrl+Y     { move-column-left; }
-        Mod+Ctrl+N     { move-window-down; }
-        Mod+Ctrl+E     { move-window-up; }
+        Mod+Ctrl+D     { move-window-down; }
+        Mod+Ctrl+U     { move-window-up; }
         Mod+Ctrl+O     { move-column-right; }
         Mod+Ctrl+Left  { move-column-left; }
         Mod+Ctrl+Down  { move-window-down; }
@@ -104,8 +121,8 @@
         Mod+Ctrl+End  { move-column-to-last; }
 
         Mod+Shift+Y     { focus-monitor-left; }
-        Mod+Shift+N     { focus-monitor-down; }
-        Mod+Shift+E     { focus-monitor-up; }
+        Mod+Shift+D     { focus-monitor-down; }
+        Mod+Shift+U     { focus-monitor-up; }
         Mod+Shift+O     { focus-monitor-right; }
         Mod+Shift+Left  { focus-monitor-left; }
         Mod+Shift+Down  { focus-monitor-down; }
@@ -113,8 +130,8 @@
         Mod+Shift+Right { focus-monitor-right; }
 
         Mod+Shift+Ctrl+Y     { move-column-to-monitor-left; }
-        Mod+Shift+Ctrl+N     { move-column-to-monitor-down; }
-        Mod+Shift+Ctrl+E     { move-column-to-monitor-up; }
+        Mod+Shift+Ctrl+D     { move-column-to-monitor-down; }
+        Mod+Shift+Ctrl+U     { move-column-to-monitor-up; }
         Mod+Shift+Ctrl+O     { move-column-to-monitor-right; }
         Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
         Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -122,20 +139,20 @@
         Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
 
         Mod+Shift+Alt+Y     { move-workspace-to-monitor-left; }
-        Mod+Shift+Alt+N     { move-workspace-to-monitor-down; }
-        Mod+Shift+Alt+E     { move-workspace-to-monitor-up; }
+        Mod+Shift+Alt+D     { move-workspace-to-monitor-down; }
+        Mod+Shift+Alt+U     { move-workspace-to-monitor-up; }
         Mod+Shift+Alt+O     { move-workspace-to-monitor-right; }
         Mod+Shift+Alt+Left  { move-workspace-to-monitor-left; }
         Mod+Shift+Alt+Down  { move-workspace-to-monitor-down; }
         Mod+Shift+Alt+Up    { move-workspace-to-monitor-up; }
         Mod+Shift+Alt+Right { move-workspace-to-monitor-right; }
 
-        Mod+U              { focus-workspace-down; }
-        Mod+I              { focus-workspace-up; }
+        Mod+N              { focus-workspace-down; }
+        Mod+E              { focus-workspace-up; }
         Mod+Page_Down      { focus-workspace-down; }
         Mod+Page_Up        { focus-workspace-up; }
-        Mod+Ctrl+U         { move-column-to-workspace-down; }
-        Mod+Ctrl+I         { move-column-to-workspace-up; }
+        Mod+Ctrl+N         { move-column-to-workspace-down; }
+        Mod+Ctrl+E         { move-column-to-workspace-up; }
         Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
         Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
 
@@ -159,8 +176,8 @@
         // Mod+TouchpadScrollLeft  { focus-column-left; }
         // Mod+TouchpadScrollRight { focus-column-right; }
 
-        Mod+Shift+U         { move-workspace-down; }
-        Mod+Shift+I         { move-workspace-up; }
+        Mod+Shift+N         { move-workspace-down; }
+        Mod+Shift+E         { move-workspace-up; }
         Mod+Shift+Page_Down { move-workspace-down; }
         Mod+Shift+Page_Up   { move-workspace-up; }
 
@@ -235,7 +252,7 @@
 
         Mod+Shift+Ctrl+T { toggle-debug-tint; }
         Mod+Shift+Ctrl+R { debug-toggle-opaque-regions; }
-        Mod+Shift+Ctrl+D { debug-toggle-damage; }
+        Mod+Shift+Ctrl+M { debug-toggle-damage; }
       }
 
       layout {

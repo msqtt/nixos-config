@@ -232,7 +232,7 @@
         font_size = 12,
         scrollback_lines = 5000,
 
-        leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 },
+        leader = { key = 's', mods = 'ALT', timeout_milliseconds = 1000 },
 
         keys = {
           -- splitting
@@ -242,7 +242,8 @@
           { mods = "LEADER", key = "s", action = act.PaneSelect },
           -- show the pane selection mode, but have it swap the active and selected panes
           { mods = 'LEADER', key = '0', action = act.PaneSelect { mode = 'SwapWithActive' } },
-          { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode },
+          { mods = 'LEADER', key = 'Enter', action = act.ActivateCopyMode },
+          { mods = 'LEADER', key = 'x', action = wezterm.action.CloseCurrentPane { confirm = true }, },
           {
             key = "w",
             mods = "LEADER",

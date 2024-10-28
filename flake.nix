@@ -1,5 +1,5 @@
 {
-  description = "Configuration of Bob's NixOS";
+  description = "Configuration of My NixOS Foo";
 
   nixConfig = {
     # append the default substituters
@@ -34,7 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    daeuniverse.url = "github:daeuniverse/flake.nix";
+    daeuniverse.url = "github:daeuniverse/flake.nix/f3068382eb9c3aa2e1c17749a6179141a3cd7381";
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -71,7 +71,7 @@
     {
       formatter.x86_64-linux = pkgs.nixpkgs-fmt;
 
-      nixosConfigurations.foobar = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.foo = nixpkgs.lib.nixosSystem {
         specialArgs = specialArgs;
         modules = [
           # substituters
