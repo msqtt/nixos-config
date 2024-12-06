@@ -58,13 +58,14 @@
       pkgs = import nixpkgs { inherit system; };
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays
-         ++ [
-             (final: prev: let pkgs-unstable = (import inputs.nixpkgs-unstable { system = final.system; }); in {
-              plasmusic-toolbar = pkgs-unstable.plasmusic-toolbar;
-              application-title-bar = pkgs-unstable.application-title-bar;
-              polonium = pkgs-unstable.polonium;
-            })
-        ] ++ (with inputs; [ niri.overlays.niri ]);
+        ++ [
+        (final: prev:
+          let pkgs-unstable = (import inputs.nixpkgs-unstable { system = final.system; }); in {
+            plasmusic-toolbar = pkgs-unstable.plasmusic-toolbar;
+            application-title-bar = pkgs-unstable.application-title-bar;
+            polonium = pkgs-unstable.polonium;
+          })
+      ] ++ (with inputs; [ niri.overlays.niri ]);
 
       specialArgs = { inherit inputs; my-nur = my-nurpkgs; };
     in

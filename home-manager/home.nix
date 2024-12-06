@@ -16,7 +16,6 @@
     "x-scheme-handler/about" = "firefox-esr.desktop";
     "x-scheme-handler/unknown" = "firefox-esr.desktop";
   };
-
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     figlet
@@ -29,6 +28,7 @@
     jetbrains.idea-ultimate
     obs-studio
     feishu
+    gimp
 
   ] ++ (with inputs.my-nur; [
     bobibo
@@ -60,6 +60,10 @@
     };
   };
 
+
+  programs.btop.catppuccin.enable = true;
+  programs.fuzzel.catppuccin.enable = true;
+
   programs = {
     nushell = {
       enable = true;
@@ -67,11 +71,173 @@
       # configFile.source = ./.../config.nu;
       # for editing directly to config.nu 
       extraConfig = ''
+        let catppuccin = {
+          latte: {
+            rosewater: "#dc8a78"
+            flamingo: "#dd7878"
+            pink: "#ea76cb"
+            mauve: "#8839ef"
+            red: "#d20f39"
+            maroon: "#e64553"
+            peach: "#fe640b"
+            yellow: "#df8e1d"
+            green: "#40a02b"
+            teal: "#179299"
+            sky: "#04a5e5"
+            sapphire: "#209fb5"
+            blue: "#1e66f5"
+            lavender: "#7287fd"
+            text: "#4c4f69"
+            subtext1: "#5c5f77"
+            subtext0: "#6c6f85"
+            overlay2: "#7c7f93"
+            overlay1: "#8c8fa1"
+            overlay0: "#9ca0b0"
+            surface2: "#acb0be"
+            surface1: "#bcc0cc"
+            surface0: "#ccd0da"
+            crust: "#dce0e8"
+            mantle: "#e6e9ef"
+            base: "#eff1f5"
+          }
+          frappe: {
+            rosewater: "#f2d5cf"
+            flamingo: "#eebebe"
+            pink: "#f4b8e4"
+            mauve: "#ca9ee6"
+            red: "#e78284"
+            maroon: "#ea999c"
+            peach: "#ef9f76"
+            yellow: "#e5c890"
+            green: "#a6d189"
+            teal: "#81c8be"
+            sky: "#99d1db"
+            sapphire: "#85c1dc"
+            blue: "#8caaee"
+            lavender: "#babbf1"
+            text: "#c6d0f5"
+            subtext1: "#b5bfe2"
+            subtext0: "#a5adce"
+            overlay2: "#949cbb"
+            overlay1: "#838ba7"
+            overlay0: "#737994"
+            surface2: "#626880"
+            surface1: "#51576d"
+            surface0: "#414559"
+            base: "#303446"
+            mantle: "#292c3c"
+            crust: "#232634"
+          }
+          macchiato: {
+            rosewater: "#f4dbd6"
+            flamingo: "#f0c6c6"
+            pink: "#f5bde6"
+            mauve: "#c6a0f6"
+            red: "#ed8796"
+            maroon: "#ee99a0"
+            peach: "#f5a97f"
+            yellow: "#eed49f"
+            green: "#a6da95"
+            teal: "#8bd5ca"
+            sky: "#91d7e3"
+            sapphire: "#7dc4e4"
+            blue: "#8aadf4"
+            lavender: "#b7bdf8"
+            text: "#cad3f5"
+            subtext1: "#b8c0e0"
+            subtext0: "#a5adcb"
+            overlay2: "#939ab7"
+            overlay1: "#8087a2"
+            overlay0: "#6e738d"
+            surface2: "#5b6078"
+            surface1: "#494d64"
+            surface0: "#363a4f"
+            base: "#24273a"
+            mantle: "#1e2030"
+            crust: "#181926"
+          }
+          mocha: {
+            rosewater: "#f5e0dc"
+            flamingo: "#f2cdcd"
+            pink: "#f5c2e7"
+            mauve: "#cba6f7"
+            red: "#f38ba8"
+            maroon: "#eba0ac"
+            peach: "#fab387"
+            yellow: "#f9e2af"
+            green: "#a6e3a1"
+            teal: "#94e2d5"
+            sky: "#89dceb"
+            sapphire: "#74c7ec"
+            blue: "#89b4fa"
+            lavender: "#b4befe"
+            text: "#cdd6f4"
+            subtext1: "#bac2de"
+            subtext0: "#a6adc8"
+            overlay2: "#9399b2"
+            overlay1: "#7f849c"
+            overlay0: "#6c7086"
+            surface2: "#585b70"
+            surface1: "#45475a"
+            surface0: "#313244"
+            base: "#1e1e2e"
+            mantle: "#181825"
+            crust: "#11111b"
+          }
+        }
+
+        # Regenerate with `run-external --redirect-stdout "nix" "run" "nixpkgs#vivid" "--" "generate" "catppuccin-mocha" | str trim | xclip -sel cl`
+        # $env.LS_COLORS = ((cat ~/.config/nushell/ls-colors) | str trim)
+
+        let stheme = $catppuccin.mocha
+        let theme = {
+          separator: $stheme.overlay0
+          leading_trailing_space_bg: $stheme.overlay0
+          header: $stheme.green
+          date: $stheme.mauve
+          filesize: $stheme.blue
+          row_index: $stheme.pink
+          bool: $stheme.peach
+          int: $stheme.peach
+          duration: $stheme.peach
+          range: $stheme.peach
+          float: $stheme.peach
+          string: $stheme.green
+          nothing: $stheme.peach
+          binary: $stheme.peach
+          cellpath: $stheme.peach
+          hints: dark_gray
+
+          shape_garbage: { fg: $stheme.crust bg: $stheme.red attr: b }
+          shape_bool: $stheme.blue
+          shape_int: { fg: $stheme.mauve attr: b}
+          shape_float: { fg: $stheme.mauve attr: b}
+          shape_range: { fg: $stheme.yellow attr: b}
+          shape_internalcall: { fg: $stheme.blue attr: b}
+          shape_external: { fg: $stheme.blue attr: b}
+          shape_externalarg: $stheme.text 
+          shape_literal: $stheme.blue
+          shape_operator: $stheme.yellow
+          shape_signature: { fg: $stheme.green attr: b}
+          shape_string: $stheme.green
+          shape_filepath: $stheme.yellow
+          shape_globpattern: { fg: $stheme.blue attr: b}
+          shape_variable: $stheme.text
+          shape_flag: { fg: $stheme.blue attr: b}
+          shape_custom: {attr: b}
+        }
+
+
+
         let carapace_completer = {|spans|
             carapace $spans.0 nushell ...$spans | from json
         }
         $env.config = {
          show_banner: false,
+         rm: {
+           always_trash: true
+         },
+         color_config: $theme,
          completions: {
            case_sensitive: false # case-sensitive completions
            quick: true    # set to false to prevent auto-selecting completions
@@ -87,10 +253,16 @@
          }
         } 
         $env.PATH = ($env.PATH | 
-        split row (char esep) |
-        prepend /home/bob/Bin |
-        append /usr/bin/env
+          split row (char esep) |
+          prepend /home/bob/Bin |
+          append /usr/bin/env
         )
+        # define custom command
+        def git-init [] {
+            mkdir bare
+            ls -a | get name | filter {|file| $file != 'bare'} | each {|file| mv $file bare/}
+            ln -s bare/.git .git
+        }
       '';
 
       shellAliases = {
@@ -126,9 +298,9 @@
     starship = {
       enable = true;
       enableNushellIntegration = true;
+      catppuccin.enable = true;
       settings = {
         add_newline = true;
-        palette = "catppuccin_mocha";
         character = {
           success_symbol = "[[󰄛](green) ❯](peach)";
           error_symbol = "[[󰄛](red) ❯](peach)";
@@ -138,34 +310,6 @@
         directory = {
           truncation_length = 4;
           style = "bold lavender";
-        };
-        palettes.catppuccin_mocha = {
-          rosewater = "#f5e0dc";
-          flamingo = "#f2cdcd";
-          pink = "#f5c2e7";
-          mauve = "#cba6f7";
-          red = "#f38ba8";
-          maroon = "#eba0ac";
-          peach = "#fab387";
-          yellow = "#f9e2af";
-          green = "#a6e3a1";
-          teal = "#94e2d5";
-          sky = "#89dceb";
-          sapphire = "#74c7ec";
-          blue = "#89b4fa";
-          lavender = "#b4befe";
-          text = "#cdd6f4";
-          subtext1 = "#bac2de";
-          subtext0 = "#a6adc8";
-          overlay2 = "#9399b2";
-          overlay1 = "#7f849c";
-          overlay0 = "#6c7086";
-          surface2 = "#585b70";
-          surface1 = "#45475a";
-          surface0 = "#313244";
-          base = "#1e1e2e";
-          mantle = "#181825";
-          crust = "#11111b";
         };
       };
     };
@@ -213,14 +357,22 @@
       local act = wezterm.action;
 
       wezterm.on('update-right-status', function(window, pane)
-        window:set_right_status(window:active_workspace())
-      end)
+        window:set_right_status("  "..window:active_workspace().." 💬  ")
+      end);
+
+      wezterm.on(
+        'format-window-title',
+        function(tab, tabs, panes, config, hover, max_width)
+          return ""
+        end
+      );
 
       return {
         color_scheme = "Catppuccin Mocha",
 
         window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
-        window_decorations = "NONE",
+        -- window_decorations = "NONE",
+
 
         font = wezterm.font_with_fallback({
           "Fira Code",
@@ -374,6 +526,7 @@
   imports = [
     ./niri.nix
     ./plasma.nix
+    ./wm.nix
   ];
 
   # This value determines the Home Manager release that your

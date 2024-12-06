@@ -26,9 +26,9 @@ in
       cursorline = true;
       expandtab = true;
       tabstop = 2;
-      smarttab = true;
       shiftwidth = 2;
-      softtabstop = 2;
+      softtabstop = 0;
+      smarttab = true;
       autoindent = true;
       list = true;
       listchars = "tab:▫▫,trail:▫";

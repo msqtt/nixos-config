@@ -2,6 +2,35 @@
 {
   programs.plasma = {
     enable = true;
+    input.keyboard.layouts = [
+      {
+        displayName = "wm";
+        layout = "us";
+        variant = "workman";
+      }
+
+    ];
+    workspace.wallpaper = "/etc/nixos/assets/nix-wallpaper-watersplash.png";
+
+    powerdevil = {
+      AC = {
+        autoSuspend.action = "nothing";
+        powerButtonAction = "nothing";
+        whenLaptopLidClosed = "hibernate";
+        whenSleepingEnter = "hybridSleep";
+        dimDisplay.enable = false;
+        turnOffDisplay.idleTimeout = "never";
+      };
+      battery = {
+        autoSuspend.action = "nothing";
+        powerButtonAction = "nothing";
+        whenLaptopLidClosed = "hibernate";
+        whenSleepingEnter = "hybridSleep";
+        dimDisplay.enable = false;
+        turnOffDisplay.idleTimeout = "never";
+      };
+    };
+
     shortcuts = {
       "ActivityManager"."switch-to-activity-e0bf0ac5-a90b-4bac-a235-f2e5b9213a5d" = [ ];
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to English (US)" = [ ];
@@ -10,17 +39,17 @@
       "kaccess"."Toggle Screen Reader On and Off" = "Meta+Alt+S";
       "kcm_touchpad"."Disable Touchpad" = "Touchpad Off";
       "kcm_touchpad"."Enable Touchpad" = "Touchpad On";
-      "kcm_touchpad"."Toggle Touchpad" = ["Touchpad Toggle" "" "Meta+Ctrl+Zenkaku Hankaku,Touchpad Toggle" "Meta+Ctrl+Zenkaku Hankaku"];
+      "kcm_touchpad"."Toggle Touchpad" = [ "Touchpad Toggle" "" "Meta+Ctrl+Zenkaku Hankaku,Touchpad Toggle" "Meta+Ctrl+Zenkaku Hankaku" ];
       "kmix"."decrease_microphone_volume" = "Microphone Volume Down";
       "kmix"."decrease_volume" = "Volume Down";
       "kmix"."decrease_volume_small" = "Shift+Volume Down";
       "kmix"."increase_microphone_volume" = "Microphone Volume Up";
       "kmix"."increase_volume" = "Volume Up";
       "kmix"."increase_volume_small" = "Shift+Volume Up";
-      "kmix"."mic_mute" = ["Microphone Mute" "" "Meta+Volume Mute\\, ,Microphone Mute" "Meta+Volume Mute,Mute Microphone"];
+      "kmix"."mic_mute" = [ "Microphone Mute" "" "Meta+Volume Mute\\, ,Microphone Mute" "Meta+Volume Mute,Mute Microphone" ];
       "kmix"."mute" = "Volume Mute";
       "ksmserver"."Halt Without Confirmation" = "none,,Shut Down Without Confirmation";
-      "ksmserver"."Lock Session" = ["Meta+L" "" "Screensaver\\, ,Meta+L" "Screensaver,Lock Session"];
+      "ksmserver"."Lock Session" = [ "Meta+L" "" "Screensaver\\, ,Meta+L" "Screensaver,Lock Session" ];
       "ksmserver"."Log Out" = "Ctrl+Alt+Del";
       "ksmserver"."Log Out Without Confirmation" = "none,,Log Out Without Confirmation";
       "ksmserver"."Reboot" = "none,,Reboot";
@@ -32,7 +61,7 @@
       "kwin"."Decrease Opacity" = "none,,Decrease Opacity of Active Window by 5%";
       "kwin"."Edit Tiles" = "Meta+T";
       "kwin"."Expose" = "Ctrl+F9";
-      "kwin"."ExposeAll" = ["Ctrl+F10" "" "Launch (C)\\, ,Ctrl+F10" "Launch (C),Toggle Present Windows (All desktops)"];
+      "kwin"."ExposeAll" = [ "Ctrl+F10" "" "Launch (C)\\, ,Ctrl+F10" "Launch (C),Toggle Present Windows (All desktops)" ];
       "kwin"."ExposeClass" = "Ctrl+F7";
       "kwin"."ExposeClassCurrentDesktop" = [ ];
       "kwin"."Grid View" = "Meta+G";
@@ -176,7 +205,7 @@
       "kwin"."Window to Screen 6" = "none,,Move Window to Screen 6";
       "kwin"."Window to Screen 7" = "none,,Move Window to Screen 7";
       "kwin"."view_actual_size" = "Meta+0";
-      "kwin"."view_zoom_in" = ["Meta++" "" "Meta+=\\, Zoom In,Meta++" "Meta+=,Zoom In"];
+      "kwin"."view_zoom_in" = [ "Meta++" "" "Meta+=\\, Zoom In,Meta++" "Meta+=,Zoom In" ];
       "kwin"."view_zoom_out" = "Meta+-";
       "mediacontrol"."mediavolumedown" = [ ];
       "mediacontrol"."mediavolumeup" = "none,,Media volume up";
@@ -198,7 +227,7 @@
       "org_kde_powerdevil"."Sleep" = "Sleep";
       "org_kde_powerdevil"."Toggle Keyboard Backlight" = "Keyboard Light On/Off";
       "org_kde_powerdevil"."Turn Off Screen" = [ ];
-      "org_kde_powerdevil"."powerProfile" = ["Battery" "" "Meta+B\\, ,Battery" "Meta+B,Switch Power Profile"];
+      "org_kde_powerdevil"."powerProfile" = [ "Battery" "" "Meta+B\\, ,Battery" "Meta+B,Switch Power Profile" ];
       "plasmashell"."activate task manager entry 1" = "Meta+1";
       "plasmashell"."activate task manager entry 10" = ",Meta+0,Activate Task Manager Entry 10";
       "plasmashell"."activate task manager entry 2" = "Meta+2";
@@ -251,12 +280,8 @@
       "kwinrc"."Tiling/a5a3b88c-c755-5b49-b92a-938da369c0b1"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       "kwinrc"."Tiling/ba56c627-ac4b-5faf-991b-8f952d41c023"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.25},{\"width\":0.5},{\"width\":0.25}]}";
       "kwinrc"."Xwayland"."Scale" = 1.5;
-      "kxkbrc"."Layout"."DisplayNames" = "";
-      "kxkbrc"."Layout"."VariantList" = "";
       "plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
     };
-    dataFile = {
-
-    };
+    dataFile = { };
   };
 }

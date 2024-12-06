@@ -40,7 +40,6 @@
 
 
     extraHosts = ''
-      127.0.0.1 host
       192.168.100.5 mypi
       125.217.52.212 kexie2
       43.163.233.244 kexieserver
@@ -62,6 +61,7 @@
     inputMethod = {
       enabled = "fcitx5";
       fcitx5 = {
+        # catppuccin.enable = true;
         plasma6Support = true;
         addons = with pkgs; [
           kdePackages.fcitx5-qt
@@ -148,6 +148,21 @@
       pulse.enable = true;
     };
 
+
+    # jack = {
+    #   jackd.enable = true;
+    #   # support ALSA only programs via ALSA JACK PCM plugin
+    #   alsa.enable = false;
+    #   # support ALSA only programs via loopback device (supports programs like Steam)
+    #   loopback = {
+    #     enable = true;
+    #     # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
+    #     #dmixConfig = ''
+    #     #  period_size 2048
+    #     #'';
+    #   };
+    # };
+
     libinput.enable = true;
 
     xserver = {
@@ -186,7 +201,7 @@
 
   security = {
     # duosec.allowTcpForwarding = true;
-    pam.services.swaylock = {};
+    pam.services.swaylock = { };
 
     doas = {
       enable = true;
@@ -207,7 +222,7 @@
     bob = {
       shell = pkgs.nushell;
       isNormalUser = true;
-      extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "audio" "jackaudio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
 
       # To generate a hash to put in initialHashedPassword
       # you can do this:
@@ -270,19 +285,28 @@
       #  wayland composer
       wl-clipboard
       xsel
-      fuzzel
-      xwayland-satellite-stable
+      cage
+      xwayland-satellite-unstable
       libsecret
       gammastep
       mako
       swaybg
       swaylock
+      mpv
+      imv
     ];
   };
 
-  programs.niri = {
-    enable = true;
-    #package = pkgs.niri;
+  programs = {
+    niri = {
+      enable = true;
+      #package = pkgs.niri;
+    };
+
+    wshowkeys = {
+      enable = true;
+    };
+
   };
 
   virtualisation = {
