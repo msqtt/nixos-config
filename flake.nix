@@ -19,22 +19,22 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
       #url = "github:nix-community/nixvim";
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    daeuniverse.url = "github:daeuniverse/flake.nix/f3068382eb9c3aa2e1c17749a6179141a3cd7381";
+    daeuniverse.url = "github:daeuniverse/flake.nix";
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -50,6 +50,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
@@ -88,15 +90,12 @@
                 "https://cache.nixos.org"
               ];
             };
-          }
 
-          {
             nixpkgs = {
               config.allowUnfree = true;
               overlays = overlays;
             };
           }
-
           # system config
           ./nixos/configuration.nix
 
@@ -107,7 +106,18 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.bob.imports = [ ./home-manager/home.nix ];
-            home-manager.sharedModules = with inputs; [ plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.sharedModules = with inputs; [
+              plasma-manager.homeManagerModules.plasma-manager
+              catppuccin.homeManagerModules.catppuccin
+              {
+
+                catppuccin = {
+                  enable = true;
+                  flavor = "mocha";
+                };
+                gtk.catppuccin.enable = true;
+              }
+            ];
           }
 
         ] ++ (with inputs; [
@@ -116,6 +126,7 @@
           impermanence.nixosModules.impermanence
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
+          catppuccin.nixosModules.catppuccin
         ]);
       };
     };

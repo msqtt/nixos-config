@@ -374,10 +374,10 @@
         -- window_decorations = "NONE",
 
 
-        font = wezterm.font_with_fallback({
-          "Fira Code",
-          { family = "Terminess Nerd Font Mono", scale = 1.5 },
-        }),
+        # font = wezterm.font_with_fallback({
+        #   "Fira Code",
+        #   { family = "Terminess Nerd Font Mono", scale = 1.5 },
+        # }),
         hide_mouse_cursor_when_typing = true,
         hide_tab_bar_if_only_one_tab = true,
         use_cap_height_to_scale_fallback_fonts = true,

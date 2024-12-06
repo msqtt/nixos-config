@@ -136,13 +136,13 @@ in
         key = "s";
         mode = [ "n" "x" "o" ];
         lua = true;
-        action = "require('flash').jump";
+        action.__raw = "require('flash').jump";
       }
       {
         key = "<C-s>";
         mode = [ "n" "x" "o" ];
         lua = true;
-        action = "require('flash').treesitter";
+        action.__raw = "require('flash').treesitter";
       }
       {
         key = "<C-c>";
@@ -210,7 +210,7 @@ in
       nvim-surround
     ];
     plugins = {
-      # yazi.enable = true;
+      yazi.enable = true;
       friendly-snippets.enable = true;
       comment.enable = true;
       treesitter.enable = true;
@@ -272,13 +272,14 @@ in
         servers = {
           nixd.enable = true;
           pylsp.enable = true;
+          svelte.enable = true;
           volar.enable = true;
-          tsserver.enable = true;
+          ts_ls.enable = true;
           gopls = {
             enable = true;
             extraOptions = { completeUnimported = true; };
           };
-          rust-analyzer = {
+          rust_analyzer = {
             enable = true;
             installRustc = false;
             installCargo = false;

@@ -59,7 +59,8 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
     inputMethod = {
-      enabled = "fcitx5";
+      enable = true;
+      type = "fcitx5";
       fcitx5 = {
         # catppuccin.enable = true;
         plasma6Support = true;
@@ -107,7 +108,7 @@
     packages = with pkgs; [
       wqy_zenhei
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
       source-han-sans
       source-han-serif

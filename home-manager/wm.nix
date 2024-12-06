@@ -16,14 +16,12 @@
         modules-left = [
           "niri/workspaces"
           "niri/window"
-          "niri/language"
         ];
         modules-center = [
-
         ];
         modules-right = [
           "network"
-          "temperature"
+          # "temperature"
           "pulseaudio"
           "battery"
           "clock"
