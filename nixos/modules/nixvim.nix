@@ -13,6 +13,11 @@ in
       enable = true;
       settings.background.dark = "mocha";
     };
+    # colorschemes.nightfox = {
+    #   enable = true;
+    #   flavor = "duskfox";
+    # };
+
     opts = {
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
@@ -211,9 +216,13 @@ in
     ];
     plugins = {
       yazi.enable = true;
+      web-devicons.enable = true;
       friendly-snippets.enable = true;
       comment.enable = true;
-      treesitter.enable = true;
+      treesitter = {
+        enable = true;
+        settings.highlight.enable = true;
+      };
       gitsigns.enable = true;
       nvim-autopairs.enable = true;
       flash.enable = true;

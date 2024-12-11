@@ -2,7 +2,6 @@
 
   programs.fuzzel = {
     enable = true;
-    catppuccin.enable = true;
   };
 
 
@@ -89,7 +88,7 @@
               ""
             ];
           };
-          on-click = "blueman-manager";
+          on-click = "pavucontrol";
         };
       };
     };

@@ -273,6 +273,7 @@
       bat
       fd
       ripgrep
+      # zellij
 
       unar
       xz

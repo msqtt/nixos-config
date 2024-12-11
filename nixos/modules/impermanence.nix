@@ -39,6 +39,7 @@
         ".local/share/direnv"
         ".local/share/zoxide"
         ".local/share/Steam"
+        ".local/share/DBeaverData"
       ];
       files = [
         # ".screenrc"

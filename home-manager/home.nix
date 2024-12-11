@@ -5,17 +5,7 @@
   # paths it should manage.
   home.username = "bob";
   home.homeDirectory = "/home/bob";
-  home.sessionVariables = {
-    DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
-  };
 
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = "firefox-esr.desktop";
-    "x-scheme-handler/http" = "firefox-esr.desktop";
-    "x-scheme-handler/https" = "firefox-esr.desktop";
-    "x-scheme-handler/about" = "firefox-esr.desktop";
-    "x-scheme-handler/unknown" = "firefox-esr.desktop";
-  };
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     figlet
@@ -29,7 +19,9 @@
     obs-studio
     feishu
     gimp
-
+    pavucontrol
+    blueberry
+    dbeaver-bin
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
@@ -60,9 +52,6 @@
     };
   };
 
-
-  programs.btop.catppuccin.enable = true;
-  programs.fuzzel.catppuccin.enable = true;
 
   programs = {
     nushell = {
@@ -99,62 +88,6 @@
             crust: "#dce0e8"
             mantle: "#e6e9ef"
             base: "#eff1f5"
-          }
-          frappe: {
-            rosewater: "#f2d5cf"
-            flamingo: "#eebebe"
-            pink: "#f4b8e4"
-            mauve: "#ca9ee6"
-            red: "#e78284"
-            maroon: "#ea999c"
-            peach: "#ef9f76"
-            yellow: "#e5c890"
-            green: "#a6d189"
-            teal: "#81c8be"
-            sky: "#99d1db"
-            sapphire: "#85c1dc"
-            blue: "#8caaee"
-            lavender: "#babbf1"
-            text: "#c6d0f5"
-            subtext1: "#b5bfe2"
-            subtext0: "#a5adce"
-            overlay2: "#949cbb"
-            overlay1: "#838ba7"
-            overlay0: "#737994"
-            surface2: "#626880"
-            surface1: "#51576d"
-            surface0: "#414559"
-            base: "#303446"
-            mantle: "#292c3c"
-            crust: "#232634"
-          }
-          macchiato: {
-            rosewater: "#f4dbd6"
-            flamingo: "#f0c6c6"
-            pink: "#f5bde6"
-            mauve: "#c6a0f6"
-            red: "#ed8796"
-            maroon: "#ee99a0"
-            peach: "#f5a97f"
-            yellow: "#eed49f"
-            green: "#a6da95"
-            teal: "#8bd5ca"
-            sky: "#91d7e3"
-            sapphire: "#7dc4e4"
-            blue: "#8aadf4"
-            lavender: "#b7bdf8"
-            text: "#cad3f5"
-            subtext1: "#b8c0e0"
-            subtext0: "#a5adcb"
-            overlay2: "#939ab7"
-            overlay1: "#8087a2"
-            overlay0: "#6e738d"
-            surface2: "#5b6078"
-            surface1: "#494d64"
-            surface0: "#363a4f"
-            base: "#24273a"
-            mantle: "#1e2030"
-            crust: "#181926"
           }
           mocha: {
             rosewater: "#f5e0dc"
@@ -237,7 +170,7 @@
          rm: {
            always_trash: true
          },
-         color_config: $theme,
+         # color_config: $theme,
          completions: {
            case_sensitive: false # case-sensitive completions
            quick: true    # set to false to prevent auto-selecting completions
@@ -257,6 +190,8 @@
           prepend /home/bob/Bin |
           append /usr/bin/env
         )
+        $env.TERM = 'screen-256color'
+
         # define custom command
         def git-init [] {
             mkdir bare
@@ -298,7 +233,6 @@
     starship = {
       enable = true;
       enableNushellIntegration = true;
-      catppuccin.enable = true;
       settings = {
         add_newline = true;
         character = {
@@ -351,6 +285,35 @@
 
   };
 
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set-option -g focus-events on
+      set -g default-terminal "screen-256color"
+      set-option -a terminal-features 'screen-256color:RGB'
+      set-option -a terminal-overrides 'screen-256color:Tc'
+    '';
+  };
+
+  programs.foot = {
+    enable = true;
+    server.enable = true;
+    settings = {
+      main = {
+        # term = "xterm-256color";
+        term = "screen-256color";
+        font = "Fira Code:size=13";
+        dpi-aware = "yes";
+      };
+      colors = {
+        # background= "000000";
+      };
+      mouse = {
+        hide-when-typing = "yes";
+      };
+    };
+  };
+
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -374,10 +337,10 @@
         -- window_decorations = "NONE",
 
 
-        # font = wezterm.font_with_fallback({
-        #   "Fira Code",
-        #   { family = "Terminess Nerd Font Mono", scale = 1.5 },
-        # }),
+        font = wezterm.font_with_fallback({
+          "Fira Code",
+          { family = "Terminess Nerd Font Mono", scale = 1.5 },
+        }),
         hide_mouse_cursor_when_typing = true,
         hide_tab_bar_if_only_one_tab = true,
         use_cap_height_to_scale_fallback_fonts = true,

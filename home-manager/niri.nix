@@ -97,7 +97,7 @@
        // Mod+T { spawn "kgx" "-e" "fish -C t"; }
 
        Mod+Space { spawn "fuzzel"; }
-       Mod+Return { spawn "wezterm"; }
+       Mod+Return { spawn "footclient"; }
        Mod+B {spawn "waybar"; }
 
        XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
