@@ -19,9 +19,9 @@
        }
 
        touchpad {
-         // off
-         // tap
-         // dwt
+         // on
+          tap
+          dwt
          // dwtp
          natural-scroll
          // accel-speed 0.2

@@ -282,7 +282,7 @@
       # podman-compose
       docker-compose
       distrobox
-      fastfetch
+      pfetch
 
       #  wayland composer
       wl-clipboard

@@ -22,6 +22,7 @@
     pavucontrol
     blueberry
     dbeaver-bin
+    musescore
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
@@ -193,11 +194,13 @@
         $env.TERM = 'screen-256color'
 
         # define custom command
-        def git-init [] {
-            mkdir bare
-            ls -a | get name | filter {|file| $file != 'bare'} | each {|file| mv $file bare/}
-            ln -s bare/.git .git
+        def ginit [] {
+          mkdir bare
+          ls -a | get name | filter {|file| $file != 'bare'} | each {|file| mv $file bare/}
+          ln -s bare/.git .git
         }
+
+        alias fcd = cd (fzf --walker dir)
       '';
 
       shellAliases = {
@@ -287,11 +290,38 @@
 
   programs.tmux = {
     enable = true;
+    keyMode = "vi";
     extraConfig = ''
       set-option -g focus-events on
+      set -g mouse on
+      set -g set-clipboard on
+      set -g history-limit 10000
+
       set -g default-terminal "screen-256color"
       set-option -a terminal-features 'screen-256color:RGB'
       set-option -a terminal-overrides 'screen-256color:Tc'
+
+  
+      bind -n M-v copy-mode
+
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind -T copy-mode-vi y send-keys -X cursor-left
+      bind -T copy-mode-vi o send-keys -X cursor-right
+      bind -T copy-mode-vi e send-keys -X cursor-up
+      bind -T copy-mode-vi n send-keys -X cursor-down
+      bind -T copy-mode-vi k send-keys -X next-word-end
+      bind -T copy-mode-vi E send-keys -N 5 -X cursor-up
+      bind -T copy-mode-vi N send-keys -N 7 -X cursor-down
+      bind -T copy-mode-vi Y send-keys -X start-of-line
+      bind -T copy-mode-vi I send-keys -X end-of-line
+      bind -T copy-mode-vi H send-keys -X copy-end-of-line
+      bind -T copy-mode-vi h send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi j send-keys -X search-again
+
+      # for system copy
+      bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "wl-copy"
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
     '';
   };
 

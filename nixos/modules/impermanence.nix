@@ -44,6 +44,7 @@
       files = [
         # ".screenrc"
         "Makefile"
+        "shell.nix"
         ".config/fcitx5/conf/classicui.conf"
         ".config/nushell/history.txt"
       ];

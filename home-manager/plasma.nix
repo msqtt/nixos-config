@@ -8,7 +8,6 @@
         layout = "us";
         variant = "workman";
       }
-
     ];
     workspace.wallpaper = "/etc/nixos/assets/nix-wallpaper-watersplash.png";
 
@@ -30,7 +29,10 @@
         turnOffDisplay.idleTimeout = "never";
       };
     };
-
+    kwin.effects = {
+      minimization.animation = "magiclamp";
+      wobblyWindows.enable = true;
+    };
     shortcuts = {
       "ActivityManager"."switch-to-activity-e0bf0ac5-a90b-4bac-a235-f2e5b9213a5d" = [ ];
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to English (US)" = [ ];
