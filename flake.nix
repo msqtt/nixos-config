@@ -115,7 +115,6 @@
                   enable = true;
                   flavor = "mocha";
                 };
-                gtk.catppuccin.enable = true;
               }
             ];
           }

@@ -8,8 +8,6 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    figlet
-    cowsay
     firefox
     chromium
     thunderbird
@@ -21,7 +19,6 @@
     gimp
     pavucontrol
     blueberry
-    dbeaver-bin
     musescore
   ] ++ (with inputs.my-nur; [
     bobibo

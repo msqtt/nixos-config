@@ -147,6 +147,7 @@
     pipewire = {
       enable = true;
       pulse.enable = true;
+      jack.enable = true;
     };
 
 
@@ -204,6 +205,25 @@
     # duosec.allowTcpForwarding = true;
     pam.services.swaylock = { };
 
+    # memory unlimited for jack audio group 
+    pam.loginLimits = [
+      {
+        domain = "@audio";
+        item = "rtprio";
+        type = "-";
+        value = "95";
+      }
+      {
+        domain = "@audio";
+        item = "memlock";
+        type = "-";
+        value = "unlimited";
+      }
+    ];
+
+    # rtkit is optional but recommended for pipewire
+    rtkit.enable = true;
+
     doas = {
       enable = true;
       wheelNeedsPassword = false;
@@ -223,7 +243,7 @@
     bob = {
       shell = pkgs.nushell;
       isNormalUser = true;
-      extraGroups = [ "wheel" "audio" "jackaudio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
 
       # To generate a hash to put in initialHashedPassword
       # you can do this:
@@ -273,6 +293,7 @@
       bat
       fd
       ripgrep
+      zrythm
       # zellij
 
       unar
