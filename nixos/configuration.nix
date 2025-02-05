@@ -160,12 +160,13 @@
       };
     };
 
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
+    displayManager = {
+      # sddm = {
+      #   enable = true;
+      #   wayland.enable = true;
+      # };
+      # plasma6.enable = true;
     };
-
-    desktopManager.plasma6.enable = true;
 
     # Configure keymap in X11
     # xserver.xkb.layout = "us";

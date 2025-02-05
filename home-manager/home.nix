@@ -515,8 +515,8 @@
 
   imports = [
     ./niri.nix
-    ./plasma.nix
     ./wm.nix
+    # ./plasma.nix
   ];
 
   # This value determines the Home Manager release that your

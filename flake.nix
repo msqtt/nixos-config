@@ -20,7 +20,6 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-c9faf2.url = "github:nixos/nixpkgs/c9faf24cd379be7e66de824393cc2584c025febe";
 
     home-manager = {
@@ -51,23 +50,14 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
       pkgs-c9faf2 = import inputs.nixpkgs-c9faf2 { inherit system; };
 
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays
-        ++ [
-        (final: prev:
-          let pkgs-unstable = (import inputs.nixpkgs-unstable { system = final.system; }); in {
-            plasmusic-toolbar = pkgs-unstable.plasmusic-toolbar;
-            application-title-bar = pkgs-unstable.application-title-bar;
-            polonium = pkgs-unstable.polonium;
-          })
-      ] ++ (with inputs; [ niri.overlays.niri ]);
+        ++ [ ] ++ (with inputs; [ niri.overlays.niri ]);
 
       specialArgs = { inherit inputs;
       my-nur = my-nurpkgs;
-      pkgs-unstable = pkgs-unstable;
       pkgs-c9faf2 = pkgs-c9faf2;
       };
     in
@@ -106,9 +96,7 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.bob.imports = [ ./home-manager/home.nix ];
-            home-manager.sharedModules = with inputs; [
-              plasma-manager.homeManagerModules.plasma-manager
-            ];
+            home-manager.sharedModules = [ ];
           }
 
         ] ++ (with inputs; [
