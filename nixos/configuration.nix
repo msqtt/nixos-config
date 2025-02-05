@@ -12,6 +12,7 @@
       ./modules/daed.nix
       ./modules/impermanence.nix
       ./modules/nixvim.nix
+      ./modules/stylix.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -62,7 +63,7 @@
       enable = true;
       type = "fcitx5";
       fcitx5 = {
-        plasma6Support = true;
+        # plasma6Support = true;
         addons = with pkgs; [
           kdePackages.fcitx5-qt
           fcitx5-lua
@@ -241,12 +242,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    plasma6.excludePackages = with pkgs.kdePackages; [
-      konsole
-      oxygen
-      kate
-      elisa
-    ];
+    # plasma6.excludePackages = with pkgs.kdePackages; [
+    #   konsole
+    #   oxygen
+    #   kate
+    #   elisa
+    # ];
 
     variables = {
       EDITOR = "nvim";

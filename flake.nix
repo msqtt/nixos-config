@@ -44,6 +44,7 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
+    stylix.url = "github:danth/stylix/release-24.11";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
@@ -56,9 +57,10 @@
       overlays = builtins.attrValues my-nurpkgs.overlays
         ++ [ ] ++ (with inputs; [ niri.overlays.niri ]);
 
-      specialArgs = { inherit inputs;
-      my-nur = my-nurpkgs;
-      pkgs-c9faf2 = pkgs-c9faf2;
+      specialArgs = {
+        inherit inputs;
+        my-nur = my-nurpkgs;
+        pkgs-c9faf2 = pkgs-c9faf2;
       };
     in
     {
@@ -105,6 +107,7 @@
           impermanence.nixosModules.impermanence
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
+          stylix.nixosModules.stylix
         ]);
       };
     };

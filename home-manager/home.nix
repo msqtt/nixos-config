@@ -329,8 +329,8 @@
       main = {
         # term = "xterm-256color";
         term = "screen-256color";
-        font = "Fira Code:size=13";
-        dpi-aware = "yes";
+        # font = "Fira Code:size=13";
+        # dpi-aware = "yes";
       };
       colors = {
         # background= "000000";

@@ -1,8 +1,9 @@
 {
   programs.niri.config = ''
-     spawn-at-startup "gammastep" "-O" "4500K" "-b" "0.9"
-     spawn-at-startup "mako" "--background-color=#1e1e2e" "--text-color=#cdd6f4" "--border-color=#f5c2e7" "--progress-color=#313244" "--border-size=2" "--max-icon-size=32" "--border-radius=4"
-     spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/nix-wallpaper-watersplash.png"
+     spawn-at-startup "gammastep" "-O" "4500K" "-b" "0.8"
+     spawn-at-startup "mako"
+     // spawn-at-startup "mako" "--background-color=#1e1e2e" "--text-color=#cdd6f4" "--border-color=#f5c2e7" "--progress-color=#313244" "--border-size=2" "--max-icon-size=32" "--border-radius=4"
+     spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/emoji-d5d6db-960x540@2x.png"
      spawn-at-startup "waybar"
 
      input {
@@ -75,10 +76,10 @@
 
      cursor {
          xcursor-theme "breeze_cursors"
-         xcursor-size 48
+         xcursor-size 64
 
          // hide-on-key-press
-         // hide-after-inactive-ms 1000
+         hide-after-inactive-ms 1000
      }
 
      binds {
@@ -98,7 +99,7 @@
 
        Mod+Space { spawn "fuzzel"; }
        Mod+Return { spawn "footclient"; }
-       Mod+B {spawn "waybar"; }
+       Mod+B {spawn "sh" "-c" "pgrep waybar > /dev/null && pkill waybar || waybar"; }
 
        XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
        XF86AudioLowerVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -270,7 +271,9 @@
        focus-ring {
          // off
          width 2
-         active-color "#225877"
+         // dwm color
+         // active-color "#225877"
+         active-color "red"
          inactive-color "#505050"
          // active-gradient from="#80c8ff" to="#bbddff" angle=45
          // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
