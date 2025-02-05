@@ -21,6 +21,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-c9faf2.url = "github:nixos/nixpkgs/c9faf24cd379be7e66de824393cc2584c025febe";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -44,20 +45,15 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
-
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
+      pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
+      pkgs-c9faf2 = import inputs.nixpkgs-c9faf2 { inherit system; };
+
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays
         ++ [
@@ -69,7 +65,11 @@
           })
       ] ++ (with inputs; [ niri.overlays.niri ]);
 
-      specialArgs = { inherit inputs; my-nur = my-nurpkgs; };
+      specialArgs = { inherit inputs;
+      my-nur = my-nurpkgs;
+      pkgs-unstable = pkgs-unstable;
+      pkgs-c9faf2 = pkgs-c9faf2;
+      };
     in
     {
       formatter.x86_64-linux = pkgs.nixpkgs-fmt;
@@ -108,14 +108,6 @@
             home-manager.users.bob.imports = [ ./home-manager/home.nix ];
             home-manager.sharedModules = with inputs; [
               plasma-manager.homeManagerModules.plasma-manager
-              catppuccin.homeManagerModules.catppuccin
-              {
-
-                catppuccin = {
-                  enable = true;
-                  flavor = "mocha";
-                };
-              }
             ];
           }
 
@@ -125,7 +117,6 @@
           impermanence.nixosModules.impermanence
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
-          catppuccin.nixosModules.catppuccin
         ]);
       };
     };

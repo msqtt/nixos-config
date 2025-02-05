@@ -62,7 +62,6 @@
       enable = true;
       type = "fcitx5";
       fcitx5 = {
-        # catppuccin.enable = true;
         plasma6Support = true;
         addons = with pkgs; [
           kdePackages.fcitx5-qt
@@ -150,21 +149,6 @@
       jack.enable = true;
     };
 
-
-    # jack = {
-    #   jackd.enable = true;
-    #   # support ALSA only programs via ALSA JACK PCM plugin
-    #   alsa.enable = false;
-    #   # support ALSA only programs via loopback device (supports programs like Steam)
-    #   loopback = {
-    #     enable = true;
-    #     # buffering parameters for dmix device to work with ALSA only semi-professional sound programs
-    #     #dmixConfig = ''
-    #     #  period_size 2048
-    #     #'';
-    #   };
-    # };
-
     libinput.enable = true;
 
     xserver = {
@@ -243,7 +227,7 @@
     bob = {
       shell = pkgs.nushell;
       isNormalUser = true;
-      extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ];
 
       # To generate a hash to put in initialHashedPassword
       # you can do this:
@@ -256,7 +240,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-
     plasma6.excludePackages = with pkgs.kdePackages; [
       konsole
       oxygen
@@ -329,7 +312,6 @@
     wshowkeys = {
       enable = true;
     };
-
   };
 
   virtualisation = {

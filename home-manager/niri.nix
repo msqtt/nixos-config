@@ -48,8 +48,8 @@
     output "HDMI-A-1" {
       mode "1920x1080@75"
       // transform "270"
-      // scale 1.5
-      position x=0 y=-1080
+      scale 1.5
+      position x=0 y=-720
       variable-refresh-rate // on-demand=true
       background-color "black"
     }

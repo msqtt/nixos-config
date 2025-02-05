@@ -19,12 +19,12 @@
     gimp
     pavucontrol
     blueberry
-    musescore
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
+  ]) ++ (with inputs.pkgs-c9faf2; [
+    musescore
   ]);
-
   programs = {
     git = {
       enable = true;
