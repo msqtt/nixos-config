@@ -6,11 +6,13 @@
     extra-substituters = [
       "https://cache.garnix.io"
       "https://niri.cachix.org"
+      "https://cosmic.cachix.org/"
 
       # nix community's cache server
       "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -19,7 +21,11 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-24.11";
+      # for cosmic
+      follows = "nixos-cosmic/nixpkgs-stable";
+    };
     nixpkgs-c9faf2.url = "github:nixos/nixpkgs/c9faf24cd379be7e66de824393cc2584c025febe";
 
     home-manager = {
@@ -37,6 +43,7 @@
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
     impermanence.url = "github:nix-community/impermanence";
+    stylix.url = "github:danth/stylix/release-24.11";
 
     my-nur = {
       url = "github:msqtt/nur-packages";
@@ -44,7 +51,7 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
-    stylix.url = "github:danth/stylix/release-24.11";
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
@@ -108,6 +115,7 @@
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
           stylix.nixosModules.stylix
+          nixos-cosmic.nixosModules.default
         ]);
       };
     };

@@ -166,7 +166,13 @@
       #   enable = true;
       #   wayland.enable = true;
       # };
+
+      cosmic-greeter.enable = true;
+    };
+
+    desktopManager = {
       # plasma6.enable = true;
+      cosmic.enable = true;
     };
 
     # Configure keymap in X11

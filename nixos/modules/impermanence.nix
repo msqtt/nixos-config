@@ -32,6 +32,8 @@
         { directory = ".local/share/keyrings"; mode = "0700"; }
         #{ directory = ".local/share/TelegramDesktop"; mode = "0700"; }
 
+        ".config/cosmic"
+        ".config/cosmic-settings"
         ".config/JetBrains"
         ".config/Code"
         ".vscode" # plugin

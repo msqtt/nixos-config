@@ -284,6 +284,7 @@ in
           svelte.enable = true;
           volar.enable = true;
           ts_ls.enable = true;
+          elixirls.enable = true;
           gopls = {
             enable = true;
             extraOptions = { completeUnimported = true; };

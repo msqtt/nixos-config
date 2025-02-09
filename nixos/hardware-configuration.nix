@@ -23,6 +23,7 @@
     {
       device = "none";
       fsType = "tmpfs";
+      options = [ "size=10G" ];
     };
 
   fileSystems."/nix" =
