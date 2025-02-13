@@ -1,6 +1,5 @@
 ### NixOs Stuffs
 
-这是我 NixOS 的全部配置🥺 
 
 - [neovim config](home/alice/nvim/conf)
 - [我的自建NUR仓库](https://github.com/msqtt/my-nur)
