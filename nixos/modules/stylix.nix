@@ -9,7 +9,7 @@ in
 {
   stylix = {
     enable = true;
-    cursor.size = 64;
+    cursor.size = 48;
     fonts = {
       emoji = {
         name = "Noto Color Emoji";

@@ -11,7 +11,7 @@
     firefox
     chromium
     thunderbird
-    vscode
+    vscode.fhs
     libreoffice-qt
     jetbrains.idea-ultimate
     obs-studio
@@ -19,6 +19,7 @@
     gimp
     pavucontrol
     blueberry
+    zrythm
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
@@ -197,7 +198,16 @@
           ln -s bare/.git .git
         }
 
-        alias fcd = cd (fzf --walker dir)
+        def dockerimgs [] {
+          docker images | lines | parse -r '(?P<REPOSITORY>\S+)\s+(?P<TAG>\S+)\s+(?P<IMAGE_ID>\S+)\s+(?P<CREATED>\S+ \S+ ago)\s+(?P<SIZE>\S+)' | select REPOSITORY IMAGE_ID CREATED SIZE
+        }
+        def dockerps [--all (-a)] {
+          if $all {
+            docker ps -a | lines | parse -r '(?P<CONTAINER_ID>\S+)\s+(?P<IMAGE>\S+)\s+(?P<COMMAND>".+")\s+(?P<CREATED>\S+ \S+ ago)\s+(?P<STATUS>(Up|Exited \(\d+\)|Restarting \(\d+\)|Paused)( \d+ (minutes|hours|seconds)( ago|( \(.+\)))?)?)\s+(?P<PORTS>(\S+, )+\S+)\s+(?P<NAMES>\S+)' | select CONTAINER_ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+          } else {
+            docker ps | lines | parse -r '(?P<CONTAINER_ID>\S+)\s+(?P<IMAGE>\S+)\s+(?P<COMMAND>".+")\s+(?P<CREATED>\S+ \S+ ago)\s+(?P<STATUS>(Up|Exited \(\d+\)|Restarting \(\d+\)|Paused)( \d+ (minutes|hours|seconds)( ago|( \(.+\)))?)?)\s+(?P<PORTS>(\S+, )+\S+)\s+(?P<NAMES>\S+)' | select CONTAINER_ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+          }
+        }
       '';
 
       shellAliases = {
@@ -206,6 +216,7 @@
         lla = "ls -la";
         lg = "lazygit";
         sudo = "doas";
+        fcd = "cd (fzf --walker dir)";
       };
     };
 
@@ -281,6 +292,15 @@
           { on = [ "<C-c>" ]; run = "close"; desc = "Cancel input"; }
         ];
       };
+    };
+
+    btop = {
+      enable = true;
+      # settings = {
+      #   color_theme = "TTY";
+      #   theme_background = true;
+      #   truecolor = true;
+      # };
     };
 
   };
@@ -516,6 +536,7 @@
   imports = [
     ./niri.nix
     ./wm.nix
+    ./vimrc.nix
     # ./plasma.nix
   ];
 

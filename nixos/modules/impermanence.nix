@@ -40,8 +40,11 @@
 
         ".local/share/direnv"
         ".local/share/zoxide"
-        ".local/share/Steam"
+        ".local/share/flatpak"
         ".local/share/DBeaverData"
+
+        # ".local/share/Steam"
+        ".var/app/com.valvesoftware.Steam/.local/share/Steam"
       ];
       files = [
         # ".screenrc"

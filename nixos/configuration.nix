@@ -150,6 +150,7 @@
       jack.enable = true;
     };
 
+
     libinput.enable = true;
 
     xserver = {
@@ -160,6 +161,9 @@
         options = "ctrl:nocaps";
       };
     };
+
+
+    flatpak.enable = true;
 
     displayManager = {
       # sddm = {
@@ -273,7 +277,6 @@
       git
 
       # for monitor
-      btop
       iotop
 
       # useful cli tools
@@ -284,7 +287,6 @@
       bat
       fd
       ripgrep
-      zrythm
       # zellij
 
       unar
@@ -299,7 +301,6 @@
       #  wayland composer
       wl-clipboard
       xsel
-      cage
       xwayland-satellite-unstable
       libsecret
       gammastep
