@@ -3,8 +3,8 @@ let
   # theme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
   theme = "${pkgs.base16-schemes}/share/themes/tokyo-night-light.yaml";
 
-  wallpaper = config.lib.stylix.pixel "base0A";
-  # wallpaper = "/etc/nixos/assets/nix-wallpaper-watersplash.png";
+  # wallpaper = config.lib.stylix.pixel "base0A";
+  wallpaperDir = builtins.path { path = ../../assets; };
 in
 {
   stylix = {
@@ -22,6 +22,6 @@ in
     };
 
     base16Scheme = theme;
-    image = wallpaper;
+    image = "${wallpaperDir}/emoji-d5d6db-960x540@2x.png";
   };
 }

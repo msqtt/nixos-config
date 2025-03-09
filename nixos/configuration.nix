@@ -166,17 +166,17 @@
     flatpak.enable = true;
 
     displayManager = {
-      # sddm = {
-      #   enable = true;
-      #   wayland.enable = true;
-      # };
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
 
-      cosmic-greeter.enable = true;
+      cosmic-greeter.enable = false;
     };
 
     desktopManager = {
-      # plasma6.enable = true;
-      cosmic.enable = true;
+      plasma6.enable = true;
+      # cosmic.enable = true;
     };
 
     # Configure keymap in X11
@@ -287,6 +287,7 @@
       bat
       fd
       ripgrep
+      pv
       # zellij
 
       unar
@@ -304,7 +305,6 @@
       xwayland-satellite-unstable
       libsecret
       gammastep
-      mako
       swaybg
       swaylock
       mpv

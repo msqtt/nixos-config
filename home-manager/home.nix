@@ -535,7 +535,6 @@
 
   imports = [
     ./niri.nix
-    ./wm.nix
     ./vimrc.nix
     # ./plasma.nix
   ];
