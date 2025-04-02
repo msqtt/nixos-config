@@ -11,6 +11,14 @@ in
     enable = true;
     cursor.size = 48;
     fonts = {
+      serif = {
+        package = pkgs. noto-fonts-cjk-serif;
+        name = "Noto CJK Serif";
+      };
+      sansSerif = {
+        package = pkgs.noto-fonts-cjk-sans;
+        name = "Noto CJK Sans";
+      };
       emoji = {
         name = "Noto Color Emoji";
         package = pkgs.noto-fonts-emoji;

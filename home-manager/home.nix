@@ -13,18 +13,20 @@
     thunderbird
     vscode.fhs
     libreoffice-qt
-    jetbrains.idea-ultimate
+    # jetbrains.idea-ultimate
     obs-studio
     feishu
     gimp
     pavucontrol
     blueberry
     zrythm
+    musescore
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
-  ]) ++ (with inputs.pkgs-c9faf2; [
-    musescore
+  ]) ++ (with inputs.pkgs-unstable; [
+    code-cursor
+  # ]) ++ (with inputs.pkgs-c9faf2; [
   ]);
   programs = {
     git = {
@@ -378,7 +380,7 @@
       );
 
       return {
-        color_scheme = "Catppuccin Mocha",
+        -- color_scheme = "Catppuccin Mocha",
 
         window_padding = { left = 2, right = 2, top = 0, bottom = 0 },
         -- window_decorations = "NONE",

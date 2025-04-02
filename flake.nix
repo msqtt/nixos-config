@@ -23,10 +23,10 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-24.11";
-      # for cosmic
-      follows = "nixos-cosmic/nixpkgs-stable";
     };
-    nixpkgs-c9faf2.url = "github:nixos/nixpkgs/c9faf24cd379be7e66de824393cc2584c025febe";
+
+    nixpkgs-52e309.url = "github:nixos/nixpkgs/52e3095f6d812b91b22fb7ad0bfc1ab416453634";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -51,14 +51,17 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      pkgs-c9faf2 = import inputs.nixpkgs-c9faf2 { inherit system; };
+      pkgs-52e309 = import inputs.nixpkgs-52e309 { inherit system; };
+      pkgs-unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays
@@ -67,7 +70,8 @@
       specialArgs = {
         inherit inputs;
         my-nur = my-nurpkgs;
-        pkgs-c9faf2 = pkgs-c9faf2;
+        pkgs-52e309 = pkgs-52e309;
+        pkgs-unstable = pkgs-unstable;
       };
     in
     {
@@ -115,7 +119,7 @@
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
           stylix.nixosModules.stylix
-          nixos-cosmic.nixosModules.default
+          # nixos-cosmic.nixosModules.default
         ]);
       };
     };

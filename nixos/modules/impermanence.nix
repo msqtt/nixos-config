@@ -1,8 +1,7 @@
 {
   environment.persistence."/persist" = {
     enable = true; # NB: Defaults to true, not needed
-    hideMounts = true;
-    directories = [
+    hideMounts = true; directories = [
       "/etc/nixos"
       "/var/log"
       "/var/lib/docker"
@@ -12,8 +11,7 @@
       # { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
       "/etc/daed"
       "/etc/NetworkManager/system-connections"
-    ];
-    files = [
+    ]; files = [
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
@@ -32,11 +30,13 @@
         { directory = ".local/share/keyrings"; mode = "0700"; }
         #{ directory = ".local/share/TelegramDesktop"; mode = "0700"; }
 
+        ".config/5ire"
         ".config/cosmic"
         ".config/cosmic-settings"
         ".config/JetBrains"
         ".config/Code"
         ".vscode" # plugin
+        ".config/Cursor"
 
         ".local/share/direnv"
         ".local/share/zoxide"
@@ -52,6 +52,10 @@
         "shell.nix"
         ".config/fcitx5/conf/classicui.conf"
         ".config/nushell/history.txt"
+        ".config/kdeglobals"
+        ".config/kglobalshortcutsrc"
+        ".config/kwinoutputconfig.json"
+        ".config/kwinrc"
       ];
     };
   };
