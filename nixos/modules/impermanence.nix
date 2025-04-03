@@ -37,6 +37,7 @@
         ".config/Code"
         ".vscode" # plugin
         ".config/Cursor"
+        ".cursor"
 
         ".local/share/direnv"
         ".local/share/zoxide"
@@ -45,6 +46,8 @@
 
         # ".local/share/Steam"
         ".var/app/com.valvesoftware.Steam/.local/share/Steam"
+        ".var/app/io.httpie.Httpie"
+        ".var/app/org.dbgate.DbGate"
       ];
       files = [
         # ".screenrc"
