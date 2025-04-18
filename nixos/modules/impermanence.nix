@@ -3,7 +3,7 @@
     enable = true; # NB: Defaults to true, not needed
     hideMounts = true; directories = [
       "/etc/nixos"
-      "/var/log"
+      # "/var/log"
       "/var/lib/docker"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
@@ -30,7 +30,6 @@
         { directory = ".local/share/keyrings"; mode = "0700"; }
         #{ directory = ".local/share/TelegramDesktop"; mode = "0700"; }
 
-        ".config/5ire"
         ".config/cosmic"
         ".config/cosmic-settings"
         ".config/JetBrains"
