@@ -29,6 +29,22 @@
   # ]) ++ (with inputs.pkgs-c9faf2; [
   ]);
   programs = {
+    jujutsu = {
+      enable = true; 
+      settings = {
+        user = {
+          email = "mosquito@email.cn";
+          name = "msqtt";
+        };
+        ui = {
+          default-command = "log";
+          diff-editor = ":builtin";
+        };
+        git = {
+          auto-local-bookmark = true;
+        };
+      };
+    };
     git = {
       enable = true;
       userName = "msqtt";

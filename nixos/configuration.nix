@@ -138,6 +138,10 @@
 
   # List services that you want to enable:
   services = {
+    v2raya = {
+      enable = true;
+      # cliPackage = pkgs.xray;
+    };
 
     # Enable the OpenSSH daemon.
     openssh = {
@@ -299,7 +303,7 @@
 
       #  wayland composer
       wl-clipboard
-      xsel
+      xclip
       xwayland-satellite-unstable
       libsecret
       gammastep
@@ -340,7 +344,7 @@
       # using kvm only support nat
       addNetworkInterface = false;
       enableExtensionPack = true;
-      package = inputs.pkgs-52e309.virtualbox;
+      # package = inputs.pkgs-52e309.virtualbox;
     };
   };
 

@@ -3,13 +3,14 @@
     enable = true; # NB: Defaults to true, not needed
     hideMounts = true; directories = [
       "/etc/nixos"
-      # "/var/log"
+      "/var/log"
       "/var/lib/docker"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       # { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
       "/etc/daed"
+      "/etc/v2raya"
       "/etc/NetworkManager/system-connections"
     ]; files = [
       "/etc/machine-id"
