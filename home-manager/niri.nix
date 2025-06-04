@@ -6,6 +6,7 @@
      // spawn-at-startup "mako" "--background-color=#1e1e2e" "--text-color=#cdd6f4" "--border-color=#f5c2e7" "--progress-color=#313244" "--border-size=2" "--max-icon-size=32" "--border-radius=4"
      spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/emoji-d5d6db-960x540@2x.png"
      spawn-at-startup "waybar"
+     spawn-at-startup "rfkill" "unblock" "all"
 
      input {
        keyboard {
@@ -76,7 +77,7 @@
      }
 
      cursor {
-         xcursor-theme "breeze_cursors"
+        // xcursor-theme "breeze_cursors"
          xcursor-size 64
 
          // hide-on-key-press
@@ -283,7 +284,7 @@
   '';
 
 
-  services.mako.enable = true;
+  # services.mako.enable = true;
 
   programs.fuzzel = {
     enable = true;

@@ -9,7 +9,7 @@ in
 {
   stylix = {
     enable = true;
-    cursor.size = 48;
+    # cursor.size = 48;
     fonts = {
       serif = {
         package = pkgs. noto-fonts-cjk-serif;

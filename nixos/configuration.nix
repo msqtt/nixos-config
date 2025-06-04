@@ -64,11 +64,12 @@
       type = "fcitx5";
       fcitx5 = {
         # plasma6Support = true;
+        waylandFrontend = true;
         addons = with pkgs; [
-          kdePackages.fcitx5-qt
           fcitx5-lua
-          fcitx5-rime # table input method support
-          libsForQt5.fcitx5-configtool
+          fcitx5-rime
+          fcitx5-gtk # alternatively, kdePackages.fcitx5-qt
+          # kdePackages.fcitx5-qt
           fcitx5-material-color
         ];
         settings.inputMethod = {
@@ -113,7 +114,7 @@
       source-han-sans
       source-han-serif
       fira-code
-      terminus-nerdfont
+      nerd-fonts.terminess-ttf 
     ];
     fontconfig = {
       defaultFonts = {
@@ -311,6 +312,7 @@
       swaylock
       mpv
       imv
+      mako
     ];
   };
 
@@ -344,7 +346,7 @@
       # using kvm only support nat
       addNetworkInterface = false;
       enableExtensionPack = true;
-      # package = inputs.pkgs-52e309.virtualbox;
+      package = inputs.pkgs-73cf49.virtualbox;
     };
   };
 

@@ -25,7 +25,7 @@
       url = "github:nixos/nixpkgs/nixos-25.05";
     };
 
-    nixpkgs-52e309.url = "github:nixos/nixpkgs/52e3095f6d812b91b22fb7ad0bfc1ab416453634";
+    nixpkgs-73cf49.url = "github:nixos/nixpkgs/73cf49b8ad837ade2de76f87eb53fc85ed5d4680";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -58,7 +58,7 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
-      pkgs-52e309 = import inputs.nixpkgs-52e309 { inherit system; };
+      pkgs-73cf49 = import inputs.nixpkgs-73cf49 { inherit system; };
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -71,7 +71,7 @@
       specialArgs = {
         inherit inputs;
         my-nur = my-nurpkgs;
-        pkgs-52e309 = pkgs-52e309;
+        pkgs-73cf49 = pkgs-73cf49;
         pkgs-unstable = pkgs-unstable;
       };
     in

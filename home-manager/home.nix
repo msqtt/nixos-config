@@ -281,7 +281,7 @@
       enable = true;
       enableNushellIntegration = true;
       keymap = {
-        manager.prepend_keymap = [
+        mgr.prepend_keymap = [
           { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
           { on = [ "n" ]; run = "arrow 1"; desc = "Move cursor down"; }
           { on = [ "E" ]; run = "seek -5"; desc = "Seek up 5 units in the preview"; }

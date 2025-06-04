@@ -133,6 +133,11 @@ in
         action = "viw";
       }
       {
+        key = "S:";
+        mode = [ "n" ];
+        action = ''viwy<CR><cmd>let @/ = @"<CR>:%s//<C-R><C-V>'';
+      }
+      {
         key = "vv";
         mode = [ "n" ];
         action = "_v$";
@@ -178,6 +183,14 @@ in
         action = "<cmd>tabe<CR>";
         mode = [ "n" ];
       }
+
+      { mode = "n"; key = "<leader>a"; action.__raw = "function() require'harpoon':list():add() end"; }
+      { mode = "n"; key = "<C-e>"; action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end"; }
+      { mode = "n"; key = "<C-j>"; action.__raw = "function() require'harpoon':list():select(1) end"; }
+      { mode = "n"; key = "<C-k>"; action.__raw = "function() require'harpoon':list():select(2) end"; }
+      { mode = "n"; key = "<C-l>"; action.__raw = "function() require'harpoon':list():select(3) end"; }
+      { mode = "n"; key = "<C-m>"; action.__raw = "function() require'harpoon':list():select(4) end"; }
+
     ];
 
     extraConfigLua = ''
@@ -250,13 +263,6 @@ in
 
       harpoon = {
         enable = true;
-        keymaps = {
-          addFile = "<leader>ya";
-          cmdToggleQuickMenu = "<leader>yc";
-          toggleQuickMenu = "<leader>yy";
-          navNext = "<leader>yn";
-          navPrev = "<leader>yp";
-        };
       };
       lsp = {
         enable = true;
