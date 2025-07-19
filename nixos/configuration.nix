@@ -68,7 +68,8 @@
         addons = with pkgs; [
           fcitx5-lua
           fcitx5-rime
-          fcitx5-gtk # alternatively, kdePackages.fcitx5-qt
+          fcitx5-gtk # alternatively,
+          #kdePackages.fcitx5-qt
           # kdePackages.fcitx5-qt
           fcitx5-material-color
         ];
@@ -172,14 +173,19 @@
 
     displayManager = {
       sddm = {
-        enable = true;
+        enable = false;
         wayland.enable = true;
       };
-
     };
 
     desktopManager = {
-      plasma6.enable = true;
+      plasma6.enable = false;
+    };
+
+    xserver.desktopManager.gnome.enable = true;
+    xserver.displayManager.gdm = {
+      enable = true;
+      wayland = true;
     };
 
     # Configure keymap in X11
@@ -313,6 +319,9 @@
       mpv
       imv
       mako
+
+      # nur.repos.ataraxiasjel.waydroid-script
+      # waydroid-helper
     ];
   };
 
@@ -324,6 +333,11 @@
 
     wshowkeys = {
       enable = true;
+    };
+
+    ssh = {
+      startAgent = true;
+      agentTimeout = "3h";
     };
   };
 
@@ -347,6 +361,9 @@
       addNetworkInterface = false;
       enableExtensionPack = true;
       package = inputs.pkgs-73cf49.virtualbox;
+    };
+    waydroid = {
+      enable = false;
     };
   };
 

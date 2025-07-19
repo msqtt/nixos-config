@@ -5,6 +5,7 @@
       "/etc/nixos"
       "/var/log"
       "/var/lib/docker"
+      "/var/lib/waydroid"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
@@ -38,11 +39,11 @@
         ".vscode" # plugin
         ".config/Cursor"
         ".cursor"
-
         ".local/share/direnv"
         ".local/share/zoxide"
         ".local/share/flatpak"
         ".local/share/DBeaverData"
+        ".local/share/waydroid"
 
         # ".local/share/Steam"
         ".var/app/com.valvesoftware.Steam/.local/share/Steam"

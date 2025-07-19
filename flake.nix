@@ -46,6 +46,10 @@
     impermanence.url = "github:nix-community/impermanence";
     stylix.url = "github:danth/stylix/release-25.05";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     my-nur = {
       url = "github:msqtt/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -125,6 +129,7 @@
           nixvim.nixosModules.nixvim
           niri.nixosModules.niri
           stylix.nixosModules.stylix
+          inputs.nur.modules.nixos.default
           # nixos-cosmic.nixosModules.default
         ]);
       };

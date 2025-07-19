@@ -1,4 +1,7 @@
-{ config, pkgs, ... } @inputs:
+{ config, pkgs, lib, ... } @inputs:
+let 
+  mkTuple = lib.gvariant.mkTuple;
+in
 
 {
   # Home Manager needs a bit of information about you and the
@@ -11,6 +14,7 @@
     firefox
     chromium
     thunderbird
+    calibre
     vscode.fhs
     libreoffice-qt
     # jetbrains.idea-ultimate
@@ -388,12 +392,12 @@
         window:set_right_status("  "..window:active_workspace().." 💬  ")
       end);
 
-      wezterm.on(
-        'format-window-title',
-        function(tab, tabs, panes, config, hover, max_width)
-          return ""
-        end
-      );
+     -- wezterm.on(
+     --   'format-window-title',
+     --   function(tab, tabs, panes, config, hover, max_width)
+     --     return ""
+     --   end
+     -- );
 
       return {
         -- color_scheme = "Catppuccin Mocha",
@@ -551,10 +555,34 @@
     '';
   };
 
+  dconf = {
+    enable= true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        accent-color = "purple";
+      };
+      "org/gnome/desktop/input-sources" = {
+        show-all-sources = true;
+        sources = [ (mkTuple [ "xkb" "us+workman" ]) ];
+        xkb-options = [ "ctrl:nocaps" ];
+      };
+      "org/gnome/desktop/wm/keybindings" = {
+        switch-to-workspace-left = ["<Super>y"];
+        switch-to-workspace-right = ["<Super>o"];
+      };
+      "org/gnome/desktop/peripherals/touchpad" = {
+        send-events = "disabled";
+       };
+    };
+  };
+
+
+
   imports = [
     ./niri.nix
     ./vimrc.nix
     # ./plasma.nix
+    ./qutebrowser.nix
   ];
 
   # This value determines the Home Manager release that your

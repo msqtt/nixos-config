@@ -31,5 +31,9 @@ in
 
     base16Scheme = theme;
     image = "${wallpaperDir}/emoji-d5d6db-960x540@2x.png";
+
+    targets = {
+      console.enable = false;
+    };
   };
 }

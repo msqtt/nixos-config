@@ -50,10 +50,11 @@
 
     output "HDMI-A-1" {
       mode "1920x1080@75"
+      scale 1.25
       // transform "270"
-      scale 1.5
-      position x=0 y=-720
-      variable-refresh-rate // on-demand=true
+      // position x=0 y=-720
+      position x=1536 y=0
+      variable-refresh-rate on-demand=true
       background-color "black"
     }
 
@@ -275,8 +276,8 @@
          width 2
          // dwm color
          // active-color "#225877"
-         active-color "indigo"
-         inactive-color "#505050"
+          active-color "red"
+         // inactive-color "#505050"
          // active-gradient from="#80c8ff" to="#bbddff" angle=45
          // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
        }
