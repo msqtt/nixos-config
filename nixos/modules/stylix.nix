@@ -1,7 +1,6 @@
 { pkgs, config, ... }:
 let
-  # theme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
-  theme = "${pkgs.base16-schemes}/share/themes/tokyo-night-light.yaml";
+  theme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
   # wallpaper = config.lib.stylix.pixel "base0A";
   wallpaperDir = builtins.path { path = ../../assets; };
@@ -30,10 +29,11 @@ in
     };
 
     base16Scheme = theme;
-    image = "${wallpaperDir}/emoji-d5d6db-960x540@2x.png";
+    image = "${wallpaperDir}/purple-3d.png";
 
     targets = {
       console.enable = false;
+      nixvim.enable = false;
     };
   };
 }

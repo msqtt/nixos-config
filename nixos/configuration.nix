@@ -318,7 +318,6 @@
       swaylock
       mpv
       imv
-      mako
 
       # nur.repos.ataraxiasjel.waydroid-script
       # waydroid-helper

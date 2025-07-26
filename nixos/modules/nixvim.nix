@@ -1,6 +1,6 @@
-{ pkgs, ... }:
 let
   window-border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+  indent = 2;
 in
 {
   programs.nixvim = {
@@ -13,54 +13,32 @@ in
       enable = true;
       settings.background.dark = "mocha";
     };
-    # colorschemes.nightfox = {
-    #   enable = true;
-    #   flavor = "duskfox";
-    # };
 
+    diagnostic.settings = {
+      virtual_text = true;
+    };
     opts = {
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
-      termguicolors = true;
       ttyfast = true;
-      autochdir = false;
-      exrc = true;
-      secure = false;
+      autochdir = true;
+
+      wrap = true;
+      colorcolumn = "80";
+      ignorecase = true;
+      smartcase = true;
+
+      termguicolors = true;
       number = true;
       relativenumber = true;
-      cursorline = true;
+      showmode = false;
+
       expandtab = true;
-      tabstop = 2;
-      shiftwidth = 2;
-      softtabstop = 0;
+      tabstop = indent;
+      shiftwidth = indent;
+      softtabstop = indent;
       smarttab = true;
       autoindent = true;
-      list = true;
-      listchars = "tab:▫▫,trail:▫";
-      fillchars = "vert:|";
-      scrolloff = 4;
-      ttimeoutlen = 0;
-      timeout = false;
-      viewoptions = "cursor,folds,slash,unix";
-      wrap = true;
-      textwidth = 0;
-      indentexpr = "";
-      foldlevel = 99;
-      foldenable = true;
-      foldlevelstart = 99;
-      splitright = true;
-      splitbelow = true;
-      showmode = false;
-      smartcase = true;
-      shortmess = "aoOTIcF";
-      inccommand = "split";
-      completeopt = "longest,noinsert,menuone,noselect,preview";
-      visualbell = true;
-      colorcolumn = "80";
-      updatetime = 100;
-      virtualedit = "block";
-      ignorecase = true;
-      foldmethod = "manual";
     };
     keymaps = [
       {
@@ -143,18 +121,6 @@ in
         action = "_v$";
       }
       {
-        key = "s";
-        mode = [ "n" "x" "o" ];
-        lua = true;
-        action.__raw = "require('flash').jump";
-      }
-      {
-        key = "<C-s>";
-        mode = [ "n" "x" "o" ];
-        lua = true;
-        action.__raw = "require('flash').treesitter";
-      }
-      {
         key = "<C-c>";
         mode = [ "n" "x" "o" ];
         action = "<ESC>";
@@ -163,11 +129,6 @@ in
         key = "<C-d>";
         mode = [ "i" ];
         action = "<Delete>";
-      }
-      {
-        key = "wpg";
-        mode = [ "c" ];
-        action = "w !jbl -p 50 | wl-copy";
       }
       {
         key = "<C-l>";
@@ -183,14 +144,29 @@ in
         action = "<cmd>tabe<CR>";
         mode = [ "n" ];
       }
+      { key = "wpg"; mode = [ "c" ]; action = "w !jbl -p 50 | wl-copy"; }
 
-      { mode = "n"; key = "<leader>a"; action.__raw = "function() require'harpoon':list():add() end"; }
-      { mode = "n"; key = "<C-e>"; action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end"; }
+      { mode = "n"; key = "<leader>ya"; action.__raw = "function() require'harpoon':list():add() end"; }
+      { mode = "n"; key = "<leader>ye"; action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end"; }
       { mode = "n"; key = "<C-j>"; action.__raw = "function() require'harpoon':list():select(1) end"; }
       { mode = "n"; key = "<C-k>"; action.__raw = "function() require'harpoon':list():select(2) end"; }
       { mode = "n"; key = "<C-l>"; action.__raw = "function() require'harpoon':list():select(3) end"; }
       { mode = "n"; key = "<C-m>"; action.__raw = "function() require'harpoon':list():select(4) end"; }
 
+      { key = "s"; mode = [ "n" "x" "o" ]; lua = true; action.__raw = "require('flash').jump"; }
+      { key = "<C-s>"; mode = [ "n" "x" "o" ]; lua = true; action.__raw = "require('flash').treesitter"; }
+
+      { mode = "n"; key = "K"; action = "<cmd>Lspsaga hover_doc<CR>"; }
+      { mode = "n"; key = "gr"; action = "<cmd>Lspsaga rename<CR>"; }
+      { mode = "n"; key = "F2"; action = "<cmd>Lspsaga rename<CR>"; }
+      { mode = "n"; key = "gf"; action = "<cmd>Lspsaga finder<CR>"; }
+      { mode = "n"; key = "gj"; action = "<cmd>Lspsaga diagnostic_jump_next<CR>"; }
+      { mode = "n"; key = "gk"; action = "<cmd>Lspsaga diagnostic_jump_prev<CR>"; }
+      { mode = "n"; key = "gd"; action = "<cmd>Lspsaga show_cursor_diagnostics<CR>"; }
+      { mode = "n"; key = "gD"; action = "<cmd>Lspsaga show_workspace_diagnostics<CR>"; }
+      { mode = "n"; key = "ga"; action = "<cmd>Lspsaga code_action<CR>"; }
+      { mode = "n"; key = "go"; action = "<cmd>Lspsaga outline<CR>"; }
+      { mode = "n"; key = "gt"; action = "<cmd>Lspsaga term_toggle<CR>"; }
     ];
 
     extraConfigLua = ''
@@ -221,27 +197,96 @@ in
       vim.keymap.set({ "n" }, "d!", "<cmd>CloseCmd<CR>", {noremap =  true})
       ----------------------------
 
-      require("nvim-surround").setup()
+      -- require("nvim-surround").setup()
     '';
 
-    extraPlugins = with pkgs.vimPlugins; [
-      nvim-surround
-    ];
+    # extraPlugins = with pkgs.vimPlugins; [
+    #   nvim-surround
+    # ];
+
     plugins = {
-      yazi.enable = true;
-      web-devicons.enable = true;
-      friendly-snippets.enable = true;
-      comment.enable = true;
       treesitter = {
         enable = true;
         settings.highlight.enable = true;
       };
+      friendly-snippets.enable = true;
+
+      yazi.enable = true;
+      web-devicons.enable = true;
+      # indent-blankline.enable = true;
+      hlchunk = {
+        enable = true;
+        autoLoad = true;
+        settings = {
+          blank = {
+            enable = true;
+          };
+          chunk = {
+            enable = true;
+            exclude_filetypes = {
+              lazyterm = true;
+              neo-tree = true;
+              lspinfo = true;
+              dashboard = true;
+              man = true;
+            };
+            use_treesitter = false;
+          };
+          indent = {
+            enable = false;
+            exclude_filetypes = {
+              lazyterm = true;
+              neo-tree = true;
+            };
+            use_treesitter = false;
+          };
+          line_num = {
+            use_treesitter = false;
+          };
+        };
+      };
       gitsigns.enable = true;
+      dropbar.enable = true;
+      startify.enable = true;
+      lualine = {
+        enable = true;
+      };
+
+      nvim-surround = {
+        enable = true;
+        # settings = {
+        #   aliases = ''
+        #     {
+        #       "a" = ">";
+        #       "b" = ")";
+        #       "B" = "}";
+        #       "r" = "]";
+        #       "q" = [ "\"" "'" "`" ];
+        #       "s" = [ "}" "]" ")" ">" "\"" "'" "`" ];
+        #     }
+        #   '';
+        #   keymaps = ''
+        #     {
+        #         insert = "<C-g>s";
+        #         insert_line = "<C-g>S";
+        #         normal = "ys";
+        #         normal_cur = "yss";
+        #         normal_line = "yS";
+        #         normal_cur_line = "ySS";
+        #         visual = "S";
+        #         visual_line = "gS";
+        #         delete = "ds";
+        #         change = "cs";
+        #         change_line = "cS";
+        #       }
+        #     '';
+        # };
+      };
       nvim-autopairs.enable = true;
       flash.enable = true;
-      startify.enable = true;
-      indent-blankline.enable = false;
-      lualine = {
+      comment.enable = true;
+
+      harpoon = {
         enable = true;
       };
       telescope = {
@@ -261,37 +306,57 @@ in
         };
       };
 
-      harpoon = {
+      lspsaga = {
         enable = true;
+        symbolInWinbar.enable = false;
+        ui.codeAction = "🌟";
+        lightbulb = {
+          sign = false;
+          virtualText = true;
+        };
       };
       lsp = {
         enable = true;
         keymaps = {
           silent = true;
-          diagnostic = {
-            # Navigate in diagnostics
-            "<leader>k" = "goto_prev";
-            "<leader>j" = "goto_next";
-            gl = "open_float";
-          };
-          lspBuf = {
-            gd = "definition";
-            gD = "references";
-            gt = "type_definition";
-            gi = "implementation";
-            K = "hover";
-            ga = "code_action";
-            "<F2>" = "rename";
-          };
+          # diagnostic = {
+          #   # Navigate in diagnostics
+          #   "<leader>k" = "goto_prev";
+          #   "<leader>j" = "goto_next";
+          #   gl = "open_float";
+          # };
+          # lspBuf = {
+          #   gd = "definition";
+          #   gD = "references";
+          #   gt = "type_definition";
+          #   gi = "implementation";
+          #   K = "hover";
+          #   ga = "code_action";
+          #   "<F2>" = "rename";
+          # };
         };
         servers = {
+          jsonls.enable = true;
+          yamlls.enable = true;
+          sqls.enable = true;
+          dockerls.enable = true;
+          docker_compose_language_service.enable = true;
+
+          nushell.enable = true;
+          bashls.enable = true;
           nixd.enable = true;
           pylsp.enable = true;
-          svelte.enable = true;
-          volar.enable = true;
+          systemd_ls.enable = true;
+
+          emmet_language_server.enable = true;
+          html.enable = true;
+          cssls.enable = true;
+          tailwindcss.enable = true;
           ts_ls.enable = true;
+          svelte.enable = false;
+          volar.enable = true;
+
           elixirls.enable = true;
-          nushell.enable = true;
           gopls = {
             enable = true;
             extraOptions = { completeUnimported = true; };

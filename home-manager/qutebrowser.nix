@@ -1,13 +1,18 @@
-{ config, pkgs, ... }:
 {
   programs.qutebrowser = {
     enable = true;
     enableDefaultBindings = false;
     settings = {
       # content.proxy = "socks5://localhost:20170";
-      colors.webpage.darkmode.enabled = false;
+      colors.webpage.darkmode.enabled = true;
       editor.command = [ "wezterm" "start" "--always-new-process" "--" "nvim" "{file}" "+call cursor({line}, {column})" ];
     };
+
+    quickmarks = {
+      nixpkgs = "https://search.nixos.org";
+      home-manager = "https://home-manager-options.extranix.com";
+    };
+
     keyBindings = {
       caret = {
         "$" = "move-to-end-of-line";

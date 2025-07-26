@@ -19,11 +19,10 @@ in
     libreoffice-qt
     # jetbrains.idea-ultimate
     obs-studio
-    feishu
     gimp
     pavucontrol
     blueberry
-    zrythm
+    # zrythm
     musescore
   ] ++ (with inputs.my-nur; [
     bobibo
@@ -43,6 +42,7 @@ in
         ui = {
           default-command = "log";
           diff-editor = ":builtin";
+          editor = "nvim";
         };
         git = {
           auto-local-bookmark = true;
@@ -212,6 +212,7 @@ in
           append /usr/bin/env
         )
         $env.TERM = 'screen-256color'
+        $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
 
         # define custom command
         def ginit [] {
@@ -239,6 +240,7 @@ in
         lg = "lazygit";
         sudo = "doas";
         fcd = "cd (fzf --walker dir)";
+        fvi = "vim (fzf)";
       };
     };
 

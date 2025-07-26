@@ -1,10 +1,11 @@
 {
+  services.mako.enable = true;
   programs.niri.config = ''
      spawn-at-startup "xwayland-satellite"
-     spawn-at-startup "gammastep" "-O" "6000K" "-b" "0.9"
+     // spawn-at-startup "gammastep" "-O" "6000K" "-b" "0.9"
      // spawn-at-startup "mako"
      // spawn-at-startup "mako" "--background-color=#1e1e2e" "--text-color=#cdd6f4" "--border-color=#f5c2e7" "--progress-color=#313244" "--border-size=2" "--max-icon-size=32" "--border-radius=4"
-     spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/emoji-d5d6db-960x540@2x.png"
+     spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/purple-3d.png"
      spawn-at-startup "waybar"
      spawn-at-startup "rfkill" "unblock" "all"
 
@@ -23,7 +24,7 @@
 
        touchpad {
          // on
-          tap
+         // tap
           dwt
          // dwtp
          natural-scroll
@@ -64,15 +65,13 @@
      }
 
      window-rule {
-         match app-id=r#"^org\.wezfurlong\.wezterm$"#
-         default-column-width {}
+        // match app-id=r#"^org\.wezfurlong\.wezterm$"#
+        // default-column-width {}
      }
 
      environment {
          DISPLAY ":0"
-        // GTK_IM_MODULE "wayland;fcitx"
-        // QT_IM_MODULE "wayland;fcitx"
-        // XMODIFIERS "@im=fcitx"
+         ELECTRON_OZONE_PLATFORM_HINT "auto"
          NIXOS_OZONE_WL "1"
          QT_QPA_PLATFORM "wayland"
      }
@@ -86,10 +85,12 @@
      }
 
      binds {
+       Mod+l { open-overview; }
        Mod+Shift+Slash { show-hotkey-overlay; }
 
        Mod+Shift+C { spawn "sh" "-c" "env DISPLAY=:0 xsel -ob | wl-copy"; }
        Mod+Shift+V { spawn "sh" "-c" "wl-paste -n | env DISPLAY=:0 xsel -ib"; }
+       Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
 
        // Mod+T { spawn "sh" "-c" "alacritty msg create-window -e fish -C t || alacritty -e fish -C t"; }
        // Mod+Shift+T { spawn "sh" "-c" "alacritty msg create-window || alacritty"; }
@@ -101,7 +102,7 @@
        // Mod+T { spawn "kgx" "-e" "fish -C t"; }
 
        Mod+Space { spawn "fuzzel"; }
-       Mod+Return { spawn "footclient"; }
+       Mod+Return { spawn "wezterm"; }
        Mod+B {spawn "sh" "-c" "pgrep waybar > /dev/null && pkill waybar || waybar"; }
 
        XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
@@ -271,12 +272,16 @@
      }
 
      layout {
+       gaps 8
+       always-center-single-column
+       background-color "transparent"
+
        focus-ring {
          // off
          width 2
          // dwm color
          // active-color "#225877"
-          active-color "red"
+          active-color "#f38ba8"
          // inactive-color "#505050"
          // active-gradient from="#80c8ff" to="#bbddff" angle=45
          // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
@@ -372,7 +377,7 @@
           interval = 60;
           format-icons = {
             default = [
-              ""
+              " "
             ];
           };
           on-click = "pavucontrol";
