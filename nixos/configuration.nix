@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... } @inputs:
+{  pkgs, ... } @inputs:
 
 {
   imports =
@@ -12,7 +12,8 @@
       ./modules/daed.nix
       ./modules/impermanence.nix
       ./modules/nixvim.nix
-      ./modules/stylix.nix
+      ./modules/stylix-config.nix
+      ./modules/theme-switch.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -182,7 +183,7 @@
       plasma6.enable = false;
     };
 
-    xserver.desktopManager.gnome.enable = true;
+    xserver.desktopManager.gnome.enable = false;
     xserver.displayManager.gdm = {
       enable = true;
       wayland = true;
@@ -271,7 +272,7 @@
     variables = {
       EDITOR = "nvim";
       # LIBSEAT_BACKEND = "logind";
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
       # for linux man doc
@@ -313,7 +314,11 @@
       xclip
       xwayland-satellite-unstable
       libsecret
+
+      # brightness
       gammastep
+      brightnessctl
+
       swaybg
       swaylock
       mpv
@@ -327,16 +332,14 @@
   programs = {
     niri = {
       enable = true;
-      #package = pkgs.niri;
     };
-
     wshowkeys = {
       enable = true;
     };
 
     ssh = {
       startAgent = true;
-      agentTimeout = "3h";
+      agentTimeout = "24h";
     };
   };
 

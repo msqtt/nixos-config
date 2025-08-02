@@ -9,10 +9,10 @@ in
     vimAlias = true;
     globals.mapleader = " ";
     clipboard.register = "unnamedplus";
-    colorschemes.catppuccin = {
-      enable = true;
-      settings.background.dark = "mocha";
-    };
+    # colorschemes.catppuccin = {
+    #   enable = true;
+    #   settings.background.dark = "mocha";
+    # };
 
     diagnostic.settings = {
       virtual_text = true;
@@ -21,7 +21,7 @@ in
       langmap = "yh,hy,nj,jn,ek,ke,ol,lo,YH,HY,NJ,JN,EK,KE,OL,LO";
       clipboard = "unnamedplus";
       ttyfast = true;
-      autochdir = true;
+      autochdir = false;
 
       wrap = true;
       colorcolumn = "80";
@@ -213,7 +213,10 @@ in
 
       yazi.enable = true;
       web-devicons.enable = true;
+      highlight-colors.enable = true;
+
       # indent-blankline.enable = true;
+
       hlchunk = {
         enable = true;
         autoLoad = true;

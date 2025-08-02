@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... } @inputs:
+{ pkgs, lib, ... } @inputs:
 let 
   mkTuple = lib.gvariant.mkTuple;
 in
@@ -11,6 +11,11 @@ in
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
+    # cli tui
+    home-manager    
+
+    # gui
+    dragon-drop
     firefox
     chromium
     thunderbird
@@ -27,10 +32,12 @@ in
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
-  ]) ++ (with inputs.pkgs-unstable; [
-    code-cursor
-  # ]) ++ (with inputs.pkgs-c9faf2; [
   ]);
+  # ++ (with inputs.pkgs-unstable; [
+    # code-cursor
+  # ]) ++ (with inputs.pkgs-c9faf2; [
+  # ]);
+
   programs = {
     jujutsu = {
       enable = true; 
@@ -57,6 +64,7 @@ in
         ci = "commit";
         co = "checkout";
         s = "status";
+        st = "status";
       };
     };
 
@@ -286,6 +294,9 @@ in
     yazi = {
       enable = true;
       enableNushellIntegration = true;
+      # plugins = {
+      #   smart-paste = pkgs.yaziPlugins.smart-paste;
+      # };
       keymap = {
         mgr.prepend_keymap = [
           { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
@@ -296,13 +307,19 @@ in
           { on = [ "o" ]; run = "enter"; desc = "Enter the child directory"; }
           { on = [ "Y" ]; run = "back"; desc = "Go back to the previous directory"; }
           { on = [ "O" ]; run = "forward"; desc = "Go forward to the next directory"; }
-
           { on = [ "j" ]; run = "find_arrow"; desc = "Go to the next found"; }
           { on = [ "J" ]; run = "find_arrow --previous"; desc = "Go to the previous found"; }
           { on = [ "h" ]; run = "yank"; desc = "Yank selected files (copy)"; }
           { on = [ "H" ]; run = "unyank"; desc = "Cancel the yank status"; }
           { on = [ "l" ]; run = "open"; desc = "Open selected files"; }
           { on = [ "L" ]; run = "open --interactive"; desc = "Open selected files interactively"; }
+
+          { on = [ "c" "a" ]; run = ''shell -- cat $1 | wl-copy''; desc = "Copy the file content"; }
+          { on = [ "!" ]; run = ''shell "$SHELL" --block''; for = "unix" ; desc = ''Open $SHELL here''; }
+          { on = [ "<C-n>" ]; run = ''shell -- dragon-drop -x -i -T "$1"''; desc = "Drag and drop via dragon"; }
+          { on = [ "g" "r" ]; run = ''shell -- ya emit cd "$(git rev-parse --show-toplevel)"''; desc = "Cd to root of current git repo"; }
+
+          # { on = [ "p" ]; run = "plugin smart-paste"; desc = "Paste into the hovered directory or CWD"; }
         ];
         tasks.prepend_keymap = [
           { on = [ "e" ]; run = "arrow -1"; desc = "Move cursor up"; }
@@ -578,13 +595,12 @@ in
     };
   };
 
-
-
   imports = [
     ./niri.nix
     ./vimrc.nix
     # ./plasma.nix
     ./qutebrowser.nix
+    ./theme-switch.nix
   ];
 
   # This value determines the Home Manager release that your

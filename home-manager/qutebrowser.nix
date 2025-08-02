@@ -4,7 +4,7 @@
     enableDefaultBindings = false;
     settings = {
       # content.proxy = "socks5://localhost:20170";
-      colors.webpage.darkmode.enabled = true;
+      colors.webpage.darkmode.enabled = false;
       editor.command = [ "wezterm" "start" "--always-new-process" "--" "nvim" "{file}" "+call cursor({line}, {column})" ];
     };
 
