@@ -13,7 +13,7 @@ in
   home.packages = with pkgs; [
     # cli tui
     home-manager    
-
+    kiro-cli
     # gui
     dragon-drop
     firefox
