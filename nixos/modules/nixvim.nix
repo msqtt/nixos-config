@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 let
   window-border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
   indent = 2;
@@ -5,6 +6,9 @@ in
 {
   programs.nixvim = {
     enable = true;
+    # Reuse the system's already-configured pkgs (allowUnfree = true) instead of
+    # nixvim's own pinned nixpkgs, so unfree vim plugins (e.g. cmp-emoji) can build.
+    nixpkgs.pkgs = pkgs;
     viAlias = true;
     vimAlias = true;
     globals.mapleader = " ";
@@ -211,6 +215,15 @@ in
       };
       friendly-snippets.enable = true;
 
+      oil = {
+        enable = true;
+        settings = {
+          win_options = {
+            signcolumn = "yes:2";
+          };
+        };
+      };
+
       yazi.enable = true;
       web-devicons.enable = true;
       highlight-colors.enable = true;
@@ -359,7 +372,7 @@ in
           svelte.enable = false;
           volar.enable = true;
 
-          elixirls.enable = true;
+          elixirls.enable = false;
           gopls = {
             enable = true;
             extraOptions = { completeUnimported = true; };

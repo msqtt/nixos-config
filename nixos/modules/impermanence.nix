@@ -1,7 +1,8 @@
 {
   environment.persistence."/persist" = {
     enable = true; # NB: Defaults to true, not needed
-    hideMounts = true; directories = [
+    hideMounts = true;
+    directories = [
       "/etc/nixos"
       "/var/log"
       "/var/lib/docker"
@@ -13,16 +14,18 @@
       "/etc/daed"
       "/etc/v2raya"
       "/etc/NetworkManager/system-connections"
-    ]; files = [
+    ];
+    files = [
       "/etc/machine-id"
       { file = "/var/keys/secret_file"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
     users.bob = {
       directories = [
-        "Bin"
+        "Media"
+        "Desktop"
         "Documents"
         "Projects"
-        "VirtualBox VMs"
+        "Vms"
 
         # { directory = ".gnupg"; mode = "0700"; }
         { directory = ".ssh"; mode = "0700"; }
@@ -39,16 +42,26 @@
         ".vscode" # plugin
         ".config/Cursor"
         ".cursor"
+        ".config/opencode"
+        ".cache/opencode"
         ".local/share/direnv"
+        ".local/share/opencode"
         ".local/share/zoxide"
+        ".pi"
+        ".hermes"
         ".local/share/flatpak"
         ".local/share/DBeaverData"
         ".local/share/waydroid"
+        ".local/share/hmcl"
 
         # ".local/share/Steam"
         ".var/app/com.valvesoftware.Steam/.local/share/Steam"
         ".var/app/io.httpie.Httpie"
         ".var/app/org.dbgate.DbGate"
+        ".minecraft"
+
+        ".logseq"
+        ".minikube"
       ];
       files = [
         # ".screenrc"

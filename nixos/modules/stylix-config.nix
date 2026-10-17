@@ -15,7 +15,7 @@ in
 
     wallpaper = mkOption {
       type = types.path;
-      default = "${builtins.path { path = ../../assets; }}/eva-white.png";
+      default = "${builtins.path { path = ../../assets; }}/emoji-d5d6db-960x540@2x.png";
       description = "Wallpaper";
     };
   };
@@ -39,7 +39,7 @@ in
         };
         emoji = {
           name = "Noto Color Emoji";
-          package = pkgs.noto-fonts-emoji;
+          package = pkgs.noto-fonts-color-emoji;
         };
         monospace = {
           name = "Fira Code";

@@ -20,8 +20,8 @@ let
        spawn-at-startup "xwayland-satellite"
        // spawn-at-startup "gammastep" "-O" "6000K" "-b" "0.9"
        spawn-at-startup "swaybg" "-m" "fill" "-i" "/etc/nixos/assets/emoji-d5d6db-960x540@2x.png"
-       spawn-at-startup "waybar"
        spawn-at-startup "rfkill" "unblock" "all"
+       spawn-at-startup "sh" "-c" "wl-paste --watch cliphist store"
 
        input {
          keyboard {
@@ -37,8 +37,8 @@ let
          }
 
          touchpad {
-           // on
-           // tap
+            // on
+            tap
             dwt
            // dwtp
            natural-scroll
@@ -64,11 +64,11 @@ let
       // }
 
       output "HDMI-A-1" {
-        mode "1920x1080@75"
+        mode "1920x1080@120"
         scale 1.25
         // transform "270"
-        // position x=0 y=-720
-        position x=1536 y=0
+        position x=0 y=-720
+        // position x=1536 y=0
         variable-refresh-rate on-demand=true
         background-color "black"
       }
@@ -115,9 +115,9 @@ let
          // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
          // Mod+T { spawn "kgx" "-e" "fish -C t"; }
 
-         Mod+Space { spawn "fuzzel"; }
-         Mod+Return { spawn "wezterm"; }
-         Mod+B {spawn "sh" "-c" "pgrep waybar > /dev/null && pkill waybar || waybar"; }
+         Mod+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+         Mod+Return { spawn "ghostty"; }
+         Mod+Ctrl+V { spawn "sh" "-c" "cliphist list | fzf --no-sort --wrap | cliphist decode | wl-copy"; }
 
          XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
          XF86AudioLowerVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -269,7 +269,7 @@ let
          Mod+Tab       { switch-layout "next"; }
          Mod+Shift+Tab { switch-layout "prev"; }
 
-         Mod+Shift+L { spawn "swaylock"; }
+         Mod+Shift+L { spawn "dms" "ipc" "call" "lock" "lock"; }
 
          Print { screenshot; }
          Ctrl+Print { screenshot-screen; }
@@ -302,180 +302,6 @@ let
          }
        }
     '';
-    };
-
-    services.mako.enable = true;
-
-    programs.fuzzel = {
-      enable = true;
-    };
-
-    programs.waybar = {
-      enable = true;
-      settings = {
-        mainBar = {
-          layer = "top";
-          position = "top";
-          height = 25;
-          modules-left = [
-            "niri/workspaces"
-            "niri/window"
-          ];
-          modules-center = [
-            "clock"
-          ];
-          modules-right = [
-            "network"
-            # "temperature"
-            "pulseaudio"
-            "battery"
-            "tray"
-          ];
-          "niri/workspaces" = {
-            disable-markup = true;
-            format = "{index}";
-          };
-          "niri/window" = {
-            format = "{}";
-            icon = true;
-          };
-          tray = {
-            icon-size = 18;
-            spacing = 15;
-          };
-          clock = {
-            format = "{:%a %b %e  %R}";
-            interval = 30;
-          };
-          battery = {
-            bat = "BAT0";
-            states = {
-              full = 99;
-              good = 98;
-              normal = 98;
-              warning = 20;
-              critical = 20;
-            };
-            format = "{icon}   {capacity}%";
-            format-good = "{icon}   {capacity}%";
-            format-full = "   {capacity}%";
-            format-icons = [
-              ""
-              ""
-              ""
-              ""
-              ""
-            ];
-            interval = 30;
-          };
-
-          network = {
-            interface = "wlp1s0";
-            format-wifi = "   WiFi-On";
-            format-disconnected = "😵   Disconnected";
-            interval = 60;
-          };
-          temperature = {
-            thermal-zone = 0;
-            format = "{icon} {temperatureC}°C";
-            format-icons = [
-              ""
-            ];
-            interval = 30;
-          };
-          pulseaudio = {
-            format = "{icon}  {volume}%  ";
-            format-bluetooth = "  {volume}%  ";
-            format-muted = "🔇  Mute  ";
-            interval = 60;
-            format-icons = {
-              default = [
-                " "
-              ];
-            };
-            on-click = "pavucontrol";
-          };
-        };
-      };
-
-      style = ''
-        * {
-            font-family: "UbuntuMono Nerd Font";
-            font-size: 16px;
-        }
-
-
-        window#waybar { 
-        }
-
-
-        .modules-left {
-          padding: 0px 0px 0px 0px;
-        }
-
-
-        .modules-right {
-          padding: 0px 5px 0px 0px;
-        }
-
-        #workspaces {
-        }
-
-
-        #workspaces button {
-          padding: 0px 11px 0px 11px; 
-          min-width: 1px;
-        }
-
-
-        #workspaces button.focused { 
-          padding: 0px 11px 0px 11px; 
-        }
-
-
-        #mode { 
-             padding: 0px 5px 0px 5px;
-             border: 1px solid #2f343a;
-        }
-
-
-        #window {
-             padding: 0px 10px 0px 10px;
-        }
-
-
-        window#waybar.empty #window {
-          background-color: transparent;
-          color: transparent;
-        }
-
-
-        window#waybar.empty {
-        }
-
-
-        #network, #temperature, #backlight, #pulseudio, #battery {
-            padding: 0px 15px 0px 15px;
-        }
-
-        #clock {
-          margin: 0px 15px 0px 15px;
-        }
-
-
-        #tray{
-           padding: 0px 8px 0px 5px;
-           margin: 0px 5px 0px 5px;
-        }
-
-
-        #battery.critical {
-        }
-
-
-        #network.disconnected {
-        }
-      '';
     };
   };
 }

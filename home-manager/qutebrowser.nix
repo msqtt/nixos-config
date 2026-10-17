@@ -11,6 +11,7 @@
     quickmarks = {
       nixpkgs = "https://search.nixos.org";
       home-manager = "https://home-manager-options.extranix.com";
+      nixvim = "https://nix-community.github.io/nixvim";
     };
 
     keyBindings = {
