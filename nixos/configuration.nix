@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/daed.nix
+      ./modules/hermes-agent.nix
       ./modules/impermanence.nix
       ./modules/nixvim.nix
       ./modules/stylix-config.nix
@@ -106,17 +107,19 @@
     auto-optimise-store = true;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
       wqy_zenhei
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       source-han-sans
       source-han-serif
       fira-code
-      nerd-fonts.terminess-ttf 
+      nerd-fonts.terminess-ttf
     ];
     fontconfig = {
       defaultFonts = {
@@ -151,6 +154,11 @@
       enable = true;
     };
 
+    # Lid switch behavior:
+    #  - on AC power: ignore (keep running, screen off)
+    #  - on battery: suspend (default, unchanged)
+    logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
+
     pipewire = {
       enable = true;
       pulse.enable = true;
@@ -174,8 +182,10 @@
 
     displayManager = {
       sddm = {
+        enable = true;
+      };
+      gdm = {
         enable = false;
-        wayland.enable = true;
       };
     };
 
@@ -183,11 +193,8 @@
       plasma6.enable = false;
     };
 
-    xserver.desktopManager.gnome.enable = false;
-    xserver.displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+    gnome.gcr-ssh-agent.enable = false;
+
 
     # Configure keymap in X11
     # xserver.xkb.layout = "us";
@@ -209,7 +216,6 @@
 
   security = {
     # duosec.allowTcpForwarding = true;
-    pam.services.swaylock = { };
 
     # memory unlimited for jack audio group 
     pam.loginLimits = [
@@ -249,6 +255,7 @@
     bob = {
       shell = pkgs.nushell;
       isNormalUser = true;
+      linger = true;
       extraGroups = [ "wheel" "audio" "video" "docker" "vboxusers" ];
 
       # To generate a hash to put in initialHashedPassword
@@ -320,7 +327,6 @@
       brightnessctl
 
       swaybg
-      swaylock
       mpv
       imv
 
@@ -333,6 +339,11 @@
     niri = {
       enable = true;
     };
+
+    dms-shell = {
+      enable = true;
+    };
+
     wshowkeys = {
       enable = true;
     };
@@ -359,6 +370,7 @@
     virtualbox.host = {
       enable = true;
       enableKvm = true;
+      enableWebService = true;
       # using kvm only support nat
       addNetworkInterface = false;
       enableExtensionPack = true;
@@ -388,5 +400,21 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
+
+  # Hermes Agent — system-level, runs as root so it can manage the
+  # whole machine on its own. See nixos/modules/hermes-agent.nix.
+  services.hermes-agent = {
+    enable = true;
+    environmentFile = "/persist/home/bob/hermes-secrets.env";
+    environment = {
+      WEIXIN_ACCOUNT_ID = "6810159a83a5@im.bot";
+      WEIXIN_BASE_URL = "https://ilinkai.weixin.qq.com";
+      WEIXIN_CDN_BASE_URL = "https://novac2c.cdn.weixin.qq.com/c2c";
+      WEIXIN_DM_POLICY = "pairing";
+      WEIXIN_ALLOW_ALL_USERS = "false";
+      WEIXIN_GROUP_POLICY = "pairing";
+      WEIXIN_HOME_CHANNEL = "o9cq80_F027DPboMxAWlewc7Ku_c@im.wechat";
+    };
+  };
 
 }

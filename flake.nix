@@ -22,21 +22,21 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-25.05";
+      url = "github:nixos/nixpkgs/nixos-26.05";
     };
 
     nixpkgs-73cf49.url = "github:nixos/nixpkgs/73cf49b8ad837ade2de76f87eb53fc85ed5d4680";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
       #url = "github:nix-community/nixvim";
       # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -44,7 +44,7 @@
     daeuniverse.url = "github:daeuniverse/flake.nix";
 
     impermanence.url = "github:nix-community/impermanence";
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-26.05";
 
     nur = {
       url = "github:nix-community/NUR";
@@ -56,6 +56,10 @@
     };
 
     niri.url = "github:sodiboo/niri-flake";
+
+    pi.url = "github:earendil-works/pi";
+
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs = { nixpkgs, home-manager, ... } @inputs:
@@ -70,7 +74,7 @@
 
       my-nurpkgs = inputs.my-nur.legacyPackages.${system};
       overlays = builtins.attrValues my-nurpkgs.overlays
-        ++ [ ] ++ (with inputs; [ niri.overlays.niri ]);
+        ++ [ ] ++ (with inputs; [ niri.overlays.niri pi.overlays.default hermes-agent.overlays.default ]);
 
       specialArgs = {
         inherit inputs;
@@ -103,7 +107,10 @@
               config = {
                 allowUnfree = true;
                 permittedInsecurePackages = [
-                  "jujutsu-0.23.0"
+                  "electron-39.8.10"
+                ];
+                allowUnfreePredicate = pkg: builtins.elem (inputs.lib.getName pkg) [
+                 "cmp-emoji"
                 ];
               };
               overlays = overlays;

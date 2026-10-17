@@ -1,4 +1,4 @@
-{ pkgs, lib, ... } @inputs:
+{ pkgs, lib, config, ... } @inputs:
 let 
   mkTuple = lib.gvariant.mkTuple;
 in
@@ -13,8 +13,9 @@ in
   home.packages = with pkgs; [
     # cli tui
     home-manager    
-    kiro-cli
+    pi
     # gui
+    remmina
     dragon-drop
     firefox
     chromium
@@ -26,9 +27,12 @@ in
     obs-studio
     gimp
     pavucontrol
-    blueberry
+    blueman
     # zrythm
-    musescore
+    hmcl
+    logseq
+    cliphist
+    fzf
   ] ++ (with inputs.my-nur; [
     bobibo
     jbl
@@ -81,6 +85,10 @@ in
     };
   };
 
+  # hermes-agent 现在跑成系统级 service (User=root)，见
+  # /persist/etc/nixos/nixos/modules/hermes-agent.nix 和
+  # /persist/etc/nixos/nixos/configuration.nix。旧的 user-level service
+  # 和 NoNewPrivileges/PATH override 都不要了 —— root 提权是天然能力。
 
   programs = {
     nushell = {
@@ -216,18 +224,18 @@ in
         } 
         $env.PATH = ($env.PATH | 
           split row (char esep) |
-          prepend /home/bob/Bin |
+          prepend /home/bob/Desktop/bin |
           append /usr/bin/env
         )
         $env.TERM = 'screen-256color'
         $env.SSH_AUTH_SOCK = $"($env.XDG_RUNTIME_DIR)/ssh-agent"
 
         # define custom command
-        def ginit [] {
-          mkdir bare
-          ls -a | get name | filter {|file| $file != 'bare'} | each {|file| mv $file bare/}
-          ln -s bare/.git .git
-        }
+        # def ginit [] {
+        #   mkdir bare
+        #   ls -a | get name | filter {|file| $file != 'bare'} | each {|file| mv $file bare/}
+        #   ln -s bare/.git .git
+        # }
 
         def dockerimgs [] {
           docker images | lines | parse -r '(?P<REPOSITORY>\S+)\s+(?P<TAG>\S+)\s+(?P<IMAGE_ID>\S+)\s+(?P<CREATED>\S+ \S+ ago)\s+(?P<SIZE>\S+)' | select REPOSITORY IMAGE_ID CREATED SIZE
@@ -257,11 +265,11 @@ in
       enableNushellIntegration = true;
     };
 
-    thefuck = {
-      enable = true;
-      enableNushellIntegration = true;
-      enableInstantMode = true;
-    };
+    # thefuck = {
+    #   enable = true;
+    #   enableNushellIntegration = true;
+    #   enableInstantMode = true;
+    # };
 
     direnv = {
       enable = true;
@@ -294,6 +302,7 @@ in
     yazi = {
       enable = true;
       enableNushellIntegration = true;
+      shellWrapperName = "yy";
       # plugins = {
       #   smart-paste = pkgs.yaziPlugins.smart-paste;
       # };
@@ -383,22 +392,16 @@ in
     '';
   };
 
-  programs.foot = {
+  programs.ghostty = {
     enable = true;
-    server.enable = true;
     settings = {
-      main = {
-        # term = "xterm-256color";
-        term = "screen-256color";
-        # font = "Fira Code:size=13";
-        # dpi-aware = "yes";
-      };
-      colors = {
-        # background= "000000";
-      };
-      mouse = {
-        hide-when-typing = "yes";
-      };
+      theme = "Catppuccin Latte";
+      font-family = "Fira Code";
+      font-size = 12;
+      scrollback-limit = 5000;
+      window-padding-x = 2;
+      window-padding-y = 2;
+      mouse-hide-while-typing = true;
     };
   };
 
